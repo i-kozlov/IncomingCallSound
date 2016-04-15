@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Increasing ring</string>
+    <string name="lib_string.error_ititiazing_mediaplayer">
+        Error with initializing media player. Probably your
+        player does not support pause on incoming ring. Use ring stream
+    </string>
+</resources>

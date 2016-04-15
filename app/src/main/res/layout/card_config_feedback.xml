@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    >
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="@string/feedback_fill_free"/>
+
+    <EditText
+        android:id="@+id/feedback_text"
+        style="@style/code_input_textedit"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+
+        android:hint="@string/feedback_hint"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="top"
+        />
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="10dp"
+        >
+
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_gravity="center"
+
+        >
+
+        <Button android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/open_test_page"
+                android:text="@string/feedback_open_test"/>
+        <Button android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/feedback_button"
+                android:text="@string/feedback_send"/>
+        <Button android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rate_app_feedback"
+                android:text="@string/Feedbsck_rate"/>
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    
+</LinearLayout>

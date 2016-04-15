@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_notify_message">
+        If you were using vibrate before ring please check your config. Otherwise you can ignore this or take a look at new UI and functions
+    </string>
+
+    <string name="app_name">Phone ring control</string>
+
+    <string name="limit_min_volume_toggle_text">Limit min volume</string>
+
+    <string name="service_is_active" >Service is active</string>
+
+    <string name="interval_text">Increase volume evey %1$s sec</string>
+    <string name="send_result">Send report</string>
+    <string name="volume_up">Volume up</string>
+    <string name="volume_down">Volume down</string>
+    <string name="test_page">Test page</string>
+
+    <string name="test_hint">
+
+        1)Always add short description so i can understand the problem \n
+        2)Use software volume up and down buttons (above send report button) \n
+        3)Receive 2+ calls with this screen opened \n
+        4)Push send report button. Make sure report.log is attached \n
+
+    </string>
+
+
+    <string name="max_sound_level_text">Limit max sound to %1$s</string>
+    <string name="max_sound_level_text_disabled">Do not limit max level</string>
+    <string name="max_sound_level_false_text">Max sound level is not limited</string>
+    <string name="limit_max_volume_toggle_text">Limit max volume</string>
+
+    <string name="start_from_min_false_description">Will start ringing from level 1</string>
+    <string name="start_from_min_true_description">Will start ringing from %1$s</string>
+
+    <string name="pause_before_restore_volume">Pause before restoring volume</string>
+    <string name="pause_before_restoring_description">Pause for %1$s sec.</string>
+
+    <string name="return_level_false_description">Will restore to pre-ring sound level</string>
+    <string name="return_level_true_description">Will restore level to %1$s</string>
+    <string name="return_volume_toggle_text">Set return level</string>
+    <string name="rate_app">Rate app</string>
+
+
+
+    <string name="asap_switch">Vol down ASAP</string>
+    <string name="asap_option_description">Will set vol = 1, before reading config. Useful when
+        phone in powersave mode or have any other reason making first ring too loud before reduce
+        volume</string>
+
+    <string name="respect_silence">Ring when in mute or vibrate mode</string>
+    <string name="fibrate_first">Vibrate BEFORE ring</string>
+
+    <string name="tab_1_header">Main</string>
+    <string name="tab_2_header">Additional</string>
+    <string name="tab_4_header">misc</string>
+
+
+    <string name="keep_in_memory_active_notification_text">Service is running</string>
+
+    <string name="keep_icon_text">Enable notification</string>
+    <string name="foreground_service_description">Keep app in memory</string>
+    <string name="descriptions_level_prering">pre-ring level. Be careful using it together with Return to specific level after call function</string>
+    <string name="descriptions_level_number_plus_level">"level "</string>
+    <string name="descriptions_level_vibrate">vibrate</string>
+    <string name="descriptions_level_silence">
+        silence mode(beta)
+    </string>
+
+    <string name="woks_ok">Ok</string>
+    <string name="works_bad">Problems</string>
+
+    <string name="ticker_onUpgrade">New version has config changes. Please reconfigure app</string>
+
+    <string name="Use_ringer_stream">Use default playback stream</string>
+    <string name="ring_stream_text">Will play as ringtone</string>
+    <string name="music_stream_text">Will play as music. User power button instead volume buttons to mute</string>
+
+
+
+
+    <string name="enable_logging_switch">Enable logging</string>
+    <string name="send_config">Send log and config</string>
+    <string name="logging_descr">Use it if you have problems or want to help in app development. Use one of above buttons to send result
+    </string>
+    <string name="use_led">Use LED</string>
+    <string name="review_for_develop">Write a review describing how can i improve this function</string>
+    <string name="write_review">Write review</string>
+    <string name="use_flash_light">Use flashlight</string>
+    <string name="vibrate_time_desc">Vibrate intervals count: %1$s</string>
+    <string name="mute_time_desc">Mute intervals count: %1$s</string>
+    <string name="vibrate_disabled_desc">Vibration before ring is  disabled</string>
+    <string name="mute_disabled_desc">Mute before ring is  disabled</string>
+
+    <string name="multi_itmes_ending">s</string>
+    <string name="beta_lable">Beta test</string>
+    <string name="feedback_open_test">Open test page</string>
+    <string name="feedback_send">Send feedback</string>
+
+    <string name="Feedbsck_rate">Rate app</string>
+
+    <string name="drawer_ring_conf">Ring config</string>
+    <string name="drawer_ring_extra">Extra config</string>
+
+    <string name="feedback_hint">Leave feedback</string>
+    <string name="feedback_fill_free">Feel free to email me if you have problems with app or you
+        have improvement suggestion
+    </string>
+    <string name="mute_first">Mute before ring</string>
+    <string name="error_ititiazing_mediaplayer">Error with initializing media player. Probably your
+        player does not support pause on incoming ring. Use ring stream
+    </string>
+    <string name="describe_problem_hint">Please describe a problem</string>
+    <string name="test_page_warning_vol">Use Vol up and Vol down buttons</string>
+    <string name="test_page_warning_calls">Receive 2+ calls</string>
+    <string name="test_page_warning_desc">Add problem description</string>
+    <string name="reset_config_dialog_head">Reset config</string>
+    <string name="reset_config_dialog_body">Are you sure you want to reset app configuration?
+    </string>
+    <string name="please_meet_all_conditions">Please meet all three condition</string>
+    <string name="error_noapp_tosend_email">No app to send email</string>
+
+    <string name="disabled">Disabled</string>
+    <string name="find_phone_times_desc">Maximise after %s calls</string>
+    <string name="enable_find_my_phone">Find my phone</string>
+    <string name="how_beta_works_label">Report how beta works</string>
+    <string name="keep_notify_priopity_text">Low notification priority</string>
+
+
+    <string name="yes_page_text">There settings are enabled by default. No need to disabled them</string>
+    <string name="openDrawer">Open Navbar</string>
+    <string name="closeDrawer">Close Navbar</string>
+
+    <string name="drawer_app_version_text">version %1$s (%2$s)</string>
+
+    <string name="find_phone_notification">Your settings changed by Find phone function</string>
+
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/phone_group"
+           android:checkableBehavior="single">
+        <item android:layout_gravity="bottom"
+              android:title="Telephony"
+            >
+            <menu>
+
+                <item
+                    android:id="@+id/phone_config_page"
+                    android:checked="false"
+                    android:icon="@drawable/ic_phone_black_48dp"
+                    android:title="Phone config"/>
+
+                <item
+                    android:id="@+id/open_test_page"
+                    android:checked="false"
+                    android:icon="@drawable/bug_report_black"
+                    android:title="Test page"/>
+            </menu>
+        </item>
+    </group>
+
+    <group android:id="@+id/alarm_group"
+           android:checkableBehavior="none">
+        <item android:layout_gravity="bottom"
+              android:title="Alarm"
+            >
+            <menu>
+
+                <item
+                    android:id="@+id/alarm_config_page"
+                    android:checked="false"
+                    android:icon="@drawable/alarm_black"
+                    android:title="Alarm config"/>
+
+                <item
+                    android:id="@+id/alarm2"
+                    android:checked="false"
+                    android:icon="@drawable/alarm_black"
+                    android:title="Scheluder?"/>
+            </menu>
+        </item>
+    </group>
+
+
+    <group android:id="@+id/other_group"
+           android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_rate_app"
+            android:checked="false"
+            android:icon="@drawable/grade_black_rate"
+            android:title="Rate app"/>
+
+        <item
+            android:id="@+id/navigation_feedback"
+            android:checked="false"
+            android:icon="@drawable/mail_black"
+            android:title="Write feedback"/>
+
+        <item
+            android:id="@+id/navigation_about"
+            android:checked="false"
+            android:icon="@drawable/info_black"
+            android:title="About"/>
+    </group>
+
+</menu>

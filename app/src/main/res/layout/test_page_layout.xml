@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+
+    <LinearLayout android:id="@+id/footer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  android:orientation="vertical"
+        >
+
+
+        <LinearLayout android:id="@+id/test_check" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:orientation="vertical"
+            >
+            <TextView android:id="@+id/vol_but_check" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:drawableLeft="@drawable/ic_error_outline_black_24dp"
+                      android:gravity="center|left"
+                      android:text="@string/test_page_warning_vol"
+
+                />
+            <TextView android:id="@+id/incalls_check" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="4dp"
+                      android:layout_marginTop="4dp"
+                      android:drawableLeft="@drawable/ic_error_outline_black_24dp"
+                      android:gravity="center|left"
+                      android:text="@string/test_page_warning_calls"
+                />
+            <TextView android:id="@+id/description_check" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:drawableLeft="@drawable/ic_error_outline_black_24dp"
+                      android:gravity="center|left"
+                      android:text="@string/test_page_warning_desc"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/feedback_text"
+            style="@style/code_input_textedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+
+            android:hint="@string/describe_problem_hint"
+            android:inputType="textMultiLine"
+            android:minHeight="16dp"
+            android:padding="10dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/volume_down"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/volume_down"/>
+
+            <Button
+                android:id="@+id/volume_up"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/volume_up"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     >
+            <Button android:id="@+id/reset_config"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:text="@string/reset_config_dialog_head"
+                />
+            <Button
+                android:id="@+id/send_result"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+
+                android:text="@string/send_result"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/footer"
+        >
+
+        <TextView
+            android:id="@+id/test_result_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/test_hint"/>
+    </ScrollView>
+
+
+</RelativeLayout>

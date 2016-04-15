@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_notify_message">Если вы использовали опцию вибро перед звонком, пожалуйста проверьте настройки.
+        Иначе можете игнорировать это сообщение, либо взглянуть на новый интерфейс и функционал
+    </string>
+    <string name="app_name">Плавный звонок</string>
+
+    <string name="service_is_active">Включить службу</string>
+
+    <string name="interval_text">Увеличение громкости каждые %1$s сек</string>
+
+    <string name="send_result">Отправить отчет</string>
+    <string name="volume_down">Звук-</string>
+    <string name="volume_up">Звук+</string>
+    <string name="test_page">Тестовая страница</string>
+    <string name="test_hint">
+        1)Всегда добавляйте небольшое описание, чтобы я мог понять в чем проблема \n
+        2)Используйте программные кнопки повышения и понижения громкости (те что над кнопкой "отправить отчет")\n
+        3)Примите не менее двух звонков держа это окно открытым \n
+        4)Нажмите кнопку "отправить отчет" и убедитесь, что к письму приложен файл report.log \n
+
+    </string>
+
+    <string name="limit_min_volume_toggle_text">Ограничить минимальную громкость</string>
+
+    <string name="max_sound_level_text">Ограничить макс. громкость %1$s</string>
+    <string name="limit_max_volume_toggle_text">Органичить макс. громкость</string>
+
+    <string name="start_from_min_true_description">Начнет звонить с  %1$s</string>
+
+    <string name="start_from_min_false_description">Начинать звонить уровня 1</string>
+
+    <string name="pause_before_restoring_description">Пауза в %1$s сек.</string>
+    <string name="pause_before_restore_volume">Пауза перед возвратом громкости</string>
+
+
+    <string name="max_sound_level_false_text">Макс. громкость не ограничена</string>
+    <string name="return_level_true_description">Вернет уровень %1$s</string>
+    <string name="return_volume_toggle_text">Вернуть заданый уровень после звонка</string>
+    <string name="return_level_false_description">Вернет уровень, который был до звонка</string>
+    <string name="rate_app">Оценить приложение</string>
+
+
+    <string name="respect_silence">Звонить из режимов вибро и беззвучный</string>
+
+
+    <string name="fibrate_first">Сначала вибро, потом звонок</string>
+
+    <string name="tab_1_header">Основные</string>
+    <string name="tab_2_header">Доп.</string>
+    <string name="tab_4_header">Разное</string>
+
+
+
+    <string name="max_sound_level_text_disabled">Не ограничивать максимальную громкость</string>
+
+    <string name="keep_icon_text">Включить уведомление</string>
+    <string name="foreground_service_description">Держать приложение в памяти</string>
+    <string name="keep_in_memory_active_notification_text">Служба запущена</string>
+    <string name="descriptions_level_number_plus_level">"уровнем "</string>
+    <string name="descriptions_level_prering">уровнем установленным до звонка</string>
+    <string name="descriptions_level_vibrate">вибро</string>
+    <string name="descriptions_level_silence">беззвучного режима (бета)</string>
+    <string name="woks_ok">Работает ок</string>
+    <string name="works_bad">Проблемы</string>
+    <string name="ticker_onUpgrade">Изненеия в конфигурации новой версии. Обновите настройки
+    </string>
+
+    <string name="Use_ringer_stream">Стандартный поток воспроизведения</string>
+    <string name="ring_stream_text">Проигровать звонок как рингтон</string>
+    <string name="music_stream_text">Проигровать звонок как музыку. Mute с помошью кнопки питания вместо кнопок громкости </string>
+
+    <string name="asap_switch">Понижать звук как можно быстрее</string>
+    <string name="asap_option_description">Выставит громкость =1 пред чтением настроек. Особенно
+        актуально в режиме энергосбережения
+    </string>
+    <string name="enable_logging_switch">Вкл логи</string>
+    <string name="send_config">Отправить лог и конфиг</string>
+    <string name="logging_descr">На случай если у вас проблемы с приложением или вы хотите помочь
+        в его разработке
+    </string>
+    <string name="use_led">Использовать светодиод</string>
+    <string name="review_for_develop">Оставьте отзыв, если вам интересно дальнейшее развитие
+        какой-либо функции
+    </string>
+    <string name="write_review">Оставить отзыв</string>
+    <string name="use_flash_light">Использования фонарика</string>
+
+    <string name="Feedbsck_rate">Оценить</string>
+    <string name="beta_lable">Бета тест</string>
+    <string name="feedback_open_test">Тест. страница</string>
+    <string name="feedback_send">Отзыв</string>
+    <string name="multi_itmes_ending">а</string>
+
+    <string name="vibrate_time_desc">Кол-во вибро интервалов: %1$s</string>
+    <string name="vibrate_disabled_desc">Вибрация перед звонком выключена</string>
+
+    <string name="feedback_fill_free">Не стесняйтесь, напишите мне, если у вас есть проблемы с
+        приложением или имеются предложения по улучшению
+    </string>
+    <string name="feedback_hint">Оставьте отзыв</string>
+
+    <string name="mute_disabled_desc">Беззвучный режим до звонка выключен</string>
+    <string name="mute_time_desc">Кол-во беззвучных интервалов: %1$s</string>
+    <string name="mute_first">Беззвучный до рингтона</string>
+
+    <string name="error_ititiazing_mediaplayer">Ошибка инициализации медиаплеера. Возможно, ваш
+        проигрыватель не поддерживает остановку воспроизведения при входящем звонке. Используйте поток звонка
+    </string>
+    <string name="describe_problem_hint">Пожалуйста, опишите проблему</string>
+    <string name="test_page_warning_vol">Используйте кнопки звук+ и звук-
+    </string>
+    <string name="test_page_warning_desc">Добавьте описание проблемы</string>
+    <string name="test_page_warning_calls">Примите 2+ звонка</string>
+    <string name="reset_config_dialog_head">Сброс настроек</string>
+    <string name="reset_config_dialog_body">Вы уверены, что хотите сбросить настройки приложения
+    </string>
+    <string name="please_meet_all_conditions">Пожалуйста, выполните все 3 условия</string>
+    <string name="error_noapp_tosend_email">Не найдено рпиложение для отправки почты</string>
+    <string name="find_phone_times_desc">Максимизировать громкость после %s звонков</string>
+    <string name="disabled">Выключено</string>
+    <string name="enable_find_my_phone">Найти телефон</string>
+    <string name="how_beta_works_label">Раскажите как работает бета функция</string>
+    <string name="keep_notify_priopity_text">Низкий приоритет</string>
+
+    <string name="yes_page_text">Данные функции включены по-умолчанию. Не стоит их выключать</string>
+
+    <string name="drawer_ring_conf">Настройки звонка</string>
+    <string name="drawer_ring_extra">Доп. настройки</string>
+    <string name="openDrawer">Откр. панель навигации</string>
+    <string name="closeDrawer">Закрыть панель навигации</string>
+
+    <string name="drawer_app_version_text">версия %1$s (%2$s)</string>
+
+    <string name="find_phone_notification">Настройки изменены функцией Найти телефон</string>
+</resources>

@@ -1,0 +1,103 @@
+<android.support.v7.widget.CardView
+
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_gravity="center"
+    android:layout_margin="5dp"
+
+
+    android:animateLayoutChanges="true"
+    android:minHeight="100dp"
+    android:padding="10dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="4dp"
+    card_view:contentPadding="10dp">
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:minHeight="10dp"
+                      android:orientation="horizontal"
+
+                      android:paddingBottom="12dp">
+
+            <TextView
+                android:id="@+id/top"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:textSize="18sp"
+                tools:text="top text"/>
+
+            <TextView android:id="@+id/beta_feature_lable"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:layout_gravity="end|top"
+                      android:text="@string/beta_lable"
+                      android:textSize="10sp"
+                      android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/replacable_layout" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="horizontal"/>
+
+        <ViewStub android:id="@+id/stub"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:inflatedId="@+id/subTree"/>
+
+
+        <LinearLayout android:id="@+id/expand_click"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:paddingBottom="8dp"
+                      android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/bottom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="bottom \n erett e\n r r"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/expand_button"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="end|bottom"
+            android:background="@drawable/ic_expand_more_black_24dp"/>
+
+        <LinearLayout android:id="@+id/expand" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:visibility="gone">
+
+            <TextView
+                android:id="@+id/full_description"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                tools:text="full description"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

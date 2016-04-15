@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue">#FF33B5E5</color>
+
+    <color name="pin_color">#FF3f51B5</color>
+
+    <color name="fab_material_light_blue_500">#3f51b5</color>
+    <color name="fab_material_light_blue_900">#01579b</color>
+
+    <color name="ColorPrimary_alpha">#802196f3</color>
+
+    <color name="ColorPrimary">#2196f3</color>
+    <color name="ColorPrimaryDark">#FF3f51B5</color>
+
+    <color name="text_primary">#d91f1e1e</color>
+    <color name="text_secondary">#D9000000</color>
+
+    <color name="accent_material_light">#3f51b5</color>
+    <color name="button_color">#C5CAE9</color>
+
+</resources>
