@@ -134,6 +134,6 @@
 
     <string name="drawer_app_version_text">version %1$s (%2$s)</string>
 
-    <string name="find_phone_notification">Your settings changed by Find phone function</string>
+    <string name="find_phone_notification">Find phone function set volume to maximum</string>
 
 </resources>

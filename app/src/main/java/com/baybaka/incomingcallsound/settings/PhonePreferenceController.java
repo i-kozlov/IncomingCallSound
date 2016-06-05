@@ -369,14 +369,14 @@ public class PhonePreferenceController implements AllSettings {
     public void setFindPhoneEnabled(boolean checked) {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(FIND_PHONE_FUNCTION_STATUS, checked);
-        editor.apply();
+        applyAndUpdateConfig(editor);
     }
 
     @Override
     public void setFindPhoneCount(int progress) {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt(FIND_PHONE_TIMES_BEFORE_MAXIMISE, progress);
-        editor.apply();
+        applyAndUpdateConfig(editor);
     }
 
     @Override

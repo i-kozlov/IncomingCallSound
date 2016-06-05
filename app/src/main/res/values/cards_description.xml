@@ -114,19 +114,10 @@
 
     <string name="card_description_find_phone_head">Find phone</string>
     <string name="card_description_find_phone_short">
-        Alter selected number of calls in row from same number it will change your setting so next call will ring at max volume
+        Alter selected number of calls in row from same number within 5 minutes call will ring at max volume
     </string>
     <string name="card_description_find_phone_full">
-        Will help you find phone if you live it somewhere in mute mode
-        \nOn trigger it will do:
-        \n -set stream to stream_music
-        \n -set min volume limit = max volume
-        \n -enable function ignore silence/vibrate
-        \n -disable mute first/vibrate first
-
-        You will have to restore your settings manually
-        \nAny changes here will restart service
-        \nCheck condition after running increase ring task so does not really affect performance
+        It helps you find phone when you live it somewhere in mute mode
     </string>
 
 </resources>

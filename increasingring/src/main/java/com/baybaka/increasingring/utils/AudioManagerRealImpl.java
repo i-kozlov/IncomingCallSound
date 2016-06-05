@@ -103,7 +103,7 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
 
         if (getChosenStreamType() == AudioManager.STREAM_MUSIC) {
             setRingVolume(0);
-            // нужно ли ?
+            // check do we still need it  ?
             systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 
         } else {
@@ -130,22 +130,29 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
     @Override
     public void normalModeStream() {
 
-        if (getChosenStreamType() == AudioManager.STREAM_MUSIC) {
-            setRingVolume(0);
-            systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+        switch (getChosenStreamType()) {
+            case AudioManager.STREAM_MUSIC:
+                setRingVolume(0);
+                systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+//            systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, NO_FLAGS);
 
-        } else if (getChosenStreamType() == AudioManager.STREAM_RING) {
+                break;
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0);
-            } else {
-                systemAudioManager.setStreamMute(AudioManager.STREAM_RING, false);
-                setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                adjustRingerUp();
+            case AudioManager.STREAM_RING:
+            default:
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0);
+                } else {
+                    systemAudioManager.setStreamMute(AudioManager.STREAM_RING, false);
+                    setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    adjustRingerUp();
 //                systemAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
-            }
-            setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-            setRingVolume(1);
+                }
+
+                setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                setRingVolume(1);
+                break;
         }
     }
 

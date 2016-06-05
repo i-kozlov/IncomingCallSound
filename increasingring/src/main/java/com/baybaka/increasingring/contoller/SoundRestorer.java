@@ -98,6 +98,10 @@ public class SoundRestorer {
         originalVolumes = null;
     }
 
+    /**
+     * Checks if save level is ok or we need to override it with use level
+     * @return sound level to restore
+     */
     private int getSoundLevelToRestore() {
         int savedSoundLevel = originalVolumes != null ? originalVolumes.getOriginalRingVolume() : -1;
 

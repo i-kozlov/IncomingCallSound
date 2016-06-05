@@ -11,6 +11,8 @@ public class RingerConfig {
     private boolean muteFirst;
     private int muteTimes;
 
+    private boolean useMusicStream;
+
     public boolean isUseMusicStream() {
         return useMusicStream;
     }
@@ -19,7 +21,6 @@ public class RingerConfig {
         this.useMusicStream = useMusicStream;
     }
 
-    private boolean useMusicStream;
 
     public RingerConfig() {
         interval = 5;

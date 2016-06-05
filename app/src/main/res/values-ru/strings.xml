@@ -68,7 +68,7 @@
 
     <string name="Use_ringer_stream">Стандартный поток воспроизведения</string>
     <string name="ring_stream_text">Проигровать звонок как рингтон</string>
-    <string name="music_stream_text">Проигровать звонок как музыку. Mute с помошью кнопки питания вместо кнопок громкости </string>
+    <string name="music_stream_text">Проигровать звонок как музыку. Mute с помошью кнопки питания вместо кнопок громкости.</string>
 
     <string name="asap_switch">Понижать звук как можно быстрее</string>
     <string name="asap_option_description">Выставит громкость =1 пред чтением настроек. Особенно
@@ -132,5 +132,5 @@
 
     <string name="drawer_app_version_text">версия %1$s (%2$s)</string>
 
-    <string name="find_phone_notification">Настройки изменены функцией Найти телефон</string>
+    <string name="find_phone_notification">Максимальная громкость выставленна функцией Найти телефон</string>
 </resources>

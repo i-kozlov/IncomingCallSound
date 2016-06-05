@@ -13,6 +13,9 @@ import com.baybaka.notificationlib.NotificationController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 public class Controller {
@@ -39,6 +42,7 @@ public class Controller {
     private int numCount;
 
     private int numMaxCount;
+    private long lastCallTimeForTHISNumber = new Date().getTime();
     private boolean findPhoneEnabled;
 
     @Inject
@@ -87,6 +91,9 @@ public class Controller {
         notificationController.startNotify();
     }
 
+    /**
+     * Fix for first call with max sound on some phones
+     */
     private void asapAction() {
         if (fastModeEnabled) {
             mAudioManagerWrapper.setAudioLevelRespectingLogging(1);
@@ -143,25 +150,39 @@ public class Controller {
     }
 
 
-    public void findPhoneMaximizeVolume() {
-        LOG.info("Calling Find phone function");
-        mAudioManagerWrapper.maxVolDisableMuteVibrate();
-        updateAllConfigs();
+    private void findPhoneMaximizeVolume() {
+        stopVolumeIncrease();
+        mAudioManagerWrapper.changeOutputStream(AudioManager.STREAM_MUSIC);
+        RingerConfig config = configFactory.getFindPhoneConfig();
+        currentThread = new VolumeIncreaseThread(config, mAudioManagerWrapper, mRunTimeSettings);
+        new Thread(currentThread).start();
+
+        mRunTimeSettings.configurationChanged(); // to reset stream on next call
+
+//        mAudioManagerWrapper.maxVolDisableMuteVibrate();
+//        updateAllConfigs();
         mRunTimeSettings.findPhoneNotification();
     }
 
     public void findPhone(String incomingNumber) {
         if (!findPhoneEnabled) return;
+        long newCallTime = new Date().getTime();
 
-        if (lastNumber.equals(incomingNumber)) {
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(newCallTime - lastCallTimeForTHISNumber);
+        boolean timeIsOk = minutes < 6;
+
+        if (lastNumber.equals(incomingNumber) && timeIsOk) {
+
             numCount++;
             if (numCount >= numMaxCount) {
+                LOG.info("Calling find my phone function for number {}", incomingNumber);
                 findPhoneMaximizeVolume();
-                LOG.info("Calling find my phone function from number {}", incomingNumber);
             }
+
         } else {
-            lastNumber = incomingNumber;
             numCount = 1;
+            lastNumber = incomingNumber;
         }
+        lastCallTimeForTHISNumber = newCallTime;
     }
 }
