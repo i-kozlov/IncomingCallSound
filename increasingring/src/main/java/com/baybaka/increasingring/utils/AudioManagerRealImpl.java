@@ -130,29 +130,22 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
     @Override
     public void normalModeStream() {
 
-        switch (getChosenStreamType()) {
-            case AudioManager.STREAM_MUSIC:
-                setRingVolume(0);
-                systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
-//            systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, NO_FLAGS);
+        if (getChosenStreamType() == AudioManager.STREAM_MUSIC) {
+            setRingVolume(0);
+            systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 
-                break;
+        } else if (getChosenStreamType() == AudioManager.STREAM_RING) {
 
-            case AudioManager.STREAM_RING:
-            default:
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0);
-                } else {
-                    systemAudioManager.setStreamMute(AudioManager.STREAM_RING, false);
-                    setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                    adjustRingerUp();
-//                systemAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
-                }
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0);
+            } else {
+                systemAudioManager.setStreamMute(AudioManager.STREAM_RING, false);
                 setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                setRingVolume(1);
-                break;
+                adjustRingerUp();
+//                systemAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_ON);
+            }
+            setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            setRingVolume(1);
         }
     }
 
@@ -178,6 +171,8 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
             setRingerMode(state.getOriginalRingMode());
             setRingVolume(state.getOriginalRingVolume());
             setMediaVolume(state.getOriginalMusicVolume());
+//            systemAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, state.getOriginalNotificationVolume(), NO_FLAGS);
+
         }
     }
 
@@ -187,6 +182,7 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
         state.setOriginalRingMode(systemAudioManager.getRingerMode());
         state.setOriginalRingVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_RING));
         state.setOriginalMusicVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+//        state.setOriginalNotificationVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
         return state;
     }
 

@@ -46,8 +46,8 @@ public class CachingConfigFactory {
 
     public RingerConfig getFindPhoneConfig(){
         RingerConfig config = new RingerConfig();
-        config.setStartSoundLevel(99);
-        config.setAllowedMaxVolume(99);
+        config.setStartSoundLevel(14);
+        config.setAllowedMaxVolume(14);
         config.setUseMusicStream(true);
         config.setInterval(1);
         config.setVibrateFirst(false);

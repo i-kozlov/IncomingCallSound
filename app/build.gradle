@@ -1,27 +1,28 @@
+//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 //apply plugin: 'com.android.databinding'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 
-apply plugin: "sonar-runner"
-sonarRunner {
-    sonarProperties {
-        // can be also set on command line like -Dsonar.analysis.mode=incremental
-        property "sonar.host.url", "http://localhost:9000"
-        property "sonar.analysis.mode", "incremental"
-        property 'sonar.sourceEncoding', 'UTF-8'
-        property 'sonar.language', 'java'
-        property 'sonar.profile', 'Sonar way'
-    }
-}
-
-subprojects {
-    sonarRunner {
-        sonarProperties {
-            properties["sonar.sources"] += "src/main/java"
-        }
-    }
-}
+//apply plugin: "sonar-runner"
+//sonarRunner {
+//    sonarProperties {
+//        // can be also set on command line like -Dsonar.analysis.mode=incremental
+//        property "sonar.host.url", "http://localhost:9000"
+//        property "sonar.analysis.mode", "incremental"
+//        property 'sonar.sourceEncoding', 'UTF-8'
+//        property 'sonar.language', 'java'
+//        property 'sonar.profile', 'Sonar way'
+//    }
+//}
+//
+//subprojects {
+//    sonarRunner {
+//        sonarProperties {
+//            properties["sonar.sources"] += "src/main/java"
+//        }
+//    }
+//}
 
 apply plugin: 'idea'
 idea {
@@ -33,15 +34,19 @@ idea {
 
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    compileSdkVersion 24
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
 
-        targetSdkVersion 23
+//        jackOptions {
+//            enabled true
+//        }
 
-        versionCode 84
-        versionName "2.9.5"
+        targetSdkVersion 24
+
+        versionCode 86
+        versionName "2.9.6_test"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -86,31 +91,24 @@ android {
 
 dependencies {
     //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
-
-
     ///compile
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':increasingring')
     //visual
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:cardview-v7:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:24.1.0'
+    compile 'com.android.support:design:24.1.0'
+    compile 'com.android.support:cardview-v7:24.1.0'
+    compile 'com.android.support:recyclerview-v7:24.1.0'
     compile 'com.appyvet:materialrangebar:1.0'
-
-//    compile 'de.hdodenhof:circleimageview:1.3.0'
+    //    compile 'de.hdodenhof:circleimageview:1.3.0'
     ///logger
     compile('pl.brightinventions:slf4android:0.0.11@aar') {
         transitive = true
     }
-
     //di
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.dagger:dagger:2.0.1'
     apt "com.google.dagger:dagger-compiler:2.0"
     provided 'javax.annotation:jsr250-api:1.0'
-
     //    compile 'org.androidannotations:androidannotations:3.3.2'
-
-
 }

@@ -6,7 +6,6 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
-import android.net.Uri;
 
 import com.baybaka.increasingring.RunTimeSettings;
 import com.baybaka.increasingring.config.RingerConfig;
@@ -87,15 +86,12 @@ public class VolumeIncreaseThread implements Runnable {
     private boolean configured = false;
 
     private void configOutputStream() {
-        //now get current playing ringtone instead of default
-        Uri uri = RingtoneManager.getActualDefaultRingtoneUri(rts.getContext(), RingtoneManager.TYPE_RINGTONE);
-        //
+
         mAudioManagerWrapper.normalModeStream();
 
         if (config.isUseMusicStream()) {
 
-            mediaPlayer = MediaPlayer.create(rts.getContext(), uri);
-            //mediaPlayer.setDataSource(rts.getContext(), uri);
+            mediaPlayer = MediaPlayer.create(rts.getContext(), RingtoneManager.getDefaultUri(1));
             //case mediaPlayer creation failed (some sony devices)
             if (mediaPlayer != null) {
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);

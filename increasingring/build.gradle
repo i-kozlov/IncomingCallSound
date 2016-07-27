@@ -2,12 +2,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 24
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
+
         minSdkVersion 9
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -25,10 +26,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-//    testCompile 'junit:junit:4.12'
-//    compile 'com.android.support:appcompat-v7:23.1.0'
+    //    testCompile 'junit:junit:4.12'
+    //    compile 'com.android.support:appcompat-v7:23.1.0'
     //di
-
     compile 'com.google.dagger:dagger:2.0.1'
     provided 'javax.annotation:jsr250-api:1.0'
     //Test
@@ -38,8 +38,6 @@ dependencies {
         transitive = true
     }
     compile project(':notificationlib')
-
-
     //Test
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'

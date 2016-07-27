@@ -5,6 +5,16 @@ public class SoundStateDTO {
     private int originalRingVolume = -1;
     private int originalRingMode = -1 ;
     private int originalMusicVolume = -1;
+    private int originalNotificationVolume = 99;
+
+    public int getOriginalNotificationVolume() {
+        return originalNotificationVolume;
+    }
+
+    public void setOriginalNotificationVolume(int originalNotificationVolume) {
+        this.originalNotificationVolume = originalNotificationVolume;
+    }
+
 
     public int getOriginalRingVolume() {
         return originalRingVolume;
@@ -32,13 +42,15 @@ public class SoundStateDTO {
 
     @Override
     public String toString() {
-        return "{" +
+        return "SoundStateDTO{" +
                 "originalRingVolume=" + originalRingVolume +
                 ", originalRingMode=" + originalRingMode +
                 ", originalMusicVolume=" + originalMusicVolume +
+                ", originalNotificationVolume=" + originalNotificationVolume +
                 '}';
     }
 
+    //ignores notification??
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

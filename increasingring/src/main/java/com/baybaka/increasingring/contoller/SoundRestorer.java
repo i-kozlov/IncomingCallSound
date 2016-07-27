@@ -56,7 +56,7 @@ public class SoundRestorer {
             SoundStateDTO wasSetTo = mAudioManagerWrapper.getCurrentSoundState();
 
             //double check
-            if (originalVolumes.equals(wasSetTo)) {
+            if (originalVolumes.equals(wasSetTo)) { //неактуально при return to user level
                 LOG.debug("Successful restore to {}", originalVolumes);
             } else {
                 LOG.error("Values are not equal. Expected value {}, current value is {}. Trying once more", originalVolumes, wasSetTo);
