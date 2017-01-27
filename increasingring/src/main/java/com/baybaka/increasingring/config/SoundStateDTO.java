@@ -5,7 +5,7 @@ public class SoundStateDTO {
     private int originalRingVolume = -1;
     private int originalRingMode = -1 ;
     private int originalMusicVolume = -1;
-    private int originalNotificationVolume = 99;
+    private int originalNotificationVolume = -1;
 
     public int getOriginalNotificationVolume() {
         return originalNotificationVolume;

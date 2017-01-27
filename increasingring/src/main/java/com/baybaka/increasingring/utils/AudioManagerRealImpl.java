@@ -171,7 +171,7 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
             setRingerMode(state.getOriginalRingMode());
             setRingVolume(state.getOriginalRingVolume());
             setMediaVolume(state.getOriginalMusicVolume());
-//            systemAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, state.getOriginalNotificationVolume(), NO_FLAGS);
+            systemAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, state.getOriginalNotificationVolume(), NO_FLAGS);
 
         }
     }
@@ -182,7 +182,7 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
         state.setOriginalRingMode(systemAudioManager.getRingerMode());
         state.setOriginalRingVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_RING));
         state.setOriginalMusicVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
-//        state.setOriginalNotificationVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+        state.setOriginalNotificationVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
         return state;
     }
 

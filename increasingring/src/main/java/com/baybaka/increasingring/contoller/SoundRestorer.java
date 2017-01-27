@@ -99,7 +99,7 @@ public class SoundRestorer {
     }
 
     /**
-     * Checks if save level is ok or we need to override it with use level
+     * Checks if save level is ok or we need to override it with user level
      * @return sound level to restore
      */
     private int getSoundLevelToRestore() {
