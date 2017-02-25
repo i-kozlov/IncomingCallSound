@@ -125,7 +125,7 @@ public class Controller {
     }
 
     private void updateLocal() {
-//        fastModeEnabled = mSettingsService.getAsapState();
+//        fastModeEnabled = settings.getAsapState();
         fastModeEnabled = true;
         ringWhenMute = mSettingsService.ringWhenMute();
 

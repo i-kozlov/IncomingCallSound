@@ -4,7 +4,7 @@ import com.baybaka.increasingring.utils.AudioManagerWrapper;
 
 public interface Getter {
 
-    RunTimeSettings getRunTimeChanges();
+    RunTimeSettings getRunTimeSettings();
 
     SettingsService getSetting();
 

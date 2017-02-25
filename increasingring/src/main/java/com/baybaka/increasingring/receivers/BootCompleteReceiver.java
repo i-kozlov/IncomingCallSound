@@ -12,6 +12,6 @@ public class BootCompleteReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         LoggerFactory.getLogger(BootCompleteReceiver.class.getSimpleName()).info("Received boot completed event");
-        ServiceStarter.startServiceWithCondition(context);
+        ServiceStarter.INSTANCE.startServiceWithCondition(context);
     }
 }

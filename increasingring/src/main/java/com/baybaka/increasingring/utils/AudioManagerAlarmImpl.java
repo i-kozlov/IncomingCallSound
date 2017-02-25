@@ -28,7 +28,7 @@ public class AudioManagerAlarmImpl implements AudioManagerWrapper {
 
         this.appСontext = appСontext;
         Getter getter = (Getter)appСontext.getApplicationContext();
-        mRunTimeSettings = getter.getRunTimeChanges();
+        mRunTimeSettings = getter.getRunTimeSettings();
         mSettingsService = getter.getSetting();
         chosenStream = mSettingsService.getSoundStream();
     }
