@@ -1,12 +1,11 @@
-package com.baybaka.increasingring.contoller;
+package com.baybaka.increasingring.contoller.thread;
 
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 
+import com.baybaka.increasingring.service.RingToneT;
 import com.baybaka.increasingring.RunTimeSettings;
 import com.baybaka.increasingring.config.RingerConfig;
 import com.baybaka.increasingring.receivers.PowerButtonReceiver;
@@ -17,9 +16,10 @@ import org.slf4j.LoggerFactory;
 
 public class VolumeIncreaseThread implements Runnable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(VolumeIncreaseThread.class.getSimpleName());
+    private static final Logger LOG = LoggerFactory.getLogger(com.baybaka.increasingring.contoller.VolumeIncreaseThread.class.getSimpleName());
     private final RingerConfig config;
     private final AudioManagerWrapper mAudioManagerWrapper;
+    private String mPhoneNumber;
     private volatile boolean treadStopped = false;
     private MediaPlayer mediaPlayer;
     private BroadcastReceiver mReceiver;
@@ -48,10 +48,11 @@ public class VolumeIncreaseThread implements Runnable {
 
     private RunTimeSettings rts;
 
-    public VolumeIncreaseThread(RingerConfig config, AudioManagerWrapper audioManagerWrapper, RunTimeSettings rts) {
+    public VolumeIncreaseThread(RingerConfig config, AudioManagerWrapper audioManagerWrapper, RunTimeSettings rts, String phoneNumber) {
         this.config = config;
         this.rts = rts;
         mAudioManagerWrapper = audioManagerWrapper;
+        mPhoneNumber = phoneNumber;
     }
 
     @Override
@@ -91,15 +92,14 @@ public class VolumeIncreaseThread implements Runnable {
 
         if (config.isUseMusicStream()) {
 
-            mediaPlayer = MediaPlayer.create(rts.getContext(), RingtoneManager.getDefaultUri(1));
-            //case mediaPlayer creation failed (some sony devices)
-            if (mediaPlayer != null) {
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mediaPlayer.setLooping(true);
+            RingToneT t = new RingToneT(rts.getContext());
+            mediaPlayer = t.configurePlayer(mPhoneNumber);
 
-//                mediaPlayer.prepare();
+            if (mediaPlayer != null) {
+
                 mediaPlayer.start();
 
+                //configure music of with power key
                 IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 //                filter.addAction(Intent.ACTION_SCREEN_OFF);
                 mReceiver = new PowerButtonReceiver();

@@ -58,14 +58,6 @@ class MainCard_v2() : ListCardItem_v2() {
             }
         })
 
-//        fun onclick(v: View) = {
-//            val serviceStatus = mServiceRunningSwitch.isChecked
-//            mSharedPreferenceController.changeServiceEnabledSettings(serviceStatus)
-//            LoggerFactory.getLogger(MainCard_v2::class.java.simpleName).info("User set service status to $serviceStatus")
-//            ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext())
-//        }
-//
-//        mServiceRunningSwitch.setOnClickListener { onclick(it) }
 
         mServiceRunningSwitch.setOnClickListener { view ->
             val serviceStatus = mServiceRunningSwitch.isChecked

@@ -14,11 +14,6 @@ import java.util.*
 object CardsFactory {
 
     fun mainTab(): List<ListCard> {
-//        val main = MainCard_v2(R.string.card_description_main_interval_head,
-//                R.layout.card_config_service_interval,
-//                R.string.card_description_main_interval_short,
-//                R.string.card_description_main_interval_full
-//        )
 
         return Arrays.asList(
                 MainCard_v2(),

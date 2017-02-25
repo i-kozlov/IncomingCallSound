@@ -17,9 +17,9 @@ public class MyPhoneStateListener extends PhoneStateListener {
     private final Logger LOG = LoggerFactory.getLogger(MyPhoneStateListener.class.getSimpleName());
     private State savedState = State.IDLE;
 
-    Controller controller;
-    SettingsService mSettingsService;
-    RunTimeSettings mRunTimeSettings;
+    private Controller controller;
+    private SettingsService mSettingsService;
+    private RunTimeSettings mRunTimeSettings;
 
 
     @Inject
@@ -55,9 +55,10 @@ public class MyPhoneStateListener extends PhoneStateListener {
             LOG.info("Received new call state = {}", newCallState);
         }
 
+
         if (!savedState.equals(newCallState)) {
 
-            processFSM(newCallState);
+            processFSM(newCallState, incomingNumber);
 
             findPhone(newCallState, incomingNumber);
         }
@@ -69,7 +70,7 @@ public class MyPhoneStateListener extends PhoneStateListener {
         }
     }
 
-    private void processFSM(final State newCallState) {
+    private void processFSM(final State newCallState, String incomingNumber) {
         if (mRunTimeSettings.isLoggingEnabled()) {
             LOG.debug("Processing switch from {} to {}", savedState, newCallState);
         }
@@ -86,6 +87,7 @@ public class MyPhoneStateListener extends PhoneStateListener {
             }
 
             case RINGING: {
+
                 if (State.OFFHOOK.equals(newCallState)) {
                     controller.stopVolumeIncrease();
                     // do no not switch state any more. doesnt work on some models
@@ -105,7 +107,7 @@ public class MyPhoneStateListener extends PhoneStateListener {
 
                 // if state set to ringing -> control volume
                 if (State.RINGING.equals(newCallState)) {
-                    controller.startVolumeIncrease();
+                    controller.startVolumeIncrease(incomingNumber);
                 }
                 break;
             }

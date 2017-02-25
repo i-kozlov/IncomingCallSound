@@ -1,5 +1,6 @@
 package com.baybaka.incomingcallsound.ui.cards.main;
 
+import android.app.Activity;
 import android.media.AudioManager;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.incomingcallsound.ui.rv.RVAdapter;
+import com.baybaka.increasingring.utils.PermissionChecker;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -83,6 +85,10 @@ public class VibrateConfigCard extends ListCardItem {
     public void streamSwitchChanged() {
         mSharedPreferenceController.setSoundStream(streamSwitch.isChecked());
         updateStreamDescription(streamSwitch.isChecked());
+
+        if(!streamSwitch.isChecked()){
+            new PermissionChecker((Activity) rvAdapter.getContext()).checkMusic();
+        }
 
         MyApp.get().getListenerComponent().provideAudioWrapper().changeOutputStream(mSharedPreferenceController.getSoundStream());
         rvAdapter.notifyUpdate();

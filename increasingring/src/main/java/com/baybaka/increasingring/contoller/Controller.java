@@ -7,6 +7,7 @@ import com.baybaka.increasingring.SettingsService;
 import com.baybaka.increasingring.config.CachingConfigFactory;
 import com.baybaka.increasingring.config.RingerConfig;
 import com.baybaka.increasingring.receivers.TestPageOnCallEvenReceiver;
+import com.baybaka.increasingring.service.RingToneT;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
 import com.baybaka.notificationlib.NotificationController;
 
@@ -24,6 +25,7 @@ public class Controller {
 
     private final SettingsService mSettingsService;
     private final CachingConfigFactory configFactory;
+    private final RingToneT ringtone;
 
     private RunTimeSettings mRunTimeSettings;
     private final AudioManagerWrapper mAudioManagerWrapper;
@@ -36,7 +38,7 @@ public class Controller {
     private boolean ringWhenMute;
 
     private SoundRestorer mSoundRestorer;
-    NotificationController notificationController;
+    private NotificationController notificationController;
 
     private String lastNumber = "";
     private int numCount;
@@ -58,11 +60,11 @@ public class Controller {
         this.configFactory = configFactory;
         mSoundRestorer = soundRestorer;
         this.notificationController = notificationController;
-
+        this.ringtone = new RingToneT(runTimeSettings.getContext());
         updateAllConfigs();
     }
 
-    public void startVolumeIncrease() {
+    public void startVolumeIncrease(String callerNumber) {
         //to make sure no old increase task left
         stopVolumeIncrease();
 
@@ -79,7 +81,7 @@ public class Controller {
             checkForConfigUpdate();
 
             RingerConfig config = configFactory.getConfig(preRingLevel);
-            currentThread = new VolumeIncreaseThread(config, mAudioManagerWrapper, mRunTimeSettings);
+            currentThread = createThread(config, callerNumber) ; //new VolumeIncreaseThread(config, mAudioManagerWrapper, mRunTimeSettings, callerNumber);
             new Thread(currentThread).start();
 
             TestPageOnCallEvenReceiver.sendBroadcastToLogReceiver(mRunTimeSettings.getContext());
@@ -149,12 +151,20 @@ public class Controller {
 
     }
 
+    private VolumeIncreaseThread createThread(RingerConfig config, String callerNumber){
+        int stream = mAudioManagerWrapper.getCurrentChosenStreamVolume();
+        if( stream == AudioManager.STREAM_MUSIC){
+            return new RingTone(config, mAudioManagerWrapper, mRunTimeSettings);
+        } else {
+            return new Music(config, mAudioManagerWrapper, mRunTimeSettings, callerNumber, ringtone);
+        }
+    }
 
-    private void findPhoneMaximizeVolume() {
+    private void findPhoneMaximizeVolume(String callerNumber) {
         stopVolumeIncrease();
         mAudioManagerWrapper.changeOutputStream(AudioManager.STREAM_MUSIC);
         RingerConfig config = configFactory.getFindPhoneConfig();
-        currentThread = new VolumeIncreaseThread(config, mAudioManagerWrapper, mRunTimeSettings);
+        currentThread = createThread(config, callerNumber); //new VolumeIncreaseThread(config, mAudioManagerWrapper, mRunTimeSettings, callerNumber);
         new Thread(currentThread).start();
 
         mRunTimeSettings.configurationChanged(); // to reset stream on next call
@@ -176,7 +186,7 @@ public class Controller {
             numCount++;
             if (numCount >= numMaxCount) {
                 LOG.info("Calling find my phone function for number {}", incomingNumber);
-                findPhoneMaximizeVolume();
+                findPhoneMaximizeVolume(incomingNumber);
             }
 
         } else {

@@ -47,14 +47,14 @@ android {
 
         targetSdkVersion 25
 
-        versionCode 91
+        versionCode 92
         versionName "2.12_test"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -70,7 +70,7 @@ android {
         basic {
             applicationId = "com.baybaka.incomingcallsound"
             versionName = android.defaultConfig.versionName
-            minSdkVersion 9
+            minSdkVersion 15
         }
     }
 

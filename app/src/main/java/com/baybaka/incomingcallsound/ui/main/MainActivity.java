@@ -20,7 +20,7 @@ import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.ui.drawer.MyNavView;
 import com.baybaka.incomingcallsound.ui.tabs.TabsFragmentFactory;
 import com.baybaka.incomingcallsound.ui.testpage.TestPageFragment;
-import com.baybaka.incomingcallsound.utils.PermissionChecker;
+import com.baybaka.increasingring.utils.PermissionChecker;
 import com.baybaka.incomingcallsound.utils.RateApp;
 import com.baybaka.increasingring.service.ServiceStarter;
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
         }
 
-        new PermissionChecker(this);
+        new PermissionChecker(this).checkMain();
 
         //start if not running?
         ServiceStarter.startServiceWithCondition(this);

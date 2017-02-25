@@ -102,4 +102,6 @@ public interface SettingsService {
     void setMinNotificationPriory(boolean checked);
 
     boolean isProVersion();
+
+
 }

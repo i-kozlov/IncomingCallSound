@@ -4,4 +4,5 @@
         Error with initializing media player. Probably your
         player does not support pause on incoming ring. Use ring stream
     </string>
+    <string name="cannot_access_contacts">Can\'t access use custome ringtone. Grant access to app</string>
 </resources>
