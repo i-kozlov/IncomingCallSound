@@ -33,10 +33,7 @@
         There are devices that do not support switch from mute/vibrate to normal ring mode during call.
         They stay vibrate-only even after volume increase.
         \nSolution is to use music stream instead ring stream. To do it you need to disable \'Use default playback stream\'.
-        There are two disadvantages:
-        \n1)It will cause playing no contact ringtone - only default ringtone.
-        Review if this is a problem for you i will try to fix it then.
-        \n2)You loose option to mute incoming ring with volume buttons but can mute with power button
+        \nYou loose option to mute incoming ring with volume buttons but can mute with power button
         \nChanging stream can also change you max volume level. It usually happens if your max level was 7.
     </string>
 

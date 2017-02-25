@@ -28,7 +28,7 @@ public abstract class TabWithCardListFragment extends Fragment {
         mTextView = (TextView) view.findViewById(R.id.text_over_list);
         configText();
 
-        rv=(RecyclerView)view.findViewById(R.id.rv);
+        rv = (RecyclerView) view.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
@@ -52,7 +52,7 @@ public abstract class TabWithCardListFragment extends Fragment {
     protected abstract List<ListCard> getCards();
 
 
-    private void initializeAdapter(){
+    private void initializeAdapter() {
         RVAdapter adapter = new RVAdapter(cards, getActivity());
         rv.setAdapter(adapter);
     }

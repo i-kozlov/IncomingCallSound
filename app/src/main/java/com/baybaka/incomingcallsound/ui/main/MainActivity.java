@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         new PermissionChecker(this).checkMain();
 
         //start if not running?
-        ServiceStarter.startServiceWithCondition(this);
+        ServiceStarter.INSTANCE.startServiceWithCondition(this);
     }
 
     private String getStr() {

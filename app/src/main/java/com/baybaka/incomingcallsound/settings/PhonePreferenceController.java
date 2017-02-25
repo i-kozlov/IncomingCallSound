@@ -64,7 +64,7 @@ public class PhonePreferenceController implements AllSettings {
 //        System.out.println("config update");
 //        editor.apply();
         editor.commit();
-        MyApp.get().getRunTimeChanges().configurationChanged();
+        MyApp.get().getRunTimeSettings().configurationChanged();
         MyApp.get().getListenerComponent().controller().updateAllConfigs();
 
     }
@@ -249,7 +249,7 @@ public class PhonePreferenceController implements AllSettings {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(LOGGING_ENABLED, newValue);
         editor.apply();
-        MyApp.get().getRunTimeChanges().setGlobalLoggingState(newValue);
+        MyApp.get().getRunTimeSettings().setGlobalLoggingState(newValue);
     }
     ////////////
 

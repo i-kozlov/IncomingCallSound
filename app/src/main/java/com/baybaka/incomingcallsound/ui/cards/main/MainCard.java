@@ -72,7 +72,7 @@ public class MainCard extends ListCardItem {
                 boolean serviceStatus = mServiceRunningSwitch.isChecked();
                 mSharedPreferenceController.changeServiceEnabledSettings(serviceStatus);
                 LoggerFactory.getLogger(MainCard.class.getSimpleName()).info("User set service status to {}", serviceStatus);
-                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+                ServiceStarter.INSTANCE.stopServiceRestartIfEnabled(MyApp.getContext());
             }
         });
     }

@@ -73,7 +73,7 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRunTimeSettings = MyApp.get().getRunTimeChanges();
+        mRunTimeSettings = MyApp.get().getRunTimeSettings();
         setRetainInstance(true);
         registerReceivers();
     }

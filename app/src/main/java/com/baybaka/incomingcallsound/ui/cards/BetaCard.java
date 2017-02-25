@@ -1,5 +1,6 @@
 package com.baybaka.incomingcallsound.ui.cards;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.Toast;
@@ -31,7 +32,8 @@ public class BetaCard extends ListCardItem {
         }
         buttonName +=  " for " + rvAdapter.getContext().getString(getHead());
         try {
-            rvAdapter.getContext().startActivity(EmailIntentCreator.getSendEmailIntent("Beta review", buttonName));
+            Intent intent = EmailIntentCreator.getSendEmailIntent("Beta review", buttonName);
+            rvAdapter.getContext().startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(MyApp.getContext(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show();
         }

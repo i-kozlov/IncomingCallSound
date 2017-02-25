@@ -22,7 +22,7 @@ public class ReceiverLogHandler extends Handler {
 
     @Override
     public void publish(LogRecord record) {
-        if (record != null && MyApp.get().getRunTimeChanges().isTestPageOpened()) {
+        if (record != null && MyApp.get().getRunTimeSettings().isTestPageOpened()) {
             pl.brightinventions.slf4android.LogRecord logRecord = pl.brightinventions.slf4android.LogRecord.fromRecord(record);
             StringBuilder messageBuilder = new StringBuilder();
             messageValueSupplier.append(logRecord, messageBuilder);

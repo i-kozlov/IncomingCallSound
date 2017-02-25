@@ -25,12 +25,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
 
     public void notifyUpdate() {
         for (ListCard card : cards) {
-                card.update();
+            card.update();
         }
     }
 
 
-    public static class CardViewHolder extends RecyclerView.ViewHolder{
+    public static class CardViewHolder extends RecyclerView.ViewHolder {
 
         CardView cv;
         @Bind(R.id.beta_feature_lable)
@@ -80,7 +80,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
     }
 
 
-    List<ListCard> cards;
+    private List<ListCard> cards;
     private Context context;
 
     public RVAdapter(List<ListCard> cards, Context context) {
@@ -96,14 +96,17 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v;
+        System.out.println("viewType =" + viewType);
+        System.out.println(cards.get(viewType).getDescription());
         boolean beta = cards.get(viewType).isBetaFeature();
         if (beta) {
-            {
-                v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_beta_template, viewGroup, false);
-            }
+
+            v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_beta_template, viewGroup, false);
+
         } else
             v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_template, viewGroup, false);
 
+        //bind real layout to stub
         ViewStub stub = (ViewStub) v.findViewById(R.id.stub);
         stub.setLayoutResource(cards.get(viewType).getLayout());
         stub.inflate();
@@ -113,7 +116,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-//        return cards.get(position).isBetaFeature() ? 1 : 0;
+        //position is used to init stub
         return position;
     }
 

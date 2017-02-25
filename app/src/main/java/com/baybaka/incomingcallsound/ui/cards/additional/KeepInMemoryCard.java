@@ -49,7 +49,7 @@ public class KeepInMemoryCard extends ListCardItem {
             public void onClick(View v) {
                 mSharedPreferenceController.setRunForeground(keepInMemorySwitch.isChecked());
                 LoggerFactory.getLogger(KeepInMemoryCard.class.getSimpleName()).info("keepInMemorySwitch  set {}. User call stopServiceRestartIfEnabled", keepInMemorySwitch.isChecked());
-                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+                ServiceStarter.INSTANCE.stopServiceRestartIfEnabled(MyApp.getContext());
             }
         });
 
@@ -58,7 +58,7 @@ public class KeepInMemoryCard extends ListCardItem {
             public void onClick(View v) {
                 mSharedPreferenceController.setMinNotificationPriory(keepPrioritySwitch.isChecked());
                 LoggerFactory.getLogger(KeepInMemoryCard.class.getSimpleName()).info("keepPrioritySwitch set {}. User call stopServiceRestartIfEnabled", keepPrioritySwitch.isChecked());
-                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+                ServiceStarter.INSTANCE.stopServiceRestartIfEnabled(MyApp.getContext());
             }
         });
     }

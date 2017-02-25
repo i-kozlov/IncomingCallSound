@@ -1,5 +1,6 @@
 package com.baybaka.incomingcallsound.ui.cards
 
+import android.os.Build
 import com.baybaka.incomingcallsound.ui.cards.additional.IgnoreSilenceVibrateCard
 import com.baybaka.incomingcallsound.ui.cards.additional.KeepInMemoryCard
 import com.baybaka.incomingcallsound.ui.cards.additional.LoggingCard
@@ -31,12 +32,14 @@ object CardsFactory {
     }
 
     fun betaTab(): List<ListCard> {
-        return Arrays.asList(
-                FeedbackCard(),
-                MuteConfigCard(),
-                NotificationCard(),
-                FindPhoneConfigCard()
-        )
+        val preAndroid5 = Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
+        val list = mutableListOf<ListCard>(FeedbackCard())
+
+        if (preAndroid5) list += MuteConfigCard()
+
+        list += NotificationCard()
+        list += FindPhoneConfigCard()
+        return list
     }
 
     fun old(): List<ListCard> {

@@ -94,7 +94,7 @@ public class MyApp extends Application implements Injector, Getter {
     }
 
     @Override
-    public RunTimeSettings getRunTimeChanges() {
+    public RunTimeSettings getRunTimeSettings() {
         return mListenerComponent.runTimeChanges();
     }
 
