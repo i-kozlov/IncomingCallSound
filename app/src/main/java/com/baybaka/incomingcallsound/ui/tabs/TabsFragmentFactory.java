@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.ui.cards.CardsFactory;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCard;
 import com.baybaka.incomingcallsound.utils.Description;
 
 import java.util.List;
@@ -31,30 +31,30 @@ public class TabsFragmentFactory {
 
     public static class MainTab extends TabWithCardListFragment {
         @Override
-        protected List<ListCartItem> getCards() {
-            return CardsFactory.mainTab();
+        protected List<ListCard> getCards() {
+            return CardsFactory.INSTANCE.mainTab();
         }
     }
 
     public static class AdditionalTab extends TabWithCardListFragment {
         @Override
-        protected List<ListCartItem> getCards() {
-            return CardsFactory.additionalTab();
+        protected List<ListCard> getCards() {
+            return CardsFactory.INSTANCE.additionalTab();
         }
     }
 
     public static class BetaTab extends TabWithCardListFragment {
         @Override
-        protected List<ListCartItem> getCards() {
-            return CardsFactory.betaTab();
+        protected List<ListCard> getCards() {
+            return CardsFactory.INSTANCE.betaTab();
         }
     }
 
 
     public static class YesCardsTab extends TabWithCardListFragment {
         @Override
-        protected List<ListCartItem> getCards() {
-            return CardsFactory.yesCard();
+        protected List<ListCard> getCards() {
+            return CardsFactory.INSTANCE.yesCard();
         }
 
         @Override
@@ -66,8 +66,8 @@ public class TabsFragmentFactory {
 
     public static class OldList extends TabWithCardListFragment {
         @Override
-        protected List<ListCartItem> getCards() {
-            return CardsFactory.old();
+        protected List<ListCard> getCards() {
+            return CardsFactory.INSTANCE.old();
         }
     }
 

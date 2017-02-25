@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.appyvet.rangebar.RangeBar;
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.incomingcallsound.utils.Description;
 
 import butterknife.Bind;
@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class MinMaxLimitsCard extends ListCartItem {
+public class MinMaxLimitsCard extends ListCardItem {
 
     public MinMaxLimitsCard() {
         head = R.string.card_description_config_min_max_head;
@@ -34,25 +34,30 @@ public class MinMaxLimitsCard extends ListCartItem {
 
     private void reconfigureRangebar() {
         initRange();
-        //!!! after init
-        rangebar.setOnRangeBarChangeListener((rangeBar, indexL, indexR, lefttext, rightText) -> {
 
-            int left = Integer.parseInt(lefttext);
-            int right = Integer.parseInt(rightText);
+        RangeBar.OnRangeBarChangeListener onRangeBarChangeListener = new RangeBar.OnRangeBarChangeListener() {
+            @Override
+            public void onRangeChangeListener(RangeBar rangeBar, int indexL, int indexR, String lefttext, String rightText) {
 
-            mSharedPreferenceController.setMinVolumeLimit(left);
-            if (minLimitSwitch.isChecked()) {
-                updateMinLimitText(getMinLimitText(left));
-            }
-            //minLimitChanged(left);
+                int left = Integer.parseInt(lefttext);
+                int right = Integer.parseInt(rightText);
 
-            mSharedPreferenceController.setMaxVolumeLimit(right);
-            if (maxLimitSwitch.isChecked()) {
-                updateMaxLimitText(getMaxLimitText(right));
+                mSharedPreferenceController.setMinVolumeLimit(left);
+                if (minLimitSwitch.isChecked()) {
+                    updateMinLimitText(getMinLimitText(left));
+                }
+                //minLimitChanged(left);
 
-            }
+                mSharedPreferenceController.setMaxVolumeLimit(right);
+                if (maxLimitSwitch.isChecked()) {
+                    updateMaxLimitText(getMaxLimitText(right));
+
+                }
 //                maxLimChanged(right);
-        });
+            }
+        };
+        //!!! after init
+        rangebar.setOnRangeBarChangeListener(onRangeBarChangeListener);
     }
 
     private int maxHardwareLevel;

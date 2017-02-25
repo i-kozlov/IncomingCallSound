@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.incomingcallsound.utils.Description;
 
 import butterknife.Bind;
@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class OldMinMaxLimitsCard extends ListCartItem {
+public class OldMinMaxLimitsCard extends ListCardItem {
 
     public OldMinMaxLimitsCard() {
         head = R.string.card_description_config_min_max_head;

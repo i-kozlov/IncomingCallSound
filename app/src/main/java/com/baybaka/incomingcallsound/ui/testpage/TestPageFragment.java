@@ -1,6 +1,7 @@
 package com.baybaka.incomingcallsound.ui.testpage;
 
 import android.content.BroadcastReceiver;
+import android.content.DialogInterface;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -128,9 +129,24 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
         Button volumeDown = (Button) view.findViewById(R.id.volume_down);
         Button sendResult = (Button) view.findViewById(R.id.send_result);
 
-        volumeUp.setOnClickListener(v -> volumeUp());
-        volumeDown.setOnClickListener(v -> volumeDown());
-        sendResult.setOnClickListener(v -> sendEmail());
+        volumeUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestPageFragment.this.volumeUp();
+            }
+        });
+        volumeDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestPageFragment.this.volumeDown();
+            }
+        });
+        sendResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestPageFragment.this.sendEmail();
+            }
+        });
 
         feedbackInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -263,11 +279,17 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
         new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.reset_config_dialog_head))
                 .setMessage(getString(R.string.reset_config_dialog_body))
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    resetPrefs();
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TestPageFragment.this.resetPrefs();
+                    }
                 })
-                .setNegativeButton(android.R.string.no, (dialog, which) -> {
-                    // do nothing
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();

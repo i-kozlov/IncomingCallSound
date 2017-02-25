@@ -4,13 +4,13 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoggingCard extends ListCartItem {
+public class LoggingCard extends ListCardItem {
 
     public LoggingCard() {
         head = R.string.card_description_logging_head;

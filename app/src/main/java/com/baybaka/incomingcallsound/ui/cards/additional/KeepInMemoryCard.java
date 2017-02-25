@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.increasingring.service.ServiceStarter;
 
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class KeepInMemoryCard extends ListCartItem {
+public class KeepInMemoryCard extends ListCardItem {
 
     public KeepInMemoryCard() {
         head = R.string.card_description_keep_in_mem__head;
@@ -44,16 +44,22 @@ public class KeepInMemoryCard extends ListCartItem {
             notificationMinPriorityLayout.setVisibility(View.GONE);
         }
 
-        keepInMemorySwitch.setOnClickListener(v -> {
-            mSharedPreferenceController.setRunForeground(keepInMemorySwitch.isChecked());
-            LoggerFactory.getLogger(KeepInMemoryCard.class.getSimpleName()).info("keepInMemorySwitch  set {}. User call stopServiceRestartIfEnabled",keepInMemorySwitch.isChecked() );
-            ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+        keepInMemorySwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSharedPreferenceController.setRunForeground(keepInMemorySwitch.isChecked());
+                LoggerFactory.getLogger(KeepInMemoryCard.class.getSimpleName()).info("keepInMemorySwitch  set {}. User call stopServiceRestartIfEnabled", keepInMemorySwitch.isChecked());
+                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+            }
         });
 
-        keepPrioritySwitch.setOnClickListener(v->{
-            mSharedPreferenceController.setMinNotificationPriory(keepPrioritySwitch.isChecked());
-            LoggerFactory.getLogger(KeepInMemoryCard.class.getSimpleName()).info("keepPrioritySwitch set {}. User call stopServiceRestartIfEnabled", keepPrioritySwitch.isChecked());
-            ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+        keepPrioritySwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSharedPreferenceController.setMinNotificationPriory(keepPrioritySwitch.isChecked());
+                LoggerFactory.getLogger(KeepInMemoryCard.class.getSimpleName()).info("keepPrioritySwitch set {}. User call stopServiceRestartIfEnabled", keepPrioritySwitch.isChecked());
+                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+            }
         });
     }
 

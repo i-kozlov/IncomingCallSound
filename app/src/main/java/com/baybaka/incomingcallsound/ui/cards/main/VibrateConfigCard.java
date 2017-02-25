@@ -8,14 +8,14 @@ import android.widget.TextView;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.incomingcallsound.ui.rv.RVAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VibrateConfigCard extends ListCartItem{
+public class VibrateConfigCard extends ListCardItem {
 
     @Bind(R.id.set_vibrate_first_toggle)
     SwitchCompat vibrateFirst;

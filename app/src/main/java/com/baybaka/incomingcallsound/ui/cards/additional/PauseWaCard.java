@@ -7,13 +7,13 @@ import android.widget.TextView;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PauseWaCard extends ListCartItem {
+public class PauseWaCard extends ListCardItem {
 
     public PauseWaCard() {
         head = R.string.card_description_pause_wa_head;

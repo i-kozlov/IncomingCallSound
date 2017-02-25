@@ -12,7 +12,7 @@ import com.baybaka.incomingcallsound.ui.rv.RVAdapter;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class BetaCard extends ListCartItem{
+public class BetaCard extends ListCardItem {
 
     @Nullable @Bind(R.id.send_email_beta_good)
     Button betaGood;

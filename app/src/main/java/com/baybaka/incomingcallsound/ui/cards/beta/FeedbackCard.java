@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.log.logsender.EmailIntentCreator;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.incomingcallsound.ui.rv.RVAdapter;
 import com.baybaka.incomingcallsound.ui.testpage.TestPageFragment;
 import com.baybaka.incomingcallsound.utils.RateApp;
@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FeedbackCard extends ListCartItem {
+public class FeedbackCard extends ListCardItem {
 
     private RVAdapter rvAdapter;
 

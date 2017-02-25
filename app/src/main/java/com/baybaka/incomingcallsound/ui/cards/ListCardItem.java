@@ -7,8 +7,8 @@ import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.settings.AllSettings;
 import com.baybaka.incomingcallsound.ui.rv.RVAdapter;
 
-public class ListCartItem {
-    protected AllSettings mSharedPreferenceController = MyApp.get().getListenerComponent().settings();
+public abstract class ListCardItem implements ListCard {
+    protected static AllSettings mSharedPreferenceController = MyApp.get().getListenerComponent().settings();
 
     protected int head = R.string.limit_max_volume_toggle_text;
     protected int layout = R.layout.card_config_keep_in_memory;

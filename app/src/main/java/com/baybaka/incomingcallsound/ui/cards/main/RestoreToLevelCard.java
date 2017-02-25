@@ -7,13 +7,13 @@ import android.widget.TextView;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RestoreToLevelCard extends ListCartItem{
+public class RestoreToLevelCard extends ListCardItem {
 
     public RestoreToLevelCard() {
         head = R.string.card_description_restore_level_head;

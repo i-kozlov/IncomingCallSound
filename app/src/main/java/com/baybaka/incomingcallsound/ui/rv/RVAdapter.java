@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCard;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import butterknife.OnClick;
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
 
     public void notifyUpdate() {
-        for (ListCartItem card : cards) {
+        for (ListCard card : cards) {
                 card.update();
         }
     }
@@ -65,11 +65,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
             if (expandable.isShown()) {
 //                    MyAnim.show(expandable, fade_in);
                 MyAnim.collapse(expandable);
+                //todo update on moving to 3.0
                 mButton.setBackgroundDrawable(MyApp.getContext().getResources().getDrawable(R.drawable.ic_expand_more_black_24dp));
 
             } else {
 //                    MyAnim.hide(description, fade_out);
                 MyAnim.expand(expandable);
+                //todo update on moving to 3.0
                 mButton.setBackgroundDrawable(MyApp.getContext().getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
 
             }
@@ -78,10 +80,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
     }
 
 
-    List<ListCartItem> cards;
+    List<ListCard> cards;
     private Context context;
 
-    public RVAdapter(List<ListCartItem> cards, Context context) {
+    public RVAdapter(List<ListCard> cards, Context context) {
         this.cards = cards;
         this.context = context;
         setHasStableIds(true);
@@ -117,7 +119,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
 
     @Override
     public void onBindViewHolder(CardViewHolder cardViewHolder, int i) {
-        ListCartItem card = cards.get(i);
+        ListCard card = cards.get(i);
 
         cardViewHolder.top.setText(fromId(cards.get(i).getHead()));
         cardViewHolder.description.setText(fromId(cards.get(i).getDescription()));

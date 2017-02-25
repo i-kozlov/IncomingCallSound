@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.increasingring.service.ServiceStarter;
 
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainCard extends ListCartItem {
+public class MainCard extends ListCardItem {
 
     public MainCard() {
         head = R.string.card_description_main_interval_head;
@@ -66,11 +66,14 @@ public class MainCard extends ListCartItem {
             }
         });
 
-        mServiceRunningSwitch.setOnClickListener(v->{
-            boolean serviceStatus = mServiceRunningSwitch.isChecked();
-            mSharedPreferenceController.changeServiceEnabledSettings(serviceStatus);
-            LoggerFactory.getLogger(MainCard.class.getSimpleName()).info("User set service status to {}", serviceStatus);
-            ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+        mServiceRunningSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean serviceStatus = mServiceRunningSwitch.isChecked();
+                mSharedPreferenceController.changeServiceEnabledSettings(serviceStatus);
+                LoggerFactory.getLogger(MainCard.class.getSimpleName()).info("User set service status to {}", serviceStatus);
+                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+            }
         });
     }
 

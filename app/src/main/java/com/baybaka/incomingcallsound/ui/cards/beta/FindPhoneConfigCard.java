@@ -67,11 +67,14 @@ public class FindPhoneConfigCard extends BetaCard {
         });
 
 
-        findPhoneSwitch.setOnClickListener(v->{
-            mSharedPreferenceController.setFindPhoneEnabled(findPhoneSwitch.isChecked());
-            setSeekbarText(findPhoneTimesSeekbar.getProgress());
-            LoggerFactory.getLogger(FindPhoneConfigCard.class.getSimpleName()).info("findPhoneSwitch set {}. User call stopServiceRestartIfEnabled", findPhoneSwitch.isChecked());
-            ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+        findPhoneSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSharedPreferenceController.setFindPhoneEnabled(findPhoneSwitch.isChecked());
+                FindPhoneConfigCard.this.setSeekbarText(findPhoneTimesSeekbar.getProgress());
+                LoggerFactory.getLogger(FindPhoneConfigCard.class.getSimpleName()).info("findPhoneSwitch set {}. User call stopServiceRestartIfEnabled", findPhoneSwitch.isChecked());
+                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext());
+            }
         });
     }
 

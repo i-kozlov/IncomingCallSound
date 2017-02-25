@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCard;
 import com.baybaka.incomingcallsound.ui.rv.RVAdapter;
 
 import java.util.List;
@@ -43,13 +43,13 @@ public abstract class TabWithCardListFragment extends Fragment {
     }
 
     private RecyclerView rv;
-    List<ListCartItem> cards;
+    List<ListCard> cards;
 
     private void initializeData() {
         cards = getCards();
     }
 
-    protected abstract List<ListCartItem> getCards();
+    protected abstract List<ListCard> getCards();
 
 
     private void initializeAdapter(){

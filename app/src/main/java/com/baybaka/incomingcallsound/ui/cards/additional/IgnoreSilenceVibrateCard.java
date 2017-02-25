@@ -4,12 +4,12 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 
 import com.baybaka.incomingcallsound.R;
-import com.baybaka.incomingcallsound.ui.cards.ListCartItem;
+import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class IgnoreSilenceVibrateCard extends ListCartItem {
+public class IgnoreSilenceVibrateCard extends ListCardItem {
 
     public IgnoreSilenceVibrateCard() {
         head = R.string.card_description_ignore_silence_vibrate_head;
