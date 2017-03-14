@@ -10,7 +10,7 @@
 
     <string name="service_is_active" >Service is active</string>
 
-    <string name="interval_text">Increase volume evey %1$s sec</string>
+    <string name="interval_text">Increase volume evey %1$d sec</string>
     <string name="send_result">Send report</string>
     <string name="volume_up">Volume up</string>
     <string name="volume_down">Volume down</string>
@@ -35,7 +35,7 @@
     <string name="start_from_min_true_description">Will start ringing from %1$s</string>
 
     <string name="pause_before_restore_volume">Pause before restoring volume</string>
-    <string name="pause_before_restoring_description">Pause for %1$s sec.</string>
+    <string name="pause_before_restoring_description">Pause for %1$d sec.</string>
 
     <string name="return_level_false_description">Will restore to pre-ring sound level</string>
     <string name="return_level_true_description">Will restore level to %1$s</string>
@@ -89,7 +89,7 @@
     <string name="write_review">Write review</string>
     <string name="use_flash_light">Use flashlight</string>
     <string name="vibrate_time_desc">Vibrate intervals count: %1$s</string>
-    <string name="mute_time_desc">Mute intervals count: %1$s</string>
+    <string name="mute_time_desc">Mute intervals count: %1$d</string>
     <string name="vibrate_disabled_desc">Vibration before ring is  disabled</string>
     <string name="mute_disabled_desc">Mute before ring is  disabled</string>
 
@@ -122,7 +122,7 @@
     <string name="error_noapp_tosend_email">No app to send email</string>
 
     <string name="disabled">Disabled</string>
-    <string name="find_phone_times_desc">Maximise after %s calls</string>
+    <string name="find_phone_times_desc">Maximise after %d calls</string>
     <string name="enable_find_my_phone">Find my phone</string>
     <string name="how_beta_works_label">Report how beta works</string>
     <string name="keep_notify_priopity_text">Low notification priority</string>

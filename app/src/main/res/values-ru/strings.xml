@@ -7,7 +7,7 @@
 
     <string name="service_is_active">Включить службу</string>
 
-    <string name="interval_text">Увеличение громкости каждые %1$s сек</string>
+    <string name="interval_text">Увеличение громкости каждые %1$d сек</string>
 
     <string name="send_result">Отправить отчет</string>
     <string name="volume_down">Звук-</string>
@@ -30,7 +30,7 @@
 
     <string name="start_from_min_false_description">Начинать звонить уровня 1</string>
 
-    <string name="pause_before_restoring_description">Пауза в %1$s сек.</string>
+    <string name="pause_before_restoring_description">Пауза в %1$d сек.</string>
     <string name="pause_before_restore_volume">Пауза перед возвратом громкости</string>
 
 
@@ -101,7 +101,7 @@
     <string name="feedback_hint">Оставьте отзыв</string>
 
     <string name="mute_disabled_desc">Беззвучный режим до звонка выключен</string>
-    <string name="mute_time_desc">Кол-во беззвучных интервалов: %1$s</string>
+    <string name="mute_time_desc">Кол-во беззвучных интервалов: %1$d</string>
     <string name="mute_first">Беззвучный до рингтона</string>
 
     <string name="error_ititiazing_mediaplayer">Ошибка инициализации медиаплеера. Возможно, ваш
@@ -117,7 +117,7 @@
     </string>
     <string name="please_meet_all_conditions">Пожалуйста, выполните все 3 условия</string>
     <string name="error_noapp_tosend_email">Не найдено рпиложение для отправки почты</string>
-    <string name="find_phone_times_desc">Максимизировать громкость после %s звонков</string>
+    <string name="find_phone_times_desc">Максимизировать громкость после %d звонков</string>
     <string name="disabled">Выключено</string>
     <string name="enable_find_my_phone">Найти телефон</string>
     <string name="how_beta_works_label">Раскажите как работает бета функция</string>
