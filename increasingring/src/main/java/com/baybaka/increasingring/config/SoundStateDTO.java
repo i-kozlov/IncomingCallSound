@@ -58,9 +58,9 @@ public class SoundStateDTO {
 
         SoundStateDTO that = (SoundStateDTO) o;
 
-        if (originalRingVolume != that.originalRingVolume) return false;
-        if (originalRingMode != that.originalRingMode) return false;
-        return originalMusicVolume == that.originalMusicVolume;
+        return originalRingVolume == that.originalRingVolume &&
+                originalRingMode == that.originalRingMode &&
+                originalMusicVolume == that.originalMusicVolume;
 
     }
 

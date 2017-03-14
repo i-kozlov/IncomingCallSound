@@ -29,26 +29,26 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
 
     override fun run() {
 
-        fun keepPlaying(level: Int) = !treadStopped && level <= config.allowedMaxVolume
+        fun notMaxAndRinging(level: Int) = !treadStopped && level <= config.allowedMaxVolume
 
         muteAction()
         vibrateAction()
 
         var currentSoundLevel = config.startSoundLevel
-        //todo подумать, возможно стоит делать ++ в mute и vibrate
+
+        //todo should it ++ in mute & vibrate
         if (currentSoundLevel < 1)
             currentSoundLevel = 1
 
-        if (keepPlaying(currentSoundLevel)) {
+        if (notMaxAndRinging(currentSoundLevel)) {
             configOutputStream()
         }
 
-        while (keepPlaying(currentSoundLevel)) {
+        while (notMaxAndRinging(currentSoundLevel)) {
 
             LOG.info("Loop volume var = {}. Calling sound++", currentSoundLevel)
 
             mAudioManagerWrapper.setAudioLevelRespectingLogging(currentSoundLevel)
-
 
             currentSoundLevel++
             waitIntervalSeconds()

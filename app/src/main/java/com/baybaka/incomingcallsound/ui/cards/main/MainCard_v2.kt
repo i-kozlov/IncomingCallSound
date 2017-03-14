@@ -12,7 +12,7 @@ import com.baybaka.incomingcallsound.ui.cards.ListCardItem_v2
 import com.baybaka.increasingring.service.ServiceStarter
 import org.slf4j.LoggerFactory
 
-class MainCard_v2() : ListCardItem_v2() {
+class MainCard_v2 : ListCardItem_v2() {
 
     override val head = R.string.card_description_main_interval_head
     override val layout = R.layout.card_config_service_interval

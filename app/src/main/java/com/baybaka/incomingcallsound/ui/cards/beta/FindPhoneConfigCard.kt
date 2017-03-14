@@ -38,7 +38,7 @@ class FindPhoneConfigCard : ListCardItem_v2() {
         setSeekbarText(ringTimes)
 
         findPhoneTimesSeekbar.progress = ringTimes
-        findPhoneTimesSeekbar!!.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        findPhoneTimesSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (progress == 0)
                     seekBar.progress = 1
@@ -57,20 +57,21 @@ class FindPhoneConfigCard : ListCardItem_v2() {
         })
 
 
-        findPhoneSwitch!!.setOnClickListener {
-            mSharedPreferenceController.isFindPhoneEnabled = findPhoneSwitch!!.isChecked
-            this@FindPhoneConfigCard.setSeekbarText(findPhoneTimesSeekbar!!.progress)
-            LoggerFactory.getLogger(FindPhoneConfigCard::class.java.simpleName).info("findPhoneSwitch set {}. User call stopServiceRestartIfEnabled", findPhoneSwitch!!.isChecked)
+        findPhoneSwitch.setOnClickListener {
+            mSharedPreferenceController.isFindPhoneEnabled = findPhoneSwitch.isChecked
+            this@FindPhoneConfigCard.setSeekbarText(findPhoneTimesSeekbar.progress)
+            LoggerFactory.getLogger(FindPhoneConfigCard::class.java.simpleName).info("findPhoneSwitch set {}. User call stopServiceRestartIfEnabled", findPhoneSwitch.isChecked)
             ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext())
         }
     }
 
     private fun setSeekbarText(value: Int) {
-        findPhoneTextView!!.text = muteSeekText(value)
+        findPhoneTextView.text = muteSeekText(value)
     }
 
     private fun muteSeekText(value: Int): String {
-        return if (findPhoneSwitch!!.isChecked) MyApp.getContext().getString(R.string.find_phone_times_desc, value) else MyApp.getContext().getString(R.string.disabled)
+        return if (findPhoneSwitch.isChecked) MyApp.getContext().getString(R.string.find_phone_times_desc, value)
+        else MyApp.getContext().getString(R.string.disabled)
     }
 
 }

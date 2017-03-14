@@ -37,7 +37,7 @@ interface ListCard {
 }
 
 
-abstract class ListCardItem_v2() : ListCard {
+abstract class ListCardItem_v2 : ListCard {
     override val isBetaFeature: Boolean = false
     protected lateinit var rvAdapter: RVAdapter
 
