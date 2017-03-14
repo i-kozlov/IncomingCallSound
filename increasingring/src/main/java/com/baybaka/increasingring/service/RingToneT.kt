@@ -18,7 +18,7 @@ import com.baybaka.increasingring.R
 
 class RingToneT(val context: Context) {
 
-    private var hasAccess = false;
+    private var hasAccess = false
 
     fun updatePermissionInfo(): Boolean {
         val result = Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
@@ -69,7 +69,7 @@ class RingToneT(val context: Context) {
         //case mediaPlayer creation failed (some sony devices)
         mediaPlayer?.let {
             it.setAudioStreamType(AudioManager.STREAM_MUSIC)
-            it.setLooping(true)
+            it.isLooping = true
             //                mediaPlayer.prepare();
         }
 

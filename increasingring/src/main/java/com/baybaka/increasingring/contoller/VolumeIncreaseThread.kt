@@ -29,7 +29,7 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
 
     override fun run() {
 
-        fun stillPlaying(level: Int) = !treadStopped && level <= config.allowedMaxVolume
+        fun keepPlaying(level: Int) = !treadStopped && level <= config.allowedMaxVolume
 
         muteAction()
         vibrateAction()
@@ -39,11 +39,11 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
         if (currentSoundLevel < 1)
             currentSoundLevel = 1
 
-        if (stillPlaying(currentSoundLevel)) {
+        if (keepPlaying(currentSoundLevel)) {
             configOutputStream()
         }
 
-        while (stillPlaying(currentSoundLevel)) {
+        while (keepPlaying(currentSoundLevel)) {
 
             LOG.info("Loop volume var = {}. Calling sound++", currentSoundLevel)
 
@@ -100,7 +100,6 @@ open class RingTone(config: RingerConfig, mAudioManagerWrapper: AudioManagerWrap
     : VolumeIncreaseThread(config, mAudioManagerWrapper, rts) {
 
 
-
     override fun configOutputStream() {
         mAudioManagerWrapper.normalModeStream()
     }
@@ -109,22 +108,24 @@ open class RingTone(config: RingerConfig, mAudioManagerWrapper: AudioManagerWrap
 open class Music(config: RingerConfig, audioManagerWrapper: AudioManagerWrapper, rts: RunTimeSettings, val callerNumber: String, val ringtoneService: RingToneT)
     : RingTone(config, audioManagerWrapper, rts) {
 
-    private lateinit var mediaPlayer: MediaPlayer
-    private lateinit var mReceiver: BroadcastReceiver
+    private var mediaPlayer: MediaPlayer? = null
+    private var mReceiver: BroadcastReceiver? = null
 
     override fun stop() {
         treadStopped = true
         releasePlayer()
-
-        rts.context.unregisterReceiver(mReceiver)
+        mReceiver?.let { rts.context.unregisterReceiver(it) }
     }
 
     private fun releasePlayer() {
-        if (mediaPlayer.isPlaying) {
-            this.mediaPlayer.stop()
+        mediaPlayer?.let {
+            if (it.isPlaying) {
+                it.stop()
+            }
+            it.reset()
+            it.release()
         }
-        mediaPlayer.reset()
-        mediaPlayer.release()
+
 
     }
 
@@ -136,7 +137,7 @@ open class Music(config: RingerConfig, audioManagerWrapper: AudioManagerWrapper,
 
         player?.let {
             mediaPlayer = it
-            mediaPlayer.start()
+            mediaPlayer?.start()
 
             //configure music of with power key
             val filter = IntentFilter(Intent.ACTION_SCREEN_OFF)
