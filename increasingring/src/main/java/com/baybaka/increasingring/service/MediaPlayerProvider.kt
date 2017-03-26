@@ -41,12 +41,16 @@ class MediaPlayerProvider(val context: Context) : IMediaPlayerProvider {
             ringTone?.let { Uri.parse(it) } ?: RingtoneManager.getDefaultUri(1)
         }
 
-//        return getPlayer(uri)
-        return getPlayer(RingtoneManager.getDefaultUri(1))
+        return getPlayer(uri)
+//        return getPlayer(RingtoneManager.getDefaultUri(1)) //test only
     }
 
-    private fun getRingTone(number: String): String? {
+    private fun getRingTone(number: String?): String? {
         val uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number))
+
+        val wrongUri = number == null || number.isEmpty() || uri.toString().endsWith("phone_lookup")
+        println("wrongUri: $wrongUri")
+        if(wrongUri) return null
 
         val contentResolver = context.contentResolver
         val contactLookup = contentResolver.query(uri, arrayOf(BaseColumns._ID, ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.Contacts.CUSTOM_RINGTONE), null, null, null)
