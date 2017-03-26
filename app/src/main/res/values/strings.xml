@@ -160,8 +160,8 @@
     </string>
 
     <!--show short text like "Music mode is recommended" or "Permission is required. Click to Grant"-->
-    <string name="warning_mute_vibrate_android4_and_5">Some Android 4 and 5 have problems when using mute
-        and/or vibrate without setting stream to non-default one
+    <string name="warning_mute_vibrate_android4_and_5">Success of mute/vibrate on Android 5 and lower
+        depend of devices vendor\'s implementation. Use on your own risk
     </string>
     <string name="warning_mute_vibrate_android6">Grant Do not disturb permission (Optional)
     </string>

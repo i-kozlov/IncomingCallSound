@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="update_notify_message">Если вы использовали опцию вибро перед звонком, пожалуйста проверьте настройки.
+    <string name="update_notify_message">Если вы использовали опцию вибро перед звонком, пожалуйста
+        проверьте настройки.
         Иначе можете игнорировать это сообщение, либо взглянуть на новый интерфейс и функционал
     </string>
     <string name="app_name">Плавный звонок</string>
@@ -15,7 +16,8 @@
     <string name="test_page">Тестовая страница</string>
     <string name="test_hint">
         1)Всегда добавляйте небольшое описание, чтобы я мог понять в чем проблема \n
-        2)Используйте программные кнопки повышения и понижения громкости (те что над кнопкой "отправить отчет")\n
+        2)Используйте программные кнопки повышения и понижения громкости (те что над кнопкой
+        "отправить отчет")\n
         3)Примите не менее двух звонков держа это окно открытым \n
         4)Нажмите кнопку "отправить отчет" и убедитесь, что к письму приложен файл report.log \n
 
@@ -26,7 +28,7 @@
     <string name="max_sound_level_text">Ограничить макс. громкость %1$s</string>
     <string name="limit_max_volume_toggle_text">Органичить макс. громкость</string>
 
-    <string name="start_from_min_true_description">Начнет звонить с  %1$s</string>
+    <string name="start_from_min_true_description">Начнет звонить с %1$s</string>
 
     <string name="start_from_min_false_description">Начинать звонить уровня 1</string>
 
@@ -51,7 +53,6 @@
     <string name="tab_4_header">Разное</string>
 
 
-
     <string name="max_sound_level_text_disabled">Не ограничивать максимальную громкость</string>
 
     <string name="keep_icon_text">Включить уведомление</string>
@@ -68,7 +69,9 @@
 
     <string name="use_music_stream">Нестандарный поток</string>
     <string name="ring_stream_text">Проигрывать звонок как рингтон</string>
-    <string name="music_stream_text">Проигрывать звонок как музыку. Mute с помошью кнопки питания вместо кнопок громкости.</string>
+    <string name="music_stream_text">Проигрывать звонок как музыку. Mute с помошью кнопки питания
+        вместо кнопок громкости.
+    </string>
 
     <string name="asap_switch">Понижать звук как можно быстрее</string>
     <string name="asap_option_description">Выставит громкость =1 пред чтением настроек. Особенно
@@ -107,7 +110,8 @@
     <string name="mute_first">Беззвучный до рингтона</string>
 
     <string name="error_ititiazing_mediaplayer">Ошибка инициализации медиаплеера. Возможно, ваш
-        проигрыватель не поддерживает остановку воспроизведения при входящем звонке. Используйте поток звонка
+        проигрыватель не поддерживает остановку воспроизведения при входящем звонке. Используйте
+        поток звонка
     </string>
     <string name="describe_problem_hint">Пожалуйста, опишите проблему</string>
     <string name="test_page_warning_vol">Используйте кнопки звук+ и звук-
@@ -125,7 +129,8 @@
     <string name="how_beta_works_label">Раскажите как работает бета функция</string>
     <string name="keep_notify_priopity_text">Низкий приоритет</string>
 
-    <string name="yes_page_text">Данные функции включены по-умолчанию. Не стоит их выключать</string>
+    <string name="yes_page_text">Данные функции включены по-умолчанию. Не стоит их выключать
+    </string>
 
     <string name="drawer_ring_conf">Настройки звонка</string>
     <string name="drawer_ring_extra">Доп. настройки</string>
@@ -134,16 +139,19 @@
 
     <string name="drawer_app_version_text">версия %1$s (%2$s)</string>
 
-    <string name="find_phone_notification">Максимальная громкость выставленна функцией Найти телефон</string>
+    <string name="find_phone_notification">Максимальная громкость выставленна функцией Найти
+        телефон
+    </string>
 
     <!--<string name="warning_no_dnd_permissions">Android 7 не может использовать музыкальный поток при без прав управления-->
-         <!--режимом "Не беспокоить"</string>-->
+    <!--режимом "Не беспокоить"</string>-->
 
     <string name="drawer_switch_app_mode">Переключить режим приложения</string>
     <string name="do_not_ring_toggle_text">Не звонить</string>
     <string name="error_mute_vibrate_android7">Требуются разшения. Нажмите для предоставления
     </string>
-    <string name="skip_ring_descr_text">Не будет звонить если в настройках выбрано Вибро/Беззвучный до рингтона
+    <string name="skip_ring_descr_text">Не будет звонить если в настройках выбрано Вибро/Беззвучный
+        до рингтона
     </string>
     <string name="error_music_stream_android7_dnd_reason">Нужно разшения для использования в режиме
         \"музыка\" клик для выдачи разрешений
@@ -163,7 +171,9 @@
     <string name="warning_mute_vibrate_android6">Предоставить права управления режимом \"Не
         беспокоить\". Опционально
     </string>
-    <string name="warning_mute_vibrate_android4_and_5">Некоторые устройства с версиями Android 4 и 5
-        имеют проблемы с использованием режимов тишина и/или вибро без смены потока воспроизведения на нестандартный
+    <string name="warning_mute_vibrate_android4_and_5">Успешность использования режимов тишина/вибро
+        на Android 5 и ниже
+        рависит от производителя устройства.
     </string>
+
 </resources>

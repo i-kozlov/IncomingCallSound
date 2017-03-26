@@ -3,9 +3,12 @@
 
     <string name="card_description_main_interval_head">Main app config</string>
     <string name="card_description_main_interval_short">
-        Default behavior is to do NOT ring if phone was in silence or vibrate-only mode before call (configurable)
+        Default behavior is to do NOT ring if phone was in silence or vibrate-only mode before call
+        (configurable)
     </string>
-    <string name="card_description_main_interval_full">Number of seconds between two sound increase actions also affects vibrate and mute before ring option</string>
+    <string name="card_description_main_interval_full">Number of seconds between two sound increase
+        actions also affects vibrate and mute before ring option
+    </string>
 
     <string name="card_description_config_min_max_head">Ringer volume limits</string>
     <string name="card_description_config_min_max_short">
@@ -16,22 +19,43 @@
     </string>
 
     <string name="card_description_restore_level_head">Restore volume after call</string>
-    <string name="card_description_restore_level_short">Default behaviour is to restore pre-call level </string>
+    <string name="card_description_restore_level_short">Default behaviour is to restore pre-call
+        level
+    </string>
     <string name="card_description_restore_level_full">
         Be careful when you use this with max volume level limit = prering,
         because restore to 1 after call with max level = prering will give you no volume increase
     </string>
 
     <string name="card_description_vibrate_head">Config mute/vibrate mode</string>
-    <string name="card_description_vibrate_short">
-        On Android 5 and lower can cause vibration only when using default playback stream.
-        \nSwitch to non-default stream then. See full description for details</string>
+    <string name="card_description_vibrate_short_android_4_5">
+        On Android 5 and lower using mute can failing restoring pre-ring volume and cause vibration
+        only when using default playback stream.
+        \nTrying switching to non-default stream then. See full description for details
+    </string>
+
+    <string name="card_description_vibrate_short_android_6">
+        On Android 6 should not be any problems with using mute/vibrate.
+        \nIf you still have them try switch to non-default stream or grant Do not Disturb access
+        permission.
+        \nSee full description for details
+    </string>
+
+    <string name="card_description_vibrate_short_android_7">
+        On Android 7 and higher should not be any problems with using mute/vibrate.
+        \nIf you still have them try switch to non-default stream.
+        \nSee full description for details
+    </string>
+
     <string name="card_description_vibrate_full">
-        There are devices that do not support switch from mute/vibrate to normal ring mode during call.
-        \nThey stay vibrate-only even after volume increase.
-        \nSolution is to use music stream instead ring stream. To do it you need to enable \'Non-default playback stream\'.
-        \nYou loose option to mute incoming ring with volume buttons but can mute with power button
-        \nChanging stream can also change you max volume level. \nIt usually happens if your max level was 7.
+        There are devices that do not support switch from mute/vibrate to normal ring mode during
+        call.
+        \tThey stay vibrate-only even after volume increase.
+        \tSolution is to use music stream instead ring stream. To do it you need to enable
+        \'Non-default playback stream\'.
+        \tYou loose option to mute incoming ring with volume buttons but can mute with power button
+        \tChanging stream can also change you max volume level. \tIt usually happens if your max
+        level was 7.
     </string>
 
     <string name="card_description_mute_head">Mute config</string>
@@ -56,7 +80,8 @@
 
     <string name="card_description_logging_head">Logging config</string>
     <string name="card_description_logging_short">
-        Use it if you have problems or want to help in app development. Use buttons on last tab to send logs
+        Use it if you have problems or want to help in app development. Use buttons on last tab to
+        send logs
     </string>
     <string name="card_description_logging_full">
         You can watch logging in realtime on Test page
@@ -68,9 +93,12 @@
         Keep app in memory to prevent being closed by memory cleaner
     </string>
     <string name="card_description_keep_in_mem_full">
-        Low priority option hides icon from statusbar but increase chance of closing app when on low memory.
-        \nA way to completely hide icon while function enabled is to go to system settings-> apps -> app -> notification option and disable notification for app.
-        \nYou can take a looking at app restart evens in log to find out do you need to enable this function
+        Low priority option hides icon from statusbar but increase chance of closing app when on low
+        memory.
+        \nA way to completely hide icon while function enabled is to go to system settings-> apps ->
+        app -> notification option and disable notification for app.
+        \nYou can take a looking at app restart evens in log to find out do you need to enable this
+        function
     </string>
 
     <string name="card_description_ignore_silence_vibrate_head">Respect silence</string>
@@ -80,7 +108,8 @@
         please read the full description of the Vibrate config card then
     </string>
     <string name="card_description_ignore_silence_vibrate_full">
-        You can also use this option in ase of  wrong mode detection: when software buttons on test page works ok but volume does not change on incoming ring.
+        You can also use this option in ase of wrong mode detection: when software buttons on test
+        page works ok but volume does not change on incoming ring.
         Use test page to check then
         \nPlease report if your phone need this option enabled
     </string>
@@ -108,7 +137,8 @@
 
     <string name="card_description_find_phone_head">Find phone</string>
     <string name="card_description_find_phone_short">
-        Alter selected number of calls in row from same number within 3 minutes call will ring at max volume
+        Alter selected number of calls in row from same number within 3 minutes call will ring at
+        max volume
     </string>
     <string name="card_description_find_phone_full">
         It helps you find phone when you live it somewhere in mute mode

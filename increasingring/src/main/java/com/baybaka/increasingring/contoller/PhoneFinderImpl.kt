@@ -52,9 +52,12 @@ class PhoneFinderImpl(private val settingsService: SettingsService) : PhoneFinde
     fun disable() = { enabled = false }
     fun updateCount(num: Int) = { numCount = num }
 
-    override fun update(){
+    override fun update() {
         numMaxCount = settingsService.findPhoneCount
         enabled = settingsService.isFindPhoneEnabled
+        if (!enabled) {
+            numCount = 0
+        }
     }
 
     //keep that in controller

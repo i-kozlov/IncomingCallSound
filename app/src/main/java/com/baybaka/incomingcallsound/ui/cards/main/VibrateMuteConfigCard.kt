@@ -29,8 +29,14 @@ class VibrateMuteConfigCard : ListCardItem_v2() {
 
     override val head = R.string.card_description_vibrate_head
     override val layout = R.layout.card_config_vibrate
-    override val description = R.string.card_description_vibrate_short
+    override val description = versionBasedDescription()
     override val descriptionFull = R.string.card_description_vibrate_full
+
+    private fun versionBasedDescription():  Int = when {
+        PermissionChecker.Version.isAndroid5AndLower() -> R.string.card_description_vibrate_short_android_4_5
+        PermissionChecker.Version.isAndroid6() -> R.string.card_description_vibrate_short_android_6
+        else -> R.string.card_description_vibrate_short_android_7
+    }
 
     @Bind(R.id.set_vibrate_first_toggle)
     internal lateinit var vibrateSwitch: SwitchCompat
@@ -214,7 +220,7 @@ class VibrateMuteConfigCard : ListCardItem_v2() {
                 items.forEach { this::unBan }
             }
 
-            //android 7+ can not mute ringtone without DnD control permission
+        //android 7+ can not mute ringtone without DnD control permission
             android7plus() && !checker.doNotDisturbGranted() -> {
                 setState(view, HowBad.ERROR)
                 items.forEach { ban(it) }
@@ -261,10 +267,10 @@ class VibrateMuteConfigCard : ListCardItem_v2() {
             Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ||
                     Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1 || isAndroid5AndLower() -> {
 
-                if(setToPlayAsMusic()){
+                if (setToPlayAsMusic()) {
                     setState(view, HowBad.GOOD)
 
-                } else{
+                } else {
                     setState(view, HowBad.WARNING)
                     view.setText(R.string.warning_mute_vibrate_android4_and_5)
                 }
@@ -278,7 +284,7 @@ class VibrateMuteConfigCard : ListCardItem_v2() {
                 view.setText(R.string.warning_mute_vibrate_android6)
                 view.setOnClickListener { checker.askForDndPermission() }
             }
-            // now we have Android 7+ left
+        // now we have Android 7+ left
             checker.doNotDisturbGranted() -> {
                 setState(view, HowBad.GOOD)
                 items.forEach { unBan(it) }
