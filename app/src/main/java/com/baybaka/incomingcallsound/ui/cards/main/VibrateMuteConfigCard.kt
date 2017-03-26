@@ -142,25 +142,9 @@ class VibrateMuteConfigCard : ListCardItem_v2() {
     @OnClick(R.id.stream_switch)
     fun streamSwitchChanged() {
 
-
-//        val canMove = streamSwitch.isChecked || activity()?.let {
-//            PermissionChecker(it).checkMusicAndAsk()
-//            return@let PermissionChecker(it).askForDndPermission()
-//        } ?: false
-//
-//        rvAdapter.showText(R.string.warning_no_dnd_permissions)
-
-//        if (canMove) {
-
         mSharedPreferenceController.setSoundStream(streamSwitch.isChecked)
         updateStreamDescription(streamSwitch.isChecked)
-        //            appContext().listenerComponent.provideAudioWrapper()
-//                    .changeOutputStream(mSharedPreferenceController.soundStream)
         rvAdapter.notifyUpdate()
-//        } else {
-//
-//            streamSwitch.isChecked = true
-//        }
 
     }
 
@@ -179,7 +163,7 @@ class VibrateMuteConfigCard : ListCardItem_v2() {
         this.rvAdapter = rvAdapter
     }
 
-    //todo use on switch check , etc?
+
     private fun updateStreamDescription(nonDefault: Boolean) {
         val textId = if (nonDefault) R.string.music_stream_text else R.string.ring_stream_text
         chosenStreamTextView.setText(textId)
@@ -325,24 +309,8 @@ class VibrateMuteConfigCard : ListCardItem_v2() {
 
     @OnClick(R.id.mute_switch)
     fun toggleMute() {
-
-//        val isOK = !muteSwitch.isChecked || context()?.let {
-//            return@let PermissionChecker(it).askForDndPermission()
-//        } ?: false
-//
-//        rvAdapter.showText("Android 6 & 7 can not use Mute mode without providing do not disturb permission")
-
         mSharedPreferenceController.isMuteFirst = muteSwitch.isChecked
         setMuteSeekbarText(muteTimesSeekbar.progress)
-
-//        if (isOK) {
-//            mSharedPreferenceController.isMuteFirst = muteSwitch.isChecked
-//            setMuteSeekbarText(muteTimesSeekbar.progress)
-//        } else {
-//
-//            muteSwitch.isChecked = !muteSwitch.isChecked
-//        }
-
     }
 
 
