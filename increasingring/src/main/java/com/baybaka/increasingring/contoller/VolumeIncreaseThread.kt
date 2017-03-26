@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.media.AudioManager
 import android.media.MediaPlayer
 import com.baybaka.increasingring.audio.IAudioController
 import com.baybaka.increasingring.config.RingerConfig
@@ -50,22 +49,15 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
 
         muteAction()
         vibrateAction()
-        var currentSoundLevel = config.startSoundLevel
 
-//        //todo should it ++ in mute & vibrate ?
-//        if (currentSoundLevel < 1)
-//            currentSoundLevel = 1
-//
-//        //todo replace this with doNotRing check
-//        if (oneMoreTurn(currentSoundLevel)) {
-//            configOutputStream()
-//        }
         if (config.doNotRing) {
             this.stop()
+            LOG.info("Config doNotRing set to true. Stop before ringing")
         } else {
             configOutputStream()
         }
 
+        var currentSoundLevel = config.startSoundLevel
         while (oneMoreTurn(currentSoundLevel)) {
 
             audioController.new_SetAudioLevel(currentSoundLevel)
@@ -148,79 +140,34 @@ open class RingAsMusic(config: RingerConfig, audioController: IAudioController, 
             }
             it.reset()
             it.release()
+//            am().abandonAudioFocus(focusChangeListener)
         }
 
 
     }
 
+//    private fun am(): AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
     override fun configOutputStream() {
-        //todo should be different method for ringtone and music
         audioController.normal()
 
         mediaPlayer = playerProvider.getConfiguredPlayer(callerNumber)
 
         mediaPlayer?.let { player ->
-            val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-//todo complete or remove
-// Request audio focus for playback
-            val result = am.requestAudioFocus(focusChangeListener
-                    ,
-                    // Use the music stream.
-                    AudioManager.STREAM_MUSIC,
-                    // Request permanent focus.
-                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE)
 
 
             player.start()
             //configure music off with power key
             mReceiver = PowerButtonReceiver()
-            //todo test music stop with screen off
             context.registerReceiver(mReceiver, IntentFilter(Intent.ACTION_SCREEN_OFF))
         }
 
         //show notify otherwise
         if (mediaPlayer == null) {
-            //todo could be replaced with AsyncTask.onUpdate
             rts.getNotifyProvider().playerInitError()
         }
 
     }
 
-    private val focusChangeListener: AudioManager.OnAudioFocusChangeListener =
-            AudioManager.OnAudioFocusChangeListener() {
-                fun onAudioFocusChange(focusChange: Int) {
-                    LOG.info("focusChangeListener is called")
-//                    AudioManager am =(AudioManager) getSystemService (Context.AUDIO_SERVICE);
-                    when (focusChange) {
-
-                        (AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) ->
-                            // Lower the volume while ducking.
-                            mediaPlayer?.setVolume(0.2f, 0.2f);
-
-                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
-                        }
-
-                        (AudioManager.AUDIOFOCUS_LOSS) -> {
-                        }
-//                        stop();
-//                        ComponentName component = new ComponentName(AudioPlayerActivity.this, MediaControlReceiver.class);
-//                        am.unregisterMediaButtonEventReceiver(component);
-//                        break;
-
-                        AudioManager.AUDIOFOCUS_GAIN -> {
-                            // Return the volume to normal and resume if paused.
-                            mediaPlayer?.setVolume(1f, 1f);
-                            mediaPlayer?.start();
-//                            break;
-//                            default: break;
-                        }
-
-                    }
-                }
-            };
-
-    fun f(): AudioManager.OnAudioFocusChangeListener =
-            AudioManager.OnAudioFocusChangeListener({ focusChange -> print(focusChange) })
 
 }

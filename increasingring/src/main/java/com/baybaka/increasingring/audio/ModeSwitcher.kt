@@ -118,7 +118,7 @@ class MusicImpl(override val systemAudioManager: AudioManager) : ModeSwitcher {
     override fun toString(): String = "STREAM_MUSIC"
     override fun vibrate() {
 
-//        setRingVolume(0)
+        setRingVolume(0)
 
         // check do we still need it  ?
 //        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE)
@@ -127,7 +127,7 @@ class MusicImpl(override val systemAudioManager: AudioManager) : ModeSwitcher {
     }
 
     override fun normal() {
-//        setRingVolume(0)
+        setRingVolume(0)
 
 //        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE)
         systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, 0)

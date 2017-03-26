@@ -20,7 +20,7 @@ interface IMediaPlayerProvider {
 
 class MediaPlayerProvider(val context: Context) : IMediaPlayerProvider {
 
-    //todo inject checker singlton whenever it is needed?
+    //todo inject checker singleton whenever it is needed?
     fun hasPermissions(): Boolean {
 
         val  noSecurity = Build.VERSION.SDK_INT < Build.VERSION_CODES.M
@@ -41,8 +41,8 @@ class MediaPlayerProvider(val context: Context) : IMediaPlayerProvider {
             ringTone?.let { Uri.parse(it) } ?: RingtoneManager.getDefaultUri(1)
         }
 
-        return getPlayer(uri)
-//        return getPlayer(RingtoneManager.getDefaultUri(1))
+//        return getPlayer(uri)
+        return getPlayer(RingtoneManager.getDefaultUri(1))
     }
 
     private fun getRingTone(number: String): String? {

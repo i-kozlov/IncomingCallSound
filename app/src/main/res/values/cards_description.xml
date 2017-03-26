@@ -24,13 +24,12 @@
 
     <string name="card_description_vibrate_head">Config mute/vibrate mode</string>
     <string name="card_description_vibrate_short">
-        Gives option to vibrate before ringing.
-        \nCan cause vibration only with no ringtone without proper configuration.
-        \nSee full description</string>
+        On Android 5 and lower can cause vibration only when using default playback stream.
+        \nSwitch to non-default stream then. See full description for details</string>
     <string name="card_description_vibrate_full">
         There are devices that do not support switch from mute/vibrate to normal ring mode during call.
         \nThey stay vibrate-only even after volume increase.
-        \nSolution is to use music stream instead ring stream. To do it you need to disable \'Use default playback stream\'.
+        \nSolution is to use music stream instead ring stream. To do it you need to enable \'Non-default playback stream\'.
         \nYou loose option to mute incoming ring with volume buttons but can mute with power button
         \nChanging stream can also change you max volume level. \nIt usually happens if your max level was 7.
     </string>
