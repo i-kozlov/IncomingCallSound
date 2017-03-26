@@ -58,6 +58,7 @@ constructor(private val settingsService: SettingsService) {
         return config
     }
 
+    //todo caching ignores when music permissions granted
     val findPhoneConfig: RingerConfig by lazy {
         with(RingerConfig()) {
             startSoundLevel = 14

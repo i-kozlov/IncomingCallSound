@@ -39,8 +39,8 @@ class FindPhoneConfigCard : ListCardItem_v2() {
         findPhoneTimesSeekbar.progress = ringTimes
         findPhoneTimesSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (progress == 0)
-                    seekBar.progress = 1
+                if (progress < 2)
+                    seekBar.progress = 2
                 ServiceStarter.stopServiceRestartIfEnabled(appContext())
                 setSeekbarText(seekBar.progress)
             }

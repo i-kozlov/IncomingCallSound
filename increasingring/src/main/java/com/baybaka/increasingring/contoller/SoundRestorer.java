@@ -44,7 +44,10 @@ public class SoundRestorer {
 
     synchronized void restoreVolumeToPreRingingLevel() {
 
-        if (originalVolumes == null) return;
+        if (originalVolumes == null) {
+            LOG.info("skip restoring volume");
+            return;
+        }
         usePauseWorkaround();
         calcRestoreRingLevel();
 

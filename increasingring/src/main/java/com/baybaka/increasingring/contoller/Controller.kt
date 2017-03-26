@@ -1,10 +1,10 @@
 package com.baybaka.increasingring.contoller
 
-import com.baybaka.increasingring.settings.RunTimeSettings
-import com.baybaka.increasingring.settings.SettingsService
 import com.baybaka.increasingring.audio.RingMode
 import com.baybaka.increasingring.config.CachingConfigFactory
 import com.baybaka.increasingring.receivers.TestPageOnCallEvenReceiver
+import com.baybaka.increasingring.settings.RunTimeSettings
+import com.baybaka.increasingring.settings.SettingsService
 import com.baybaka.increasingring.utils.AudioManagerWrapper
 import com.baybaka.notificationlib.NotificationController
 import org.slf4j.LoggerFactory
@@ -43,7 +43,6 @@ constructor(private val mSettingsService: SettingsService,
         //to make sure no old increase task left
         stopVolumeIncrease()
 
-        //todo should checkForConfigUpdate(); be here ?
         checkForConfigUpdate()
 
         val searching = phoneFinder.lostMe(callerNumber)
@@ -76,7 +75,6 @@ constructor(private val mSettingsService: SettingsService,
             mSoundRestorer.saveCurrentSoundLevels()
 
             asapAction()
-            //            checkForConfigUpdate();
 
             val config = configFactory.getConfig(preRingLevel)
             currentThread = configFactory.createThread(config, callerNumber)
@@ -134,7 +132,6 @@ constructor(private val mSettingsService: SettingsService,
 
     }
 
-    private fun isPhoneInNormalRingMode(): Boolean = mAudioManagerWrapper.ringerMode === RingMode.RINGER_MODE_NORMAL
 
     fun stopVolumeIncrease() {
         currentThread?.let {
@@ -147,16 +144,13 @@ constructor(private val mSettingsService: SettingsService,
 
 
     private fun findPhoneMaximizeVolume(callerNumber: String) {
-        LOG.info("Calling find my phone function for number {}", callerNumber)
-        //        mAudioManagerWrapper.changeOutputStream(AudioManager.STREAM_MUSIC);
-
+        LOG.info("Calling find my phone function for number $callerNumber")
+        mSoundRestorer.saveCurrentSoundLevels()
 
         val config = configFactory.findPhoneConfig
         currentThread = configFactory.createThread(config, callerNumber)
         Thread(currentThread).start()
 
-        //todo test can we drop it
-        mRunTimeSettings.configurationChanged() // to reset stream on next call
 
         //        mAudioManagerWrapper.maxVolDisableMuteVibrate();
         //        updateAllConfigs();
