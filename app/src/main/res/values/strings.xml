@@ -32,7 +32,7 @@
     <string name="limit_max_volume_toggle_text">Limit max volume</string>
     <string name="do_not_ring_toggle_text">Do not ring</string>
 
-    <string name="skip_ring_descr_text">Will not start ringing if vibrate first or mute first option is selected</string>
+    <string name="skip_ring_descr_text">Will not start ringing if vibrate/mute before ring option is selected</string>
 
     <string name="start_from_min_false_description">Will start ringing from level 1</string>
     <string name="start_from_min_true_description">Will start ringing from %1$s</string>
@@ -105,7 +105,9 @@
     <string name="feedback_open_test">Open test page</string>
     <string name="feedback_send">Send feedback</string>
 
-    <string name="Feedbsck_rate">Rate app</string>
+    <string name="feedback_rate">Rate app</string>
+
+    <string name="nav_web_help">See online help</string>
 
     <string name="drawer_ring_conf">Ring config</string>
     <string name="drawer_ring_extra">Extra config</string>

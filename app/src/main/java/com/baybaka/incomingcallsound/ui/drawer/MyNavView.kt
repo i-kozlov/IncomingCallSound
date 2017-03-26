@@ -1,5 +1,7 @@
 package com.baybaka.incomingcallsound.ui.drawer
 
+import android.content.Intent
+import android.net.Uri
 import android.support.annotation.StringRes
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -14,6 +16,7 @@ import com.baybaka.incomingcallsound.ui.main.MainActivity
 import com.baybaka.incomingcallsound.ui.tabs.TabsFragmentFactory
 import com.baybaka.incomingcallsound.ui.testpage.TestPageFragment
 import com.baybaka.incomingcallsound.utils.RateApp
+
 
 class MyNavView(private val drawerLayout: DrawerLayout,
                 private val context: AppCompatActivity) : NavigationView.OnNavigationItemSelectedListener {
@@ -57,7 +60,7 @@ class MyNavView(private val drawerLayout: DrawerLayout,
 
             R.id.nav_switch_mod-> {
                 val modeToSet = !settings.useSimpleMode()
-                settings.resetConfig()
+                settings.smartResetConfig()
                 settings.setSimpleMode(modeToSet)
                 replaceFragment((context as MainActivity).baseFragment)
                 updateTitle(R.string.app_name)
@@ -72,6 +75,12 @@ class MyNavView(private val drawerLayout: DrawerLayout,
 
             R.id.navigation_rate_app -> {
                 RateApp.open(context)
+                return true
+            }
+
+            R.id.navigation_to_web_help -> {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://apps.baybaka.getforge.io/"))
+                context.startActivity(browserIntent)
                 return true
             }
 

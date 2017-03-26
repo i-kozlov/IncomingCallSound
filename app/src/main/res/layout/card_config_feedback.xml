@@ -49,7 +49,7 @@
         <Button android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rate_app_feedback"
-                android:text="@string/Feedbsck_rate"/>
+                android:text="@string/feedback_rate"/>
     </LinearLayout>
 
 

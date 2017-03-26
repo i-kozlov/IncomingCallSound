@@ -86,7 +86,9 @@
     <string name="write_review">Оставить отзыв</string>
     <string name="use_flash_light">Использования фонарика</string>
 
-    <string name="Feedbsck_rate">Оценить</string>
+    <string name="feedback_rate">Оценить</string>
+    <string name="nav_web_help">Онлайн справка</string>
+
     <string name="beta_lable">Бета тест</string>
     <string name="feedback_open_test">Тест. страница</string>
     <string name="feedback_send">Отзыв</string>
@@ -141,8 +143,7 @@
     <string name="do_not_ring_toggle_text">Не звонить</string>
     <string name="error_mute_vibrate_android7">Требуются разшения. Нажмите для предоставления
     </string>
-    <string name="skip_ring_descr_text">Не будет звонить если в настройках выбрано \"Сначала вибро\"
-        или \"Беззвучный до рингтона\"
+    <string name="skip_ring_descr_text">Не будет звонить если в настройках выбрано Вибро/Беззвучный до рингтона
     </string>
     <string name="error_music_stream_android7_dnd_reason">Нужно разшения для использования в режиме
         \"музыка\" клик для выдачи разрешений

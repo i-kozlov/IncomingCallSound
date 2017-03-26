@@ -44,14 +44,15 @@ constructor(val appContext: Context) : AllSettings {
         editor.putBoolean(SKIP_RING, checked).applyAndUpdateConfig()
     }
 
-    override fun getInterval(): Int {
-        return mPreferences.getInt(CHANGE_SOUND_INTERVAL, DEFAULT_INTERVAL_VALUE)
-    }
+    override fun getInterval(): Int = mPreferences.getInt(CHANGE_SOUND_INTERVAL, DEFAULT_INTERVAL_VALUE)
 
 
-    override fun isServiceEnabledInConfig(): Boolean {
-        return mPreferences.getBoolean(IS_SERVICE_ENABLED, true)
+    override fun setNewIntervalValue(value: Int) {
+        editor.putInt(CHANGE_SOUND_INTERVAL, value)
+                .applyAndUpdateConfig()
     }
+
+    override fun isServiceEnabledInConfig(): Boolean = mPreferences.getBoolean(IS_SERVICE_ENABLED, true)
 
     override fun changeServiceEnabledSettings(newValue: Boolean) {
 
@@ -59,12 +60,6 @@ constructor(val appContext: Context) : AllSettings {
                 .applyAndUpdateConfig()
     }
 
-    override fun setNewIntervalValue(value: Int) {
-
-        editor.putInt(CHANGE_SOUND_INTERVAL, value)
-                .applyAndUpdateConfig()
-
-    }
 
     // max volume
     override fun isMaxVolumeLimited(): Boolean {
@@ -283,9 +278,11 @@ constructor(val appContext: Context) : AllSettings {
 
     override fun smartResetConfig() {
         val keepInMemory = startInForeground()
+        val interval = interval
 
         resetConfig()
         setRunForeground(keepInMemory)
+        setNewIntervalValue(interval)
         editor.applyAndUpdateConfig()
     }
 

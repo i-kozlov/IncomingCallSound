@@ -43,7 +43,14 @@
             android:checked="false"
             android:orderInCategory="50"
             android:icon="@drawable/grade_black_rate"
-            android:title="@string/Feedbsck_rate"/>
+            android:title="@string/feedback_rate"/>
+
+        <item
+            android:id="@+id/navigation_to_web_help"
+            android:checked="false"
+            android:orderInCategory="52"
+            android:icon="@drawable/ic_help_outline_white_48dp"
+            android:title="@string/nav_web_help"/>
 
         <item
             android:id="@+id/navigation_feedback"
