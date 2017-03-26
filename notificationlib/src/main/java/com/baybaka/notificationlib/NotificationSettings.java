@@ -8,7 +8,7 @@ public interface NotificationSettings {
 
     boolean isUseLed();
 
-    void setUseLed(boolean newValue);
+    void setUseLed(boolean state);
 
     String all();
 

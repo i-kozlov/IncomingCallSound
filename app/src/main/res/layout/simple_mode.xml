@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="10dp"
+              android:orientation="vertical"
+              android:paddingTop="10dp"
+>
+
+    <include layout="@layout/card_config_service_interval"/>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+    />
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+    >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/foreground_service_description"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/keep_in_memory_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="@string/simple_forcing_keep_app_in_memory_desc"
+              android:textSize="12sp"
+    />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
+              android:gravity="center"
+              android:text="@string/simple_additional_modes_desc"
+    />
+</LinearLayout>

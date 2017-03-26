@@ -21,8 +21,8 @@ public class NotificationController {
     private int flashOnInterval;
     private int flashOffInterval;
 
-    NotificationSettings mNotificationSettings;
-    Application application;
+    private NotificationSettings mNotificationSettings;
+    private Application application;
 
     @Inject
     public NotificationController(NotificationSettings notificationSettings, Application application) {

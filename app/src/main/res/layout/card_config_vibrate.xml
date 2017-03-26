@@ -4,19 +4,55 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <include android:id="@+id/stream_warning"
+             layout="@layout/warning_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+    >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/use_music_stream"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/stream_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+    <TextView android:id="@+id/chosen_stream_textview"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/on_card_section_delimiter"
+              android:layout_marginTop="@dimen/on_card_section_delimiter"
+              android:text="@string/ring_stream_text"
+              android:textSize="10sp"
+    />
+
+    <include android:id="@+id/vibrate_mute_warning"
+             layout="@layout/warning_layout"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        >
+    >
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/fibrate_first"
-            />
+        />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/set_vibrate_first_toggle"
@@ -27,41 +63,23 @@
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+
+                  android:layout_marginBottom="@dimen/on_card_section_delimiter"
                   android:orientation="vertical">
 
-        <TextView android:layout_width="wrap_content"
+        <TextView android:id="@+id/vibrate_time_textview"
+                  android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:id="@+id/vibrate_time_textview"
                   android:text="@string/vibrate_time_desc"/>
 
-        <SeekBar android:layout_width="match_parent"
+        <SeekBar android:id="@+id/vibrate_times_seekbar"
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:max="20"
-            android:id="@+id/vibrate_times_seekbar"/>
+                 android:max="20"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/Use_ringer_stream"
-            android:textSize="16sp"/>
+    <include layout="@layout/card_config_mute"/>
 
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/stream_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"/>
-    </LinearLayout>
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/chosen_stream_textview"
-              />
 
 </LinearLayout>

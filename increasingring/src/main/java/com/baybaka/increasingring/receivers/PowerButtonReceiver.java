@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.baybaka.increasingring.Injector;
+import com.baybaka.increasingring.di.Injector;
 import com.baybaka.increasingring.contoller.Controller;
 
 import javax.inject.Inject;

@@ -2,6 +2,7 @@ package com.baybaka.incomingcallsound.ui.testpage;
 
 import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,7 +23,7 @@ import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.log.LogReceiver;
 import com.baybaka.incomingcallsound.log.logsender.EmailIntentCreator;
-import com.baybaka.increasingring.RunTimeSettings;
+import com.baybaka.increasingring.settings.RunTimeSettings;
 import com.baybaka.increasingring.receivers.TestPageOnCallEvenReceiver;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
 
@@ -183,7 +184,8 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     private void sendEmail() {
         if (buttonsCheckDone && inCallesCheckDone && hasDescription) {
             try {
-                startActivity(EmailIntentCreator.getSendEmailIntent("Test page report", feedbackInput.getText().toString()));
+                Intent sendEmailIntent = EmailIntentCreator.getSendEmailIntent("Test page report", feedbackInput.getText().toString(), getContext());
+                startActivity(sendEmailIntent);
             } catch (Exception e) {
                 Toast.makeText(getActivity(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show();
             }
@@ -243,6 +245,7 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     }
 
     private int getCurrentLevel() {
+        //// TODO: according to log text it be should ring-steam-only?
         return mAudioManager.getCurrentChosenStreamVolume();
     }
 

@@ -1,5 +1,6 @@
 package com.baybaka.incomingcallsound;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
@@ -9,10 +10,10 @@ import com.baybaka.incomingcallsound.di.component.DaggerListenerComponent;
 import com.baybaka.incomingcallsound.di.component.ListenerComponent;
 import com.baybaka.incomingcallsound.di.module.ApplicationModule;
 import com.baybaka.incomingcallsound.log.ReceiverLogHandler;
-import com.baybaka.increasingring.Getter;
-import com.baybaka.increasingring.Injector;
-import com.baybaka.increasingring.RunTimeSettings;
-import com.baybaka.increasingring.SettingsService;
+import com.baybaka.incomingcallsound.settings.AllSettings;
+import com.baybaka.increasingring.di.Getter;
+import com.baybaka.increasingring.di.Injector;
+import com.baybaka.increasingring.settings.RunTimeSettings;
 import com.baybaka.increasingring.receivers.PowerButtonReceiver;
 import com.baybaka.increasingring.service.VolumeService;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
@@ -27,6 +28,7 @@ public class MyApp extends Application implements Injector, Getter {
         return context;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
     private ApplicationComponent appComponent;
     private ListenerComponent mListenerComponent;
@@ -35,6 +37,7 @@ public class MyApp extends Application implements Injector, Getter {
     @Override
     public void onCreate() {
         super.onCreate();
+
         init();
         LoggerFactory.getLogger(MyApp.class.getSimpleName()).info("Application started. App version {} (ver.{})", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
     }
@@ -99,7 +102,7 @@ public class MyApp extends Application implements Injector, Getter {
     }
 
     @Override
-    public SettingsService getSetting() {
+    public AllSettings getSetting() {
         return mListenerComponent.settings();
     }
 
@@ -110,6 +113,7 @@ public class MyApp extends Application implements Injector, Getter {
 
     //на карточках
     public int getMaxVol() {
+        //todo fix it
         return getListenerComponent().provideAudioWrapper().getChosenStreamrMaxHardwareVolumeLevel();
     }
 }

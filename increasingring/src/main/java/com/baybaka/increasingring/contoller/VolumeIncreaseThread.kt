@@ -1,54 +1,76 @@
 package com.baybaka.increasingring.contoller
 
 import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.media.AudioManager
 import android.media.MediaPlayer
-import com.baybaka.increasingring.RunTimeSettings
+import com.baybaka.increasingring.audio.IAudioController
 import com.baybaka.increasingring.config.RingerConfig
 import com.baybaka.increasingring.receivers.PowerButtonReceiver
-import com.baybaka.increasingring.service.RingToneT
-import com.baybaka.increasingring.utils.AudioManagerWrapper
+import com.baybaka.increasingring.service.IMediaPlayerProvider
+import com.baybaka.increasingring.settings.RunTimeSettings
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+
+interface IVolumeIncreaseThread : Runnable {
+    fun stop()
+}
+
 abstract class VolumeIncreaseThread(val config: RingerConfig,
-                                    val mAudioManagerWrapper: AudioManagerWrapper, val rts: RunTimeSettings) : Runnable {
+                                    val audioController: IAudioController,
+                                    val rts: RunTimeSettings) : IVolumeIncreaseThread {
 
     companion object {
-        private val LOG = LoggerFactory.getLogger(VolumeIncreaseThread::class.java.simpleName)
+        val LOG: Logger = LoggerFactory.getLogger(VolumeIncreaseThread::class.java.simpleName)
 
     }
 
+    //todo pass as boolean than we need context only
+    val isLoggingEnabled = rts.isLoggingEnabled
+    val context: Context = rts.context
     @Volatile protected var treadStopped = false
 
     abstract protected fun configOutputStream()
-    open fun stop() {
+    override fun stop() {
         treadStopped = true
     }
 
 
     override fun run() {
 
-        fun notMaxAndRinging(level: Int) = !treadStopped && level <= config.allowedMaxVolume
+        fun oneMoreTurn(level: Int) = !treadStopped && level <= config.allowedMaxVolume
+
+        if (isLoggingEnabled) {
+            LOG.info("mode: " + audioController.mode().toString())
+            LOG.info("config: " + config.toString())
+        }
 
         muteAction()
         vibrateAction()
-
         var currentSoundLevel = config.startSoundLevel
 
-        //todo should it ++ in mute & vibrate
-        if (currentSoundLevel < 1)
-            currentSoundLevel = 1
-
-        if (notMaxAndRinging(currentSoundLevel)) {
+//        //todo should it ++ in mute & vibrate ?
+//        if (currentSoundLevel < 1)
+//            currentSoundLevel = 1
+//
+//        //todo replace this with doNotRing check
+//        if (oneMoreTurn(currentSoundLevel)) {
+//            configOutputStream()
+//        }
+        if (config.doNotRing) {
+            this.stop()
+        } else {
             configOutputStream()
         }
 
-        while (notMaxAndRinging(currentSoundLevel)) {
+        while (oneMoreTurn(currentSoundLevel)) {
 
-            LOG.info("Loop volume var = {}. Calling sound++", currentSoundLevel)
+            audioController.new_SetAudioLevel(currentSoundLevel)
 
-            mAudioManagerWrapper.setAudioLevelRespectingLogging(currentSoundLevel)
+            LOG.info("Loop volume currentSoundLevel = $currentSoundLevel. Calling sound++")
 
             currentSoundLevel++
             waitIntervalSeconds()
@@ -58,9 +80,9 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
 
     private fun muteAction() {
         if (config.isMuteFirst) {
-            mAudioManagerWrapper.muteStream()
+            audioController.silent()
             for (i in 1..config.muteTimes) {
-                if (rts.isLoggingEnabled) {
+                if (isLoggingEnabled) {
                     LOG.info("mute {} time", i)
                 }
                 waitIntervalSeconds()
@@ -71,9 +93,9 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
 
     private fun vibrateAction() {
         if (config.isVibrateFirst) {
-            mAudioManagerWrapper.vibrateMode()
+            audioController.vibrate()
             for (i in 1..config.vibrateTimes) {
-                if (rts.isLoggingEnabled) {
+                if (isLoggingEnabled) {
                     LOG.info("vibrate {} time", i)
                 }
                 waitIntervalSeconds()
@@ -96,17 +118,19 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
 
 }
 
-open class RingTone(config: RingerConfig, mAudioManagerWrapper: AudioManagerWrapper, rts: RunTimeSettings)
-    : VolumeIncreaseThread(config, mAudioManagerWrapper, rts) {
+open class RingTone(config: RingerConfig, audioController: IAudioController, rts: RunTimeSettings)
+    : VolumeIncreaseThread(config, audioController, rts) {
 
 
     override fun configOutputStream() {
-        mAudioManagerWrapper.normalModeStream()
+        audioController.normal()
+//        mAudioManagerWrapper.normalModeStream()
     }
 }
 
-open class Music(config: RingerConfig, audioManagerWrapper: AudioManagerWrapper, rts: RunTimeSettings, val callerNumber: String, val ringtoneService: RingToneT)
-    : RingTone(config, audioManagerWrapper, rts) {
+open class RingAsMusic(config: RingerConfig, audioController: IAudioController, rts: RunTimeSettings,
+                       val callerNumber: String, val playerProvider: IMediaPlayerProvider)
+    : RingTone(config, audioController, rts) {
 
     private var mediaPlayer: MediaPlayer? = null
     private var mReceiver: BroadcastReceiver? = null
@@ -114,7 +138,7 @@ open class Music(config: RingerConfig, audioManagerWrapper: AudioManagerWrapper,
     override fun stop() {
         treadStopped = true
         releasePlayer()
-        mReceiver?.let { rts.context.unregisterReceiver(it) }
+        mReceiver?.let { context.unregisterReceiver(it) }
     }
 
     private fun releasePlayer() {
@@ -131,26 +155,72 @@ open class Music(config: RingerConfig, audioManagerWrapper: AudioManagerWrapper,
 
     override fun configOutputStream() {
         //todo should be different method for ringtone and music
-        mAudioManagerWrapper.normalModeStream()
+        audioController.normal()
 
-        val player = ringtoneService.configurePlayer(callerNumber)
+        mediaPlayer = playerProvider.getConfiguredPlayer(callerNumber)
 
-        player?.let {
-            mediaPlayer = it
-            mediaPlayer?.start()
+        mediaPlayer?.let { player ->
+            val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-            //configure music of with power key
-            val filter = IntentFilter(Intent.ACTION_SCREEN_OFF)
-            //                filter.addAction(Intent.ACTION_SCREEN_OFF);
+//todo complete or remove
+// Request audio focus for playback
+            val result = am.requestAudioFocus(focusChangeListener
+                    ,
+                    // Use the music stream.
+                    AudioManager.STREAM_MUSIC,
+                    // Request permanent focus.
+                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE)
+
+
+            player.start()
+            //configure music off with power key
             mReceiver = PowerButtonReceiver()
-            rts.context.registerReceiver(mReceiver, filter)
+            //todo test music stop with screen off
+            context.registerReceiver(mReceiver, IntentFilter(Intent.ACTION_SCREEN_OFF))
         }
 
         //show notify otherwise
-        if (player == null) {
-            rts.errorNotification(rts.context)
+        if (mediaPlayer == null) {
+            //todo could be replaced with AsyncTask.onUpdate
+            rts.getNotifyProvider().playerInitError()
         }
 
     }
+
+    private val focusChangeListener: AudioManager.OnAudioFocusChangeListener =
+            AudioManager.OnAudioFocusChangeListener() {
+                fun onAudioFocusChange(focusChange: Int) {
+                    LOG.info("focusChangeListener is called")
+//                    AudioManager am =(AudioManager) getSystemService (Context.AUDIO_SERVICE);
+                    when (focusChange) {
+
+                        (AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) ->
+                            // Lower the volume while ducking.
+                            mediaPlayer?.setVolume(0.2f, 0.2f);
+
+                        AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
+                        }
+
+                        (AudioManager.AUDIOFOCUS_LOSS) -> {
+                        }
+//                        stop();
+//                        ComponentName component = new ComponentName(AudioPlayerActivity.this, MediaControlReceiver.class);
+//                        am.unregisterMediaButtonEventReceiver(component);
+//                        break;
+
+                        AudioManager.AUDIOFOCUS_GAIN -> {
+                            // Return the volume to normal and resume if paused.
+                            mediaPlayer?.setVolume(1f, 1f);
+                            mediaPlayer?.start();
+//                            break;
+//                            default: break;
+                        }
+
+                    }
+                }
+            };
+
+    fun f(): AudioManager.OnAudioFocusChangeListener =
+            AudioManager.OnAudioFocusChangeListener({ focusChange -> print(focusChange) })
 
 }

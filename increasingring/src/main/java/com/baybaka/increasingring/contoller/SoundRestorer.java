@@ -1,8 +1,11 @@
 package com.baybaka.increasingring.contoller;
 
 
-import com.baybaka.increasingring.RunTimeSettings;
-import com.baybaka.increasingring.SettingsService;
+import android.os.Handler;
+
+import com.baybaka.increasingring.settings.RunTimeSettings;
+import com.baybaka.increasingring.settings.SettingsService;
+import com.baybaka.increasingring.audio.RingMode;
 import com.baybaka.increasingring.config.SoundStateDTO;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
 
@@ -35,11 +38,11 @@ public class SoundRestorer {
 
     private final Logger LOG = LoggerFactory.getLogger(SoundRestorer.class.getSimpleName());
 
-    public synchronized void saveCurrentSoundLevels() {
-        originalVolumes = mAudioManagerWrapper.getCurrentSoundState();
+    synchronized void saveCurrentSoundLevels() {
+        originalVolumes = mAudioManagerWrapper.currentStateToDTO();
     }
 
-    public synchronized void restoreVolumeToPreRingingLevel() {
+    synchronized void restoreVolumeToPreRingingLevel() {
 
         if (originalVolumes == null) return;
         usePauseWorkaround();
@@ -53,17 +56,32 @@ public class SoundRestorer {
         if (isOkToRestore()) {
 
             mAudioManagerWrapper.setAudioParamsByPreRingConfig(originalVolumes);
-            SoundStateDTO wasSetTo = mAudioManagerWrapper.getCurrentSoundState();
+            SoundStateDTO wasSetTo = mAudioManagerWrapper.currentStateToDTO();
 
             //double check
-            if (originalVolumes.equals(wasSetTo)) { //неактуально при return to user level
+            if (originalVolumes.equals(wasSetTo)) { //todo неактуально при return to user level
                 LOG.debug("Successful restore to {}", originalVolumes);
+                resetSoundLevelHolder();
             } else {
                 LOG.error("Values are not equal. Expected value {}, current value is {}. Trying once more", originalVolumes, wasSetTo);
-                mAudioManagerWrapper.setAudioParamsByPreRingConfig(originalVolumes);
+                final Handler handler = new Handler();
+
+                final Runnable r = new Runnable() {
+                    public void run() {
+                        mAudioManagerWrapper.setAudioParamsByPreRingConfig(originalVolumes);
+                        SoundStateDTO wasSetTo = mAudioManagerWrapper.currentStateToDTO();
+                        LOG.info("At 2nd attempt. Current value is {}.", wasSetTo);
+//                        handler.postDelayed(this, 1000);
+                        resetSoundLevelHolder();
+                    }
+                };
+
+                handler.postDelayed(r, 3000);
+
+
             }
 
-            resetSoundLevelHolder();
+//            resetSoundLevelHolder();
 
         } else {
             LOG.info("No need to restore. Saved sound are {}", originalVolumes);
@@ -72,7 +90,7 @@ public class SoundRestorer {
 
     private void calcRestoreRingLevel() {
         int restoreSoundLevel = getSoundLevelToRestore();
-        originalVolumes.setOriginalRingVolume(restoreSoundLevel);
+        originalVolumes.setRingVolume(restoreSoundLevel);
     }
 
     // todo countDownLatch ?
@@ -88,9 +106,9 @@ public class SoundRestorer {
         }
     }
 
-    public boolean isOkToRestore() {
+    private boolean isOkToRestore() {
         // -1 =  был в беззвучном todo всё ещё актуально? сейчас -1 == значение не получено ?
-        return originalVolumes.getOriginalRingVolume() > -1;
+        return originalVolumes.getRingVolume() > -1;
     }
 
 
@@ -103,7 +121,7 @@ public class SoundRestorer {
      * @return sound level to restore
      */
     private int getSoundLevelToRestore() {
-        int savedSoundLevel = originalVolumes != null ? originalVolumes.getOriginalRingVolume() : -1;
+        int savedSoundLevel = originalVolumes != null ? originalVolumes.getRingVolume() : -1;
 
         //if it was 0 -> was in vibrate no need to restore to user level.
         if (savedSoundLevel > 0 ) {
@@ -112,7 +130,7 @@ public class SoundRestorer {
             }
         } else {
             //если громкость 0 а режим нормальный - что-то не так
-            if (originalVolumes != null && originalVolumes.getOriginalRingMode() == 2) {
+            if (originalVolumes != null && originalVolumes.getRingMode() == RingMode.RINGER_MODE_NORMAL) {
                 return 1;
             }
         }

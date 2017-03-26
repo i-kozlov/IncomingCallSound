@@ -45,6 +45,7 @@
             android:layout_gravity="end"/>
     </LinearLayout>
 
+
     <com.appyvet.rangebar.RangeBar
         android:id="@+id/rangebar"
         xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -81,5 +82,35 @@
         android:layout_height="wrap_content"
         android:text="@string/max_sound_level_text"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+    >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/do_not_ring_toggle_text"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/do_not_ring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/skip_ring_descr_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="@dimen/smaller_text_size"
+        android:text="@string/skip_ring_descr_text"
+    />
 
 </LinearLayout>

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.log.logsender.EmailIntentCreator;
 import com.baybaka.incomingcallsound.ui.rv.RVAdapter;
@@ -32,10 +31,10 @@ public class BetaCard extends ListCardItem {
         }
         buttonName +=  " for " + rvAdapter.getContext().getString(getHead());
         try {
-            Intent intent = EmailIntentCreator.getSendEmailIntent("Beta review", buttonName);
+            Intent intent = EmailIntentCreator.getSendEmailIntent("Beta review", buttonName, rvAdapter.getContext());
             rvAdapter.getContext().startActivity(intent);
         } catch (Exception e) {
-            Toast.makeText(MyApp.getContext(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show();
+            Toast.makeText(rvAdapter.getContext(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show();
         }
     }
 

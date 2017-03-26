@@ -2,9 +2,9 @@ package com.baybaka.incomingcallsound.utils;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
-
+@Deprecated
 public class Description {
-
+    //todo remove class
     public static String getVolumeLevelText(int volumeLevel, int maxLevel) {
         if (volumeLevel == -1) {
             return getString(R.string.descriptions_level_silence);

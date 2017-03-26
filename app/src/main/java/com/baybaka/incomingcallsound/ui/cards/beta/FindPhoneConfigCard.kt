@@ -6,7 +6,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import butterknife.Bind
 import butterknife.ButterKnife
-import com.baybaka.incomingcallsound.MyApp
 import com.baybaka.incomingcallsound.R
 import com.baybaka.incomingcallsound.ui.cards.ListCardItem_v2
 import com.baybaka.increasingring.service.ServiceStarter
@@ -42,7 +41,7 @@ class FindPhoneConfigCard : ListCardItem_v2() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (progress == 0)
                     seekBar.progress = 1
-                ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext())
+                ServiceStarter.stopServiceRestartIfEnabled(appContext())
                 setSeekbarText(seekBar.progress)
             }
 
@@ -61,7 +60,7 @@ class FindPhoneConfigCard : ListCardItem_v2() {
             mSharedPreferenceController.isFindPhoneEnabled = findPhoneSwitch.isChecked
             this@FindPhoneConfigCard.setSeekbarText(findPhoneTimesSeekbar.progress)
             LoggerFactory.getLogger(FindPhoneConfigCard::class.java.simpleName).info("findPhoneSwitch set {}. User call stopServiceRestartIfEnabled", findPhoneSwitch.isChecked)
-            ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext())
+            ServiceStarter.stopServiceRestartIfEnabled(appContext())
         }
     }
 
@@ -70,8 +69,8 @@ class FindPhoneConfigCard : ListCardItem_v2() {
     }
 
     private fun muteSeekText(value: Int): String {
-        return if (findPhoneSwitch.isChecked) MyApp.getContext().getString(R.string.find_phone_times_desc, value)
-        else MyApp.getContext().getString(R.string.disabled)
+        return if (findPhoneSwitch.isChecked) context().getString(R.string.find_phone_times_desc, value)
+        else context().getString(R.string.disabled)
     }
 
 }

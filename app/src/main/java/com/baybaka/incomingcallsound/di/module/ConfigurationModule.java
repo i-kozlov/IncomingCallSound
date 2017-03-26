@@ -5,10 +5,13 @@ import android.app.Application;
 import com.baybaka.incomingcallsound.di.scopes.ApplicationScope;
 import com.baybaka.incomingcallsound.settings.AllSettings;
 import com.baybaka.incomingcallsound.settings.PhonePreferenceController;
-import com.baybaka.incomingcallsound.settings.RunTimeSettingsIpml;
-import com.baybaka.increasingring.RunTimeSettings;
-import com.baybaka.increasingring.SettingsService;
+import com.baybaka.incomingcallsound.settings.RunTimeSettingsImpl;
+import com.baybaka.increasingring.settings.RunTimeSettings;
+import com.baybaka.increasingring.settings.SettingsService;
+import com.baybaka.increasingring.settings.SettingsAdapter;
 import com.baybaka.notificationlib.NotificationSettings;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,10 +19,11 @@ import dagger.Provides;
 @Module
 public class ConfigurationModule {
 
+//    @Singleton
     @Provides
     @ApplicationScope
-    RunTimeSettings runTimeChanges() {
-        return new RunTimeSettingsIpml();
+    RunTimeSettings runTimeChanges(Application application) {
+        return new RunTimeSettingsImpl(application);
     }
 
     @Provides
@@ -34,15 +38,21 @@ public class ConfigurationModule {
         return phonePreferenceController;
     }
 
-    @Provides
+    @Provides @Named("adapter")
     @ApplicationScope
-    SettingsService settings(PhonePreferenceController phonePreferenceController) {
+    SettingsService settings(PhonePreferenceController phonePreferenceController, Application application) {
+        return new SettingsAdapter(phonePreferenceController, application);
+    }
+
+    @Provides @Named("sharedPref")
+    @ApplicationScope
+    SettingsService sharedPrefs(PhonePreferenceController phonePreferenceController) {
         return phonePreferenceController;
     }
 
     @Provides
     @ApplicationScope
-    NotificationSettings mNotificationSettings(PhonePreferenceController phonePreferenceController) {
+    NotificationSettings notificationSettings(PhonePreferenceController phonePreferenceController) {
         return phonePreferenceController;
     }
 

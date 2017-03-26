@@ -1,8 +1,11 @@
 package com.baybaka.increasingring.config
 
+import android.media.AudioManager
+import com.baybaka.increasingring.settings.SettingsService
+
 class RingerConfig {
     var startSoundLevel: Int = 0
-    var interval: Int = 0
+    var interval: Int = 5
     var allowedMaxVolume: Int = 0
 
     var isVibrateFirst: Boolean = false
@@ -11,27 +14,29 @@ class RingerConfig {
     var isMuteFirst: Boolean = false
     var muteTimes: Int = 0
 
-    var isUseMusicStream: Boolean = false
+    var doNotRing = false
+    var useMusicStream: Boolean = false
 
-    init {
-        interval = 5
+    override fun toString(): String {
+        return "RingerConfig(startSoundLevel=$startSoundLevel, interval=$interval, allowedMaxVolume=$allowedMaxVolume, isVibrateFirst=$isVibrateFirst, vibrateTimes=$vibrateTimes, isMuteFirst=$isMuteFirst, muteTimes=$muteTimes, useMusicStream=$useMusicStream)"
     }
 
-    companion object{
-        fun findPhoneConfig() : RingerConfig{
-            val config = RingerConfig()
+    fun update(settingsService: SettingsService) {
+        updateStream(settingsService.soundStream)
 
-            with(config) {
-                startSoundLevel = 14
-                allowedMaxVolume = 14
-                isUseMusicStream = true
-                interval = 1
-                isVibrateFirst = false
-                isMuteFirst = false
-            }
+        interval = settingsService.interval
 
-            return config
-        }
+        isMuteFirst = settingsService.isMuteFirst
+        muteTimes = settingsService.muteTimesCount
+
+        isVibrateFirst = settingsService.isVibrateFirst
+        vibrateTimes = settingsService.vibrateTimesCount
+
+        doNotRing = settingsService.isSkipRing
+    }
+
+    private fun updateStream(soundStream: Int) {
+        useMusicStream = soundStream == AudioManager.STREAM_MUSIC
     }
 }
 

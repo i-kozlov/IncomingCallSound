@@ -28,10 +28,10 @@ public class TwoColorBlink extends AsyncTask<Void, Void, Void> {
         indeterminate = false;
     }
 
-    private Application application;
+    private Context appContext;
 
     public TwoColorBlink(Application application) {
-        this.application = application;
+        this.appContext = application.getApplicationContext();
         notificationManager = (NotificationManager) application.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
@@ -41,7 +41,7 @@ public class TwoColorBlink extends AsyncTask<Void, Void, Void> {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             notification = new Notification();
         } else  {
-            notification = new Notification.Builder(application).setSmallIcon(R.drawable.empty).build();
+            notification = new Notification.Builder(appContext).setSmallIcon(R.drawable.empty).build();
         }
         //The notification should turn on the device's notification LED
         notification.flags = Notification.FLAG_SHOW_LIGHTS;

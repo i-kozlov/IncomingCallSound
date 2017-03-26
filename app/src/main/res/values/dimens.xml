@@ -3,4 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_compat_margin">0dp</dimen>
+
+    <dimen name="on_card_section_delimiter">12dp</dimen>
+    <dimen name="smaller_text_size">10sp</dimen>
 </resources>

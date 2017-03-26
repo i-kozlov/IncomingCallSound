@@ -9,9 +9,7 @@
 
     <string name="card_description_config_min_max_head">Ringer volume limits</string>
     <string name="card_description_config_min_max_short">
-        Allow to limit min and max ring volume
-        \nSetting limit to 0 or -1 are for advanced max limit config.
-        To enable mute/vibrate functions use suitable switch
+        Those settings allow to limit min and max ring volume
     </string>
     <string name="card_description_config_min_max_full">
         When setting limit to prering value - check full description for \'Restore volume\'
@@ -24,17 +22,17 @@
         because restore to 1 after call with max level = prering will give you no volume increase
     </string>
 
-    <string name="card_description_vibrate_head">Vibration config</string>
+    <string name="card_description_vibrate_head">Config mute/vibrate mode</string>
     <string name="card_description_vibrate_short">
         Gives option to vibrate before ringing.
-        Can cause vibration only with no ringtone without proper configuration.
+        \nCan cause vibration only with no ringtone without proper configuration.
         \nSee full description</string>
     <string name="card_description_vibrate_full">
         There are devices that do not support switch from mute/vibrate to normal ring mode during call.
-        They stay vibrate-only even after volume increase.
+        \nThey stay vibrate-only even after volume increase.
         \nSolution is to use music stream instead ring stream. To do it you need to disable \'Use default playback stream\'.
         \nYou loose option to mute incoming ring with volume buttons but can mute with power button
-        \nChanging stream can also change you max volume level. It usually happens if your max level was 7.
+        \nChanging stream can also change you max volume level. \nIt usually happens if your max level was 7.
     </string>
 
     <string name="card_description_mute_head">Mute config</string>
@@ -111,7 +109,7 @@
 
     <string name="card_description_find_phone_head">Find phone</string>
     <string name="card_description_find_phone_short">
-        Alter selected number of calls in row from same number within 5 minutes call will ring at max volume
+        Alter selected number of calls in row from same number within 3 minutes call will ring at max volume
     </string>
     <string name="card_description_find_phone_full">
         It helps you find phone when you live it somewhere in mute mode

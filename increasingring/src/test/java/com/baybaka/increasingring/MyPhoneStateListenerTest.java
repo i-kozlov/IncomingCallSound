@@ -2,7 +2,8 @@ package com.baybaka.increasingring;
 
 import android.telephony.TelephonyManager;
 
-import com.baybaka.increasingring.statelistener.MyPhoneStateListener;
+import com.baybaka.increasingring.settings.SettingsService;
+import com.baybaka.increasingring.statelistener.MyPhoneStateListener2;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
 import com.baybaka.increasingring.utils.TestConfiguration;
 import com.baybaka.increasingring.utils.audio.AudioManagerFakeImpl;
@@ -26,10 +27,10 @@ import static org.powermock.api.mockito.PowerMockito.when;
 
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({MyPhoneStateListener.class, LoggerFactory.class})
+@PrepareForTest({MyPhoneStateListener2.class, LoggerFactory.class})
 public class MyPhoneStateListenerTest {
 
-    private MyPhoneStateListener mMyPhoneStateListener;
+    private MyPhoneStateListener2 mMyPhoneStateListener;
     private int currentSoundLevel;
     private AudioManagerWrapper mFakewrapper;
     private int interval = 1;

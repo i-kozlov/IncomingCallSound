@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:paddingTop="10dp"
+             android:layout_margin="5dp"
+             tools:context="com.baybaka.incomingcallsound.ui.main.SimpleFragment">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent" android:orientation="vertical">
+
+        <include layout="@layout/card_config_service_interval" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+        />
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+        >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/foreground_service_description"
+                android:textSize="16sp"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/keep_in_memory_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:textSize="12sp"
+                  android:text="Will show notification in bar"
+        />
+    </LinearLayout>
+
+</FrameLayout>

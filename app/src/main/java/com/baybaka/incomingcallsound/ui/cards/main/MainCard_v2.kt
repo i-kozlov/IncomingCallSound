@@ -6,7 +6,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import butterknife.Bind
 import butterknife.ButterKnife
-import com.baybaka.incomingcallsound.MyApp
 import com.baybaka.incomingcallsound.R
 import com.baybaka.incomingcallsound.ui.cards.ListCardItem_v2
 import com.baybaka.increasingring.service.ServiceStarter
@@ -30,10 +29,11 @@ class MainCard_v2 : ListCardItem_v2() {
         super.init(view)
         ButterKnife.bind(this, view)
 
+
         mServiceRunningSwitch.isChecked = mSharedPreferenceController.isServiceEnabledInConfig
 
         val savedInterval = mSharedPreferenceController.interval
-        intervalBatTextView.text = MyApp.getContext().getString(R.string.interval_text, savedInterval)
+        intervalBatTextView.text = context().getString(R.string.interval_text, savedInterval)
 
         val intervalSeek = view.findViewById(R.id.interval_seekBar) as SeekBar
         intervalSeek.progress = savedInterval
@@ -42,7 +42,7 @@ class MainCard_v2 : ListCardItem_v2() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (progress == 0)
                     seekBar.progress = 1
-                intervalBatTextView.text = MyApp.getContext().getString(R.string.interval_text, seekBar.progress)
+                intervalBatTextView.text = context().getString(R.string.interval_text, seekBar.progress)
 
             }
 
@@ -52,7 +52,7 @@ class MainCard_v2 : ListCardItem_v2() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 val newValue = seekBar.progress
-                val text = MyApp.getContext().getString(R.string.interval_text, newValue)
+                val text = context().getString(R.string.interval_text, newValue)
                 intervalBatTextView.text = text
                 mSharedPreferenceController.setNewIntervalValue(newValue)
             }
@@ -63,7 +63,7 @@ class MainCard_v2 : ListCardItem_v2() {
             val serviceStatus = mServiceRunningSwitch.isChecked
             mSharedPreferenceController.changeServiceEnabledSettings(serviceStatus)
             LoggerFactory.getLogger(MainCard_v2::class.java.simpleName).info("User set service status to $serviceStatus")
-            ServiceStarter.stopServiceRestartIfEnabled(MyApp.getContext())
+            ServiceStarter.stopServiceRestartIfEnabled(appContext())
         }
     }
 

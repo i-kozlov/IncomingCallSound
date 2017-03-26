@@ -66,7 +66,7 @@
     <string name="ticker_onUpgrade">Изненеия в конфигурации новой версии. Обновите настройки
     </string>
 
-    <string name="Use_ringer_stream">Стандартный поток воспроизведения</string>
+    <string name="use_music_stream">Нестандарный поток</string>
     <string name="ring_stream_text">Проигрывать звонок как рингтон</string>
     <string name="music_stream_text">Проигрывать звонок как музыку. Mute с помошью кнопки питания вместо кнопок громкости.</string>
 
@@ -92,7 +92,7 @@
     <string name="feedback_send">Отзыв</string>
     <string name="multi_itmes_ending">а</string>
 
-    <string name="vibrate_time_desc">Кол-во вибро интервалов: %1$s</string>
+    <string name="vibrate_time_desc">Кол-во вибро интервалов: %1$d</string>
     <string name="vibrate_disabled_desc">Вибрация перед звонком выключена</string>
 
     <string name="feedback_fill_free">Не стесняйтесь, напишите мне, если у вас есть проблемы с
@@ -133,4 +133,36 @@
     <string name="drawer_app_version_text">версия %1$s (%2$s)</string>
 
     <string name="find_phone_notification">Максимальная громкость выставленна функцией Найти телефон</string>
+
+    <!--<string name="warning_no_dnd_permissions">Android 7 не может использовать музыкальный поток при без прав управления-->
+         <!--режимом "Не беспокоить"</string>-->
+
+    <string name="drawer_switch_app_mode">Переключить режим приложения</string>
+    <string name="do_not_ring_toggle_text">Не звонить</string>
+    <string name="error_mute_vibrate_android7">Требуются разшения. Нажмите для предоставления
+    </string>
+    <string name="skip_ring_descr_text">Не будет звонить если в настройках выбрано \"Сначала вибро\"
+        или \"Беззвучный до рингтона\"
+    </string>
+    <string name="error_music_stream_android7_dnd_reason">Нужно разшения для использования в режиме
+        \"музыка\" клик для выдачи разрешений
+    </string>
+    <string name="permission_read_sd">Для проигрывания мелодий требуются права. Нажмите для их
+        выдачи
+    </string>
+    <string name="permission_read_contacts">Если для контактов назначены различные мелодии -
+        требуются права. Нажмите для их выдачи
+    </string>
+    <string name="simple_additional_modes_desc">Больше настроек доступно при переключении режимов в
+        меню. Переключения режима также сбросит большинство ваших настроек
+    </string>
+    <string name="simple_forcing_keep_app_in_memory_desc">Принудительно держать приложение в памяти.
+        Будет показана иконка в панели уведомлений
+    </string>
+    <string name="warning_mute_vibrate_android6">Предоставить права управления режимом \"Не
+        беспокоить\". Опционально
+    </string>
+    <string name="warning_mute_vibrate_android4_and_5">Некоторые устройства с версиями Android 4 и 5
+        имеют проблемы с использованием режимов тишина и/или вибро без смены потока воспроизведения на нестандартный
+    </string>
 </resources>

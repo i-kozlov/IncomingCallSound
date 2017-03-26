@@ -8,12 +8,13 @@ import android.content.pm.PackageManager
 import android.os.IBinder
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
-import com.baybaka.increasingring.Injector
-import com.baybaka.increasingring.RunTimeSettings
-import com.baybaka.increasingring.SettingsService
+import com.baybaka.increasingring.di.Injector
+import com.baybaka.increasingring.settings.RunTimeSettings
+import com.baybaka.increasingring.settings.SettingsService
 import com.baybaka.increasingring.receivers.IncomingCallReceiver
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
+import javax.inject.Named
 
 class VolumeService : Service() {
 
@@ -30,7 +31,7 @@ class VolumeService : Service() {
         return null
     }
 
-    @Inject
+    @Inject @field:[Named("adapter")]
     internal lateinit var settings: SettingsService
     @Inject
     internal lateinit var mPhoneListener: PhoneStateListener

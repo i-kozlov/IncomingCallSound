@@ -15,7 +15,6 @@ import com.baybaka.incomingcallsound.ui.main.MainActivity;
 
 public class NotificationFactory {
 
-    //todo вынести метод в библиотеку
     public static Notification persistent(Context context, boolean minPriority) {
 
         Intent intent = new Intent(context, MainActivity.class);

@@ -4,9 +4,10 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.Build;
 
-import com.baybaka.increasingring.Getter;
-import com.baybaka.increasingring.RunTimeSettings;
-import com.baybaka.increasingring.SettingsService;
+import com.baybaka.increasingring.di.Getter;
+import com.baybaka.increasingring.settings.RunTimeSettings;
+import com.baybaka.increasingring.settings.SettingsService;
+import com.baybaka.increasingring.audio.RingMode;
 import com.baybaka.increasingring.config.SoundStateDTO;
 
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ public class AudioManagerAlarmImpl implements AudioManagerWrapper {
 
     private final RunTimeSettings mRunTimeSettings;
     SettingsService mSettingsService;
-    private int chosenStream;
+    private int chosenStream = AudioManager.STREAM_ALARM;
 
     Context appСontext;
     public AudioManagerAlarmImpl(Context appСontext) {
@@ -30,7 +31,7 @@ public class AudioManagerAlarmImpl implements AudioManagerWrapper {
         Getter getter = (Getter)appСontext.getApplicationContext();
         mRunTimeSettings = getter.getRunTimeSettings();
         mSettingsService = getter.getSetting();
-        chosenStream = mSettingsService.getSoundStream();
+//        chosenStream = mSettingsService.getSoundStream();
     }
 
     @Override
@@ -47,6 +48,11 @@ public class AudioManagerAlarmImpl implements AudioManagerWrapper {
         }
     }
 
+    @Override
+    public void setAudioLevelRespectingLogging(int soundLevel, int stream) {
+
+    }
+
     private void setAudioLevelShowingUi(int soundLevel) {
         systemAudioManager.setStreamVolume(getChosenStreamType(), soundLevel, AudioManager.FLAG_SHOW_UI);
     }
@@ -61,16 +67,22 @@ public class AudioManagerAlarmImpl implements AudioManagerWrapper {
     }
 
     @Override
-    public int getRingerMode() {
-        return systemAudioManager.getRingerMode();
+    public int getStreamMaxHardwareVolumeLevel(int stream) {
+        return 0;
     }
+
+    @Override
+    public RingMode getRingerMode() {
+        return null;
+    }
+
 
     @Override
     public int getCurrentChosenStreamVolume() {
         return systemAudioManager.getStreamVolume(getChosenStreamType());
     }
 
-    @Override
+//    @Override
     public void setRingerMode(int mode) {
         systemAudioManager.setRingerMode(mode);
     }
@@ -104,6 +116,11 @@ public class AudioManagerAlarmImpl implements AudioManagerWrapper {
     }
 
     @Override
+    public int getStreamVolume(int stream) {
+        return 0;
+    }
+
+    @Override
     public void changeOutputStream(int stream) {
         chosenStream = stream;
     }
@@ -121,15 +138,15 @@ public class AudioManagerAlarmImpl implements AudioManagerWrapper {
     }
 
     @Override
-    public SoundStateDTO getCurrentSoundState() {
+    public SoundStateDTO currentStateToDTO() {
         SoundStateDTO state = new SoundStateDTO();
-        state.setOriginalRingMode(systemAudioManager.getRingerMode());
-        state.setOriginalRingVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_RING));
-        state.setOriginalMusicVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+
+        state.setRingVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_RING));
+        state.setMusicVolume(systemAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
         return state;
     }
 
-    @Override
+//    @Override
     public void maxVolDisableMuteVibrate() {
 
     }

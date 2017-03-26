@@ -2,7 +2,7 @@ package com.baybaka.increasingring.service
 
 import android.content.Context
 import android.content.Intent
-import com.baybaka.increasingring.Getter
+import com.baybaka.increasingring.di.Getter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

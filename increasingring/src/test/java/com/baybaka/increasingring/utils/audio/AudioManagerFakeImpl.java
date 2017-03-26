@@ -1,7 +1,6 @@
 package com.baybaka.increasingring.utils.audio;
 
-import android.media.AudioManager;
-
+import com.baybaka.increasingring.audio.RingMode;
 import com.baybaka.increasingring.config.SoundStateDTO;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
 
@@ -19,13 +18,18 @@ public class AudioManagerFakeImpl implements AudioManagerWrapper {
     }
 
     @Override
+    public void setAudioLevelRespectingLogging(int soundLevel, int stream) {
+
+    }
+
+    @Override
     public int getChosenStreamrMaxHardwareVolumeLevel() {
         return 7;
     }
 
     @Override
-    public int getRingerMode() {
-        return AudioManager.RINGER_MODE_NORMAL;
+    public RingMode getRingerMode() {
+        return RingMode.RINGER_MODE_NORMAL;
     }
 
     @Override
@@ -33,7 +37,7 @@ public class AudioManagerFakeImpl implements AudioManagerWrapper {
         return currentSoundLevelHolder;
     }
 
-    @Override
+//    @Override
     public void setRingerMode(int mode) {
 
     }
@@ -41,6 +45,11 @@ public class AudioManagerFakeImpl implements AudioManagerWrapper {
     @Override
     public void normalModeStream() {
 
+    }
+
+    @Override
+    public int getStreamVolume(int stream) {
+        return 0;
     }
 
     @Override
@@ -64,11 +73,11 @@ public class AudioManagerFakeImpl implements AudioManagerWrapper {
     }
 
     @Override
-    public SoundStateDTO getCurrentSoundState() {
+    public SoundStateDTO currentStateToDTO() {
         return null;
     }
 
-    @Override
+//    @Override
     public void maxVolDisableMuteVibrate() {
 
     }

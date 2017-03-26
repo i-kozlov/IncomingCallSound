@@ -57,6 +57,7 @@ public class TabsFragmentFactory {
             return CardsFactory.INSTANCE.yesCard();
         }
 
+        //todo what it this? remove
         @Override
         protected void configText() {
             mTextView.setText(Description.getString(R.string.yes_page_text));
@@ -64,12 +65,12 @@ public class TabsFragmentFactory {
         }
     }
 
-    public static class OldList extends TabWithCardListFragment {
-        @Override
-        protected List<ListCard> getCards() {
-            return CardsFactory.INSTANCE.old();
-        }
-    }
+//    public static class OldList extends TabWithCardListFragment {
+//        @Override
+//        protected List<ListCard> getCards() {
+//            return CardsFactory.INSTANCE.old();
+//        }
+//    }
 
 
 }

@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.log.logsender.EmailIntentCreator;
 import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
@@ -46,9 +45,9 @@ public class FeedbackCard extends ListCardItem {
     @OnClick(R.id.feedback_button)
     public void sendEmail() {
         try {
-            rvAdapter.getContext().startActivity(EmailIntentCreator.getSendEmailIntent("From beta page", feedbackTextInput.getText().toString()));
+            rvAdapter.getContext().startActivity(EmailIntentCreator.getSendEmailIntent("From beta page", feedbackTextInput.getText().toString(), rvAdapter.getContext()));
         } catch (Exception e) {
-            Toast.makeText(MyApp.getContext(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show();
+            Toast.makeText(rvAdapter.getContext(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show();
         }
     }
 

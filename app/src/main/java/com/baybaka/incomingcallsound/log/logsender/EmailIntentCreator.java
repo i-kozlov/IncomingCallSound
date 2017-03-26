@@ -5,20 +5,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-import com.baybaka.incomingcallsound.MyApp;
-import com.baybaka.incomingcallsound.utils.PhoneInfo;
 import com.baybaka.incomingcallsound.settings.PhonePreferenceController;
+import com.baybaka.incomingcallsound.utils.PhoneInfo;
 
 import java.util.ArrayList;
 
 public class EmailIntentCreator {
 
+
     private static final String email = "com.baybaka+ringerVolumeReport@gmail.com";
     private static final String[] files = new String[]{"report.log", "config.xml"};
 
-    public static Intent getSendEmailIntent(String subject, String text) {
+    public static Intent getSendEmailIntent(String subject, String text, Context context) {
 
-        copyFiles(MyApp.getContext());
+        copyFiles(context);
 
         String fullBody = PhoneInfo.getAppVersionAndPhoneModelAndVersion() +  text;
         final Intent emailIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
@@ -42,9 +42,8 @@ public class EmailIntentCreator {
     }
 
     private static void copyFiles(Context context) {
-        String logFileName = MyApp.getContext().getPackageName() + ".0.0.log";
-        System.out.println("file name   " + logFileName);
-        String configFile = "shared_prefs" + "/" + PhonePreferenceController.FILE_NAME + ".xml";
+        String logFileName = context.getApplicationContext().getPackageName() + ".0.0.log";
+        String configFile = "shared_prefs/"  + PhonePreferenceController.FILE_NAME + ".xml";
         FileCopier fc = new FileCopier(context);
         fc.copyToCacheFolder(logFileName, "report.log");
         fc.copyToCacheFolder(configFile, "config.xml");

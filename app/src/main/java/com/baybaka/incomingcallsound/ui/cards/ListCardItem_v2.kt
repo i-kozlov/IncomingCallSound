@@ -1,5 +1,7 @@
 package com.baybaka.incomingcallsound.ui.cards
 
+import android.app.Activity
+import android.content.Context
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -48,7 +50,28 @@ abstract class ListCardItem_v2 : ListCard {
         val mSharedPreferenceController: AllSettings = MyApp.get().listenerComponent.settings()
     }
 
+    fun context(): Context = rvAdapter.context
+    fun appContext() = rvAdapter.context.applicationContext as MyApp
+    fun activity() = rvAdapter.context as? Activity
 }
+
+enum class Restrict {
+    NONE,
+    WARNING,
+    ERROR
+}
+
+
+//abstract class VerifiableCard : ListCardItem_v2() {
+//
+//    val checker by lazy { PermissionChecker(activity()!!) }
+//
+//    abstract fun isValid() : List<Pair<Restrict, View>>
+//
+//    abstract fun applyRestrictions(items : List<Pair<Restrict, View>> )
+//
+//    fun postInit() = applyRestrictions(isValid())
+//}
 
 abstract class BetaCard_v2 : ListCardItem_v2() {
 
@@ -62,18 +85,18 @@ abstract class BetaCard_v2 : ListCardItem_v2() {
 
     @OnClick(R.id.send_email_beta_good, R.id.send_email_beta_bad)
     fun sendEmail(button: Button) {
-        var buttonName = "hz button"
-        if (button.id == R.id.send_email_beta_good) {
-            buttonName = "Good button"
-        } else if (button.id == R.id.send_email_beta_bad) {
-            buttonName = "Bad button"
-        }
-        buttonName += " for " + rvAdapter.context.getString(head)
+
+        val buttonName = when {
+            button.id == R.id.send_email_beta_good -> "Good button"
+            button.id == R.id.send_email_beta_bad -> "Bad button"
+            else -> ""
+        } + " for ${rvAdapter.context.getString(head)}"
+
         try {
-            val intent = EmailIntentCreator.getSendEmailIntent("Beta review", buttonName)
+            val intent = EmailIntentCreator.getSendEmailIntent("Beta review", buttonName, context())
             rvAdapter.context.startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(MyApp.getContext(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show()
+            Toast.makeText(context(), R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show()
         }
 
     }

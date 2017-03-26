@@ -10,8 +10,6 @@ import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.ui.cards.ListCardItem;
 import com.baybaka.increasingring.service.ServiceStarter;
 
-import org.slf4j.LoggerFactory;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -71,7 +69,7 @@ public class MainCard extends ListCardItem {
             public void onClick(View v) {
                 boolean serviceStatus = mServiceRunningSwitch.isChecked();
                 mSharedPreferenceController.changeServiceEnabledSettings(serviceStatus);
-                LoggerFactory.getLogger(MainCard.class.getSimpleName()).info("User set service status to {}", serviceStatus);
+//                LoggerFactory.getLogger(MainCard.class.getSimpleName()).info("User set service status to {}", serviceStatus);
                 ServiceStarter.INSTANCE.stopServiceRestartIfEnabled(MyApp.getContext());
             }
         });

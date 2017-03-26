@@ -3,7 +3,7 @@ package com.baybaka.increasingring.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.baybaka.increasingring.Getter
+import com.baybaka.increasingring.di.Getter
 import com.baybaka.increasingring.service.ServiceStarter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

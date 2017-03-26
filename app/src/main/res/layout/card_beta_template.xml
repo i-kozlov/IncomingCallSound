@@ -31,6 +31,7 @@
 
                       android:paddingBottom="12dp">
 
+
             <TextView
                 android:id="@+id/top"
                 android:layout_width="0dp"
@@ -74,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="bottom \n erett e\n r r"
+                tools:text="some \n multiline\n text"
                 />
 
         </LinearLayout>
@@ -83,6 +84,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_gravity="end|bottom"
+            android:visibility="gone"
             android:background="@drawable/ic_expand_more_black_24dp"/>
 
         <LinearLayout android:id="@+id/expand" android:layout_width="match_parent"

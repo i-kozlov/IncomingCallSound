@@ -11,17 +11,26 @@
             <item
                 android:id="@+id/phone_config_page"
                 android:checked="false"
+                android:orderInCategory="10"
                 android:icon="@drawable/ic_phone_in_talk_24dp"
                 android:title="@string/drawer_ring_conf"/>
             <item
                 android:id="@+id/phone_yes_config_page"
                 android:checked="false"
                 android:icon="@drawable/perm_data_setting_black"
+                android:orderInCategory="20"
                 android:title="@string/drawer_ring_extra"/>
+            <item
+                android:id="@+id/nav_switch_mod"
+                android:checked="false"
+                android:icon="@drawable/ic_swap_horiz_black_24dp"
+                android:orderInCategory="25"
+                android:title="@string/drawer_switch_app_mode"/>
 
             <item
                 android:id="@+id/open_test_page"
                 android:checked="false"
+                android:orderInCategory="30"
                 android:icon="@drawable/ic_bug_report_24dp"
                 android:title="@string/test_page"/>
         </group>
@@ -32,12 +41,14 @@
         <item
             android:id="@+id/navigation_rate_app"
             android:checked="false"
+            android:orderInCategory="50"
             android:icon="@drawable/grade_black_rate"
             android:title="@string/Feedbsck_rate"/>
 
         <item
             android:id="@+id/navigation_feedback"
             android:checked="false"
+            android:orderInCategory="60"
             android:icon="@drawable/mail_black"
             android:title="@string/feedback_send"/>
 

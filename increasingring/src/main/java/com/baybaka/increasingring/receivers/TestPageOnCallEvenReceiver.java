@@ -24,6 +24,10 @@ public class TestPageOnCallEvenReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * Let test page know that we got ++ to calls count
+     * @param context
+     */
     public static void sendBroadcastToLogReceiver(Context context) {
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction(CALL_RECEIVER);

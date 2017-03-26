@@ -1,6 +1,7 @@
 package com.baybaka.incomingcallsound.ui.rv;
 
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
@@ -86,6 +88,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
     public RVAdapter(List<ListCard> cards, Context context) {
         this.cards = cards;
         this.context = context;
+
         setHasStableIds(true);
     }
 
@@ -93,11 +96,21 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
         return context;
     }
 
+    public void showText(String message){
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+
+    public void showText(@StringRes int resId, Object... formatArgs){
+
+        String message = context.getString(resId, formatArgs);
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v;
-        System.out.println("viewType =" + viewType);
-        System.out.println(cards.get(viewType).getDescription());
+//        System.out.println("viewType =" + viewType);
+//        System.out.println(cards.get(viewType).getDescription());
         boolean beta = cards.get(viewType).isBetaFeature();
         if (beta) {
 
@@ -148,6 +161,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
     }
 
     private String fromId(int id) {
-        return MyApp.getContext().getString(id);
+        return context.getString(id);
     }
 }
