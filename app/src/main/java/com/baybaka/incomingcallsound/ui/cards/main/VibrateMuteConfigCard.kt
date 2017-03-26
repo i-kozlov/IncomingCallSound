@@ -19,9 +19,9 @@ import com.baybaka.incomingcallsound.ui.cards.ListCardItem_v2
 import com.baybaka.incomingcallsound.ui.cards.Restrict
 import com.baybaka.incomingcallsound.ui.rv.RVAdapter
 import com.baybaka.increasingring.utils.PermissionChecker
-import com.baybaka.increasingring.utils.PermissionChecker.Companion.android7plus
-import com.baybaka.increasingring.utils.PermissionChecker.Companion.isAndroid5AndLower
-import com.baybaka.increasingring.utils.PermissionChecker.Companion.isAndroid6
+import com.baybaka.increasingring.utils.PermissionChecker.Version.android7plus
+import com.baybaka.increasingring.utils.PermissionChecker.Version.isAndroid5AndLower
+import com.baybaka.increasingring.utils.PermissionChecker.Version.isAndroid6
 
 
 class VibrateMuteConfigCard : ListCardItem_v2() {

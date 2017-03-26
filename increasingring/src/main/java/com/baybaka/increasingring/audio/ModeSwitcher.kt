@@ -2,20 +2,21 @@ package com.baybaka.increasingring.audio
 
 import android.annotation.SuppressLint
 import android.media.AudioManager
-import android.os.Build
+import com.baybaka.increasingring.utils.PermissionChecker
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 interface ModeSwitcher {
     companion object{
         val LOG: Logger = LoggerFactory.getLogger(ModeSwitcher::class.java.simpleName)
+        val NO_FLAGS = 0
     }
     val STREAM_TYPE : Int
 
     fun silent() {
-        val NO_FLAGS = 0
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+        if (PermissionChecker.Version.eqOrGreaterAndroid6()) {
             systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, NO_FLAGS)
         } else {
             systemAudioManager.setStreamMute(AudioManager.STREAM_RING, true)
@@ -35,7 +36,6 @@ interface ModeSwitcher {
     val systemAudioManager: AudioManager
 
     fun setRingVolume(level: Int) {
-        val NO_FLAGS = 0
         systemAudioManager.setStreamVolume(AudioManager.STREAM_RING, level, NO_FLAGS)
     }
 
@@ -52,7 +52,7 @@ class RingtoneImpl(override val systemAudioManager: AudioManager) : ModeSwitcher
     override fun toString(): String = "STREAM_RING"
 
     override fun vibrate() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (PermissionChecker.Version.eqOrGreaterAndroid6()) {
             systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_VIBRATE)
             //                systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, NO_FLAGS);
         } else {
@@ -70,7 +70,7 @@ class RingtoneImpl(override val systemAudioManager: AudioManager) : ModeSwitcher
     override fun normal() {
 
         when{
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ->{
+            PermissionChecker.Version.eqOrGreaterAndroid6() ->{
                 //should be called first!
                 setRingerMode(AudioManager.RINGER_MODE_NORMAL)
                 //optional?

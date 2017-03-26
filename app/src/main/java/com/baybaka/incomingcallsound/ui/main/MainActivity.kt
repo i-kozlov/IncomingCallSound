@@ -22,7 +22,7 @@ import com.baybaka.incomingcallsound.ui.testpage.TestPageFragment
 import com.baybaka.incomingcallsound.utils.RateApp
 import com.baybaka.increasingring.service.ServiceStarter
 import com.baybaka.increasingring.utils.PermissionChecker
-import com.baybaka.increasingring.utils.PermissionChecker.Companion.dndReqCode
+import com.baybaka.increasingring.utils.PermissionChecker.Version.dndReqCode
 
 
 class MainActivity : AppCompatActivity() {

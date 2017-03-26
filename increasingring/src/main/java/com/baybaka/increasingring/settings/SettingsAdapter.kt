@@ -5,7 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.media.AudioManager
 import com.baybaka.increasingring.utils.PermissionChecker
-import com.baybaka.increasingring.utils.PermissionChecker.Companion.noSecurityCheck
+import com.baybaka.increasingring.utils.PermissionChecker.Version
 
 class SettingsAdapter(val prefs: SettingsService, application: Application) : SettingsService by prefs {
 
@@ -28,7 +28,7 @@ class SettingsAdapter(val prefs: SettingsService, application: Application) : Se
 
     @SuppressLint("NewApi")
     override fun canUseMusicStream(): Boolean {
-        return noSecurityCheck() || checker.isGranted(Manifest.permission.READ_EXTERNAL_STORAGE)
+        return Version.noSecurityCheck() || checker.isGranted(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 
     override fun isVibrateFirst(): Boolean {
