@@ -24,18 +24,20 @@ interface ListCard {
     val descriptionFull: Int
     val isBetaFeature: Boolean
 
-    fun init(view: View){}
+    fun init(view: View) {}
 
     /**
      * to get activity context
      * @param rvAdapter
      */
-    fun link(rvAdapter: RVAdapter){}
+    fun link(rvAdapter: RVAdapter) {
+    }
 
     /**
      * to get update from recycler if needed
      */
-    fun update(){}
+    fun update() {
+    }
 }
 
 
@@ -46,6 +48,7 @@ abstract class ListCardItem_v2 : ListCard {
     override fun link(rvAdapter: RVAdapter) {
         this.rvAdapter = rvAdapter
     }
+
     companion object {
         val mSharedPreferenceController: AllSettings = MyApp.get().listenerComponent.settings()
     }
@@ -62,20 +65,9 @@ enum class Restrict {
 }
 
 
-//abstract class VerifiableCard : ListCardItem_v2() {
-//
-//    val checker by lazy { PermissionChecker(activity()!!) }
-//
-//    abstract fun isValid() : List<Pair<Restrict, View>>
-//
-//    abstract fun applyRestrictions(items : List<Pair<Restrict, View>> )
-//
-//    fun postInit() = applyRestrictions(isValid())
-//}
-
 abstract class BetaCard_v2 : ListCardItem_v2() {
 
-    override val isBetaFeature: Boolean  = true
+    override val isBetaFeature: Boolean = true
 
     @Bind(R.id.send_email_beta_good)
     internal lateinit var betaGood: Button

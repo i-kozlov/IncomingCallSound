@@ -270,7 +270,7 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     }
 
     private void callCheck() {
-        if (callsCount == 2) {
+        if (callsCount > 1) {
             inCallesCheckDone = true;
             inCallCheckTextview
                     .setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_black_24dp, 0, 0, 0);

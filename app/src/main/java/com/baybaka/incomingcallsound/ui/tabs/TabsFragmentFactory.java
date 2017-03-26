@@ -7,7 +7,6 @@ import android.view.View;
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.ui.cards.CardsFactory;
 import com.baybaka.incomingcallsound.ui.cards.ListCard;
-import com.baybaka.incomingcallsound.utils.Description;
 
 import java.util.List;
 
@@ -57,20 +56,14 @@ public class TabsFragmentFactory {
             return CardsFactory.INSTANCE.yesCard();
         }
 
-        //todo what it this? remove
+
         @Override
-        protected void configText() {
-            mTextView.setText(Description.getString(R.string.yes_page_text));
+        protected void runChildConfig() {
+            String header = getContext().getString(R.string.yes_page_text);
+            mTextView.setText(header);
             mTextView.setVisibility(View.VISIBLE);
         }
     }
-
-//    public static class OldList extends TabWithCardListFragment {
-//        @Override
-//        protected List<ListCard> getCards() {
-//            return CardsFactory.INSTANCE.old();
-//        }
-//    }
 
 
 }

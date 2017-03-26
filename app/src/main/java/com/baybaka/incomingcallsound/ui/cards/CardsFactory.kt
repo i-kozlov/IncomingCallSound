@@ -7,7 +7,10 @@ import com.baybaka.incomingcallsound.ui.cards.additional.PauseWaCard
 import com.baybaka.incomingcallsound.ui.cards.beta.FeedbackCard
 import com.baybaka.incomingcallsound.ui.cards.beta.FindPhoneConfigCard
 import com.baybaka.incomingcallsound.ui.cards.beta.NotificationCard
-import com.baybaka.incomingcallsound.ui.cards.main.*
+import com.baybaka.incomingcallsound.ui.cards.main.MainCard_v2
+import com.baybaka.incomingcallsound.ui.cards.main.MinMaxLimitsCard
+import com.baybaka.incomingcallsound.ui.cards.additional.RestoreToLevelCard
+import com.baybaka.incomingcallsound.ui.cards.main.VibrateMuteConfigCard
 import java.util.*
 
 object CardsFactory {
@@ -38,22 +41,6 @@ object CardsFactory {
         return list
     }
 
-    fun old(): List<ListCard> {
-        val list = ArrayList<ListCard>()
-
-//        list.add(MainCard())
-        list.add(OldMinMaxLimitsCard())
-        list.add(RestoreToLevelCard())
-        list.add(VibrateMuteConfigCard())
-
-        list.add(IgnoreSilenceVibrateCard())
-        list.add(KeepInMemoryCard())
-        list.add(LoggingCard())
-        list.add(PauseWaCard())
-
-        list.addAll(betaTab())
-        return list
-    }
 
 
     /**

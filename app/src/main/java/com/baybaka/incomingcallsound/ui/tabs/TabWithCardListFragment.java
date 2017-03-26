@@ -26,7 +26,7 @@ public abstract class TabWithCardListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recyclerview_activity, container, false);
         mTextView = (TextView) view.findViewById(R.id.text_over_list);
-        configText();
+        runChildConfig();
 
         rv = (RecyclerView) view.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -38,7 +38,10 @@ public abstract class TabWithCardListFragment extends Fragment {
         return view;
     }
 
-    protected void configText() {
+    /**
+     * Set additional child config if needed
+     */
+    protected void runChildConfig() {
 
     }
 

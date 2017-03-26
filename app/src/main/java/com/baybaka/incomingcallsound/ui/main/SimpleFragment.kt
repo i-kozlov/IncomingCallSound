@@ -85,4 +85,4 @@ class SimpleFragment : Fragment() {
         return view
     }
 
-}// Required empty public constructor
+}

@@ -20,7 +20,7 @@ interface IMediaPlayerProvider {
 
 class MediaPlayerProvider(val context: Context) : IMediaPlayerProvider {
 
-
+    //todo inject checker singlton whenever it is needed?
     fun hasPermissions(): Boolean {
 
         val  noSecurity = Build.VERSION.SDK_INT < Build.VERSION_CODES.M
@@ -32,7 +32,7 @@ class MediaPlayerProvider(val context: Context) : IMediaPlayerProvider {
 
     override fun getConfiguredPlayer(number: String): MediaPlayer? {
         val uri = if (!hasPermissions()) {
-            //should be called in UI thread
+            //todo should be called in UI thread
 //            val toast = Toast.makeText(context, R.string.cannot_access_contacts, duration)
 //            toast.show()
             RingtoneManager.getDefaultUri(1)

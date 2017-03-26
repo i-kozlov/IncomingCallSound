@@ -1,4 +1,4 @@
-package com.baybaka.incomingcallsound.ui.cards.main;
+package com.baybaka.incomingcallsound.ui.cards.additional;
 
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
