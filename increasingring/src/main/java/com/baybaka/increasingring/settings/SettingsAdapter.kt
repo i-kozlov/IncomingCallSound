@@ -23,7 +23,7 @@ class SettingsAdapter(val prefs: SettingsService, application: Application) : Se
 
     @SuppressLint("NewApi")
     private fun canUseMuteVibrate(): Boolean {
-        return doNotCheckDnD || checker.doNotDisturbGranted()
+        return doNotCheckDnD || PermissionChecker.isAndroid6() || checker.doNotDisturbGranted()
     }
 
     @SuppressLint("NewApi")
