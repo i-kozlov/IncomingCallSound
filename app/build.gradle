@@ -46,8 +46,8 @@ android {
 
         targetSdkVersion 25
 
-        versionCode 102
-        versionName "2.13"
+        versionCode 104
+        versionName "2.13.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
