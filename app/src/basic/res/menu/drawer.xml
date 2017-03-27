@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <item android:layout_gravity="bottom"
-          android:title="Telephony"
-        >
+    <group/>
+    <!--<item android:layout_gravity="bottom"-->
+          <!--android:title="Telephony"-->
+        <!--/>-->
         <group android:id="@+id/phone_group2"
                android:checkableBehavior="single">
 
@@ -12,7 +12,7 @@
                 android:id="@+id/phone_config_page"
                 android:checked="false"
                 android:orderInCategory="10"
-                android:icon="@drawable/ic_phone_in_talk_24dp"
+                android:icon="@drawable/ic_phone_in_talk_black_24dp"
                 android:title="@string/drawer_ring_conf"/>
             <item
                 android:id="@+id/phone_yes_config_page"
@@ -31,10 +31,10 @@
                 android:id="@+id/open_test_page"
                 android:checked="false"
                 android:orderInCategory="30"
-                android:icon="@drawable/ic_bug_report_24dp"
+                android:icon="@drawable/ic_bug_report_black_24dp"
                 android:title="@string/test_page"/>
         </group>
-    </item>
+    <!--</item>-->
 
     <group android:id="@+id/other_group"
            android:checkableBehavior="single">

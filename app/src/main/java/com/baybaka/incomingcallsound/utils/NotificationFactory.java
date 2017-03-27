@@ -90,7 +90,7 @@ public class NotificationFactory {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
         builder
-                .setSmallIcon(R.drawable.ic_report_problem_24dp)
+                .setSmallIcon(R.drawable.ic_report_problem_black_24dp)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher))
                 .setContentTitle(context.getString(R.string.lib_string_error_ititiazing_mediaplayer))
                 .setContentText(context.getString(R.string.lib_string_error_ititiazing_mediaplayer))
@@ -114,7 +114,7 @@ public class NotificationFactory {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
         builder
-                .setSmallIcon(R.drawable.ic_report_problem_24dp)
+                .setSmallIcon(R.drawable.ic_report_problem_black_24dp)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher))
                 .setContentTitle(context.getString(R.string.find_phone_notification))
                 .setContentText(context.getString(R.string.find_phone_notification))
