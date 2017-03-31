@@ -54,7 +54,8 @@ public class MyPhoneStateListenerTest {
     @Test
     public void testValueIsRestoredAfterCall() throws InterruptedException {
         //setStartFromMin();
-        mFakewrapper.setAudioLevelRespectingLogging(4);
+
+//        mFakewrapper.setAudioLevelRespectingLogging(4);
 
         setNewState(TelephonyManager.CALL_STATE_RINGING);
 

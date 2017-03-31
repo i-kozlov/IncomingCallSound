@@ -21,16 +21,16 @@ public interface AudioManagerWrapper {
 
 //    void setRingerMode(int mode);
 
-    void normalModeStream();
+//    void normalModeStream();
 
     int getStreamVolume(int stream);
 
-    void muteStream();
+//    void muteStream();
 
-    void vibrateMode();
+//    void vibrateMode();
 
-    @Deprecated
-    void changeOutputStream(int stream);
+//    @Deprecated
+//    void changeOutputStream(int stream);
 
     void setAudioParamsByPreRingConfig(SoundStateDTO state);
 
