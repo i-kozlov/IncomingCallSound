@@ -46,7 +46,7 @@ android {
 
         targetSdkVersion 25
 
-        versionCode 104
+        versionCode 105
         versionName "2.13.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

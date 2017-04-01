@@ -16,6 +16,7 @@ import com.baybaka.incomingcallsound.ui.main.MainActivity
 import com.baybaka.incomingcallsound.ui.tabs.TabsFragmentFactory
 import com.baybaka.incomingcallsound.ui.testpage.TestPageFragment
 import com.baybaka.incomingcallsound.utils.RateApp
+import java.util.*
 
 
 class MyNavView(private val drawerLayout: DrawerLayout,
@@ -40,7 +41,7 @@ class MyNavView(private val drawerLayout: DrawerLayout,
                     .commit()
         }
 
-        val updateTitle: (id : Int) -> Unit = fun(@StringRes id : Int){context.title = context.resources.getString(id)}
+        val updateTitle: (id: Int) -> Unit = fun(@StringRes id: Int) { context.title = context.resources.getString(id) }
 
         when (menuItem.itemId) {
 
@@ -58,7 +59,7 @@ class MyNavView(private val drawerLayout: DrawerLayout,
                 return true
             }
 
-            R.id.nav_switch_mod-> {
+            R.id.nav_switch_mod -> {
                 val modeToSet = !settings.useSimpleMode()
                 settings.smartResetConfig()
                 settings.setSimpleMode(modeToSet)
@@ -79,7 +80,7 @@ class MyNavView(private val drawerLayout: DrawerLayout,
             }
 
             R.id.navigation_to_web_help -> {
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://apps.baybaka.getforge.io/"))
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getLink()))
                 context.startActivity(browserIntent)
                 return true
             }
@@ -102,5 +103,15 @@ class MyNavView(private val drawerLayout: DrawerLayout,
                 return true
             }
         }
+    }
+
+    private fun getLink(): String {
+
+        return when (Locale.getDefault().displayLanguage) {
+            "русский" -> "https://goo.gl/LHZBfZ"
+            else -> "https://goo.gl/Z04Co2"
+        }
+
+
     }
 }

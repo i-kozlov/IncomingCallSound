@@ -39,8 +39,19 @@
               android:textSize="12sp"
     />
 
-    <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
-              android:gravity="center"
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="center"
               android:text="@string/simple_additional_modes_desc"
+              android:layout_marginBottom="@dimen/on_card_section_delimiter"
     />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:text="@string/first_call_loud_problem"
+    />
+    </LinearLayout>
 </LinearLayout>

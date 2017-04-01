@@ -180,5 +180,11 @@
         menu. Switching mode also reset most of app settings.
     </string>
 
+    <string name="first_call_loud_problem">
+        Follow \"Online help\" option in the menu
+        in case for first few seconds, the ringer is always loud.
+
+    </string>
+
 
 </resources>
