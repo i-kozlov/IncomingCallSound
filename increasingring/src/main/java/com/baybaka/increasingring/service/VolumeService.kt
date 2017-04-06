@@ -9,9 +9,9 @@ import android.os.IBinder
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import com.baybaka.increasingring.di.Injector
+import com.baybaka.increasingring.receivers.IncomingCallReceiver
 import com.baybaka.increasingring.settings.RunTimeSettings
 import com.baybaka.increasingring.settings.SettingsService
-import com.baybaka.increasingring.receivers.IncomingCallReceiver
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
 import javax.inject.Named
@@ -43,23 +43,20 @@ class VolumeService : Service() {
 
         LOG.debug("VolumeService on create")
 
-//        if (mPhoneListener == null) {
+            val injector = applicationContext as? Injector
+            injector?.let {
+                it.inject(this)
 
-            val injector = applicationContext as Injector
-            injector.inject(this)
+                // Register listener for LISTEN_CALL_STATE
+                telephonyManagerToRegisterListener.listen(mPhoneListener, PhoneStateListener.LISTEN_CALL_STATE)
+                mRunTimeSettings.setListenerIsRegistered()
 
-            //            mPhoneListener = new MyPhoneStateListener(new Controller(mSettings, AudioManagerRealImpl.getInstance()));
-
-            // Register listener for LISTEN_CALL_STATE
-            telephonyManagerToRegisterListener.listen(mPhoneListener, PhoneStateListener.LISTEN_CALL_STATE)
-            mRunTimeSettings.setListenerIsRegistered()
-
-            //            unregReceiver();
+                //            unregReceiver();
+            }
 
 
             startForegroundIfEnabled()
             LOG.debug("VolumeService is registered now")
-//        }
     }
 
     private fun startForegroundIfEnabled() {
