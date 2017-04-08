@@ -34,7 +34,7 @@ constructor(private val controller: Controller,
         }
     }
 
-    override fun onCallStateChanged(callState: Int, incomingNumber: String) {
+    override fun onCallStateChanged(callState: Int, incomingNumber: String?) {
         val newCallState = State.valueOf(callState)
 
         if (mRunTimeSettings.isLoggingEnabled) {
@@ -43,7 +43,7 @@ constructor(private val controller: Controller,
 
 
         if (oldState != newCallState) {
-            processFSM(newCallState, incomingNumber)
+            processFSM(newCallState, incomingNumber?: "")
         }
     }
 
