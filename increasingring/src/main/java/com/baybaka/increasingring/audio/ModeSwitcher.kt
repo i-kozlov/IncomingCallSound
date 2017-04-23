@@ -71,23 +71,25 @@ class RingtoneImpl(override val systemAudioManager: AudioManager) : ModeSwitcher
 
         when{
             PermissionChecker.Version.eqOrGreaterAndroid6() ->{
-                //should be called first!
-                setRingerMode(AudioManager.RINGER_MODE_NORMAL)
-                //optional?
+                //is it optional?
                 systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0)
+
+                setRingerMode(AudioManager.RINGER_MODE_NORMAL)
             }
             else -> {
 
                 setRingerMode(AudioManager.RINGER_MODE_NORMAL)
 
                 //optional?
-//                systemAudioManager.setStreamMute(AudioManager.STREAM_RING, false)
-//                adjustRingerUp()
+                systemAudioManager.setStreamMute(AudioManager.STREAM_RING, false)
+                setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                adjustRingerUp()
 
 
             }
         }
 
+        setRingerMode(AudioManager.RINGER_MODE_NORMAL)
         setRingVolume(1)
 
 //        setRingerMode(AudioManager.RINGER_MODE_NORMAL)
@@ -121,7 +123,7 @@ class MusicImpl(override val systemAudioManager: AudioManager) : ModeSwitcher {
         setRingVolume(0)
 
         // check do we still need it  ?
-//        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE)
+        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE)
 
         super.vibrate()
     }
@@ -129,7 +131,7 @@ class MusicImpl(override val systemAudioManager: AudioManager) : ModeSwitcher {
     override fun normal() {
         setRingVolume(0)
 
-//        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE)
-        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, 0)
+        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE)
+//        systemAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, 0)
     }
 }
