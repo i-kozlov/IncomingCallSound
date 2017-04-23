@@ -15,7 +15,7 @@ class IncomingCallReceiver : BroadcastReceiver() {
     }
 
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(context: Context, intent: Intent?) {
 
         val runTimeSettings = (context.applicationContext as Getter).runTimeSettings
 

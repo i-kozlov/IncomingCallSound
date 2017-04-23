@@ -31,7 +31,7 @@ class MediaPlayerProvider(val context: Context) : IMediaPlayerProvider {
     }
 
     override fun getConfiguredPlayer(number: String): MediaPlayer? {
-        val uri = if (!hasPermissions()) {
+        val uri = if (!hasPermissions() || number.isEmpty()) {
             //todo should be called in UI thread
 //            val toast = Toast.makeText(context, R.string.cannot_access_contacts, duration)
 //            toast.show()
@@ -45,10 +45,10 @@ class MediaPlayerProvider(val context: Context) : IMediaPlayerProvider {
 //        return getPlayer(RingtoneManager.getDefaultUri(1)) //test only
     }
 
-    private fun getRingTone(number: String?): String? {
+    private fun getRingTone(number: String): String? {
         val uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number))
 
-        val wrongUri = number == null || number.isEmpty() || uri.toString().endsWith("phone_lookup")
+        val wrongUri = uri.toString().endsWith("phone_lookup")
         println("wrongUri: $wrongUri")
         if(wrongUri) return null
 

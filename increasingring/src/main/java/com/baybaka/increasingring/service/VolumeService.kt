@@ -22,7 +22,7 @@ class VolumeService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         LOG.info("running service onStartCommand")
-        LOG.info("args are $intent , $flags, $startId")
+        LOG.info("args are intent=$intent , flags=$flags, startId=$startId")
         super.onStartCommand(intent, flags, startId)
         return Service.START_STICKY
     }
@@ -41,7 +41,7 @@ class VolumeService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        LOG.debug("VolumeService on create")
+        LOG.debug("VolumeService onCreate")
 
             val injector = applicationContext as? Injector
             injector?.let {
@@ -52,17 +52,18 @@ class VolumeService : Service() {
                 mRunTimeSettings.setListenerIsRegistered()
 
                 //            unregReceiver();
+                startForegroundIfEnabled()
+                LOG.debug("VolumeService is registered now")
             }
 
 
-            startForegroundIfEnabled()
-            LOG.debug("VolumeService is registered now")
     }
 
     private fun startForegroundIfEnabled() {
 
         if (settings.startInForeground() && settings.isServiceEnabledInConfig) {
-            startForeground(4815, mRunTimeSettings.persistentNotification(this, settings.showNotificationWithMinPriority()))
+            fun notification() = mRunTimeSettings.persistentNotification(this, settings.showNotificationWithMinPriority())
+            startForeground(4815, notification())
         }
     }
 

@@ -30,8 +30,10 @@ constructor(val appContext: Context) : AllSettings {
 //        System.out.println("config update");
 //        this.apply();
         this.commit()
-        (appContext as MyApp).runTimeSettings.configurationChanged()
-        appContext.listenerComponent.controller().updateAllConfigs()
+        with(appContext as MyApp){
+            runTimeSettings.configurationChanged()
+            listenerComponent.controller().updateAllConfigs()
+        }
 
     }
 
@@ -188,7 +190,7 @@ constructor(val appContext: Context) : AllSettings {
     override fun setLoggingState(newValue: Boolean) {
 
         editor.putBoolean(LOGGING_ENABLED, newValue)
-        editor.apply()
+        editor.applyAndUpdateConfig()
         MyApp.get().runTimeSettings.setGlobalLoggingState(newValue)
     }
     ////////////
@@ -317,7 +319,7 @@ constructor(val appContext: Context) : AllSettings {
     override fun setMinNotificationPriory(checked: Boolean) {
 
         editor.putBoolean(FOREGROUND_NOTIFICATION_WITH_MIN_PRIORITY, checked)
-        editor.apply()
+                .applyAndUpdateConfig()
     }
 
     override fun isProVersion(): Boolean {
