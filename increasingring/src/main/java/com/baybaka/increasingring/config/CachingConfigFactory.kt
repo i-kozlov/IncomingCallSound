@@ -14,6 +14,7 @@ import com.baybaka.increasingring.service.MediaPlayerProvider
 import com.baybaka.increasingring.settings.RunTimeSettings
 import com.baybaka.increasingring.settings.SettingsService
 import com.baybaka.increasingring.utils.AudioManagerWrapper
+import org.slf4j.LoggerFactory
 import javax.inject.Inject
 
 class CachingConfigFactory @Inject
@@ -32,6 +33,8 @@ constructor(private val settingsService: SettingsService) {
     private var maxVolLimit: Int = 99
 
 
+    private val LOG = LoggerFactory.getLogger(CachingConfigFactory::class.java.simpleName)
+
 //    fun setMaxHardwareVolumeLevel(maxHardwareVolumeLevel: Int) {
 //        this.maxHardwareVolumeLevel = maxHardwareVolumeLevel
 //    }
@@ -43,8 +46,8 @@ constructor(private val settingsService: SettingsService) {
 
 
 
-    fun getConfig(preRingLevel: Int): RingerConfig {
-
+    fun getConfig(): RingerConfig {
+        val preRingLevel = getCurrentChosenStreamVolume()
         if (preRingLevel != oldPreRingLevel) {
             if (isMinLimitToPreRing || isMaxLimitToPreRing) {
                 updateMinMaxForConfig(preRingLevel)
@@ -54,9 +57,9 @@ constructor(private val settingsService: SettingsService) {
         return config
     }
 
-    fun getConfig(): RingerConfig {
-        return config
-    }
+//    private fun getConfig(): RingerConfig {
+//        return config
+//    }
 
     //todo caching ignores when music permissions granted
     val findPhoneConfig: RingerConfig by lazy {
@@ -155,7 +158,7 @@ constructor(private val settingsService: SettingsService) {
         config.useMusicStream = soundStream == AudioManager.STREAM_MUSIC
     }
 
-    fun getCurrentChosenStreamVolume(): Int =
+    private fun getCurrentChosenStreamVolume(): Int =
             if (config.useMusicStream) audioControllerMusic.new_GetAudioLevel()
             else audioControllerRingTone.new_GetAudioLevel()
 
@@ -173,7 +176,7 @@ constructor(private val settingsService: SettingsService) {
         this.playerProvider = MediaPlayerProvider(runTimeSettings.context)
         mAudioManagerWrapper = audioManagerWrapper
         mRunTimeSettings = runTimeSettings
-        systemAudioManager = mRunTimeSettings.context.getApplicationContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        systemAudioManager = mRunTimeSettings.context.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
     val music by lazy { MusicImpl(systemAudioManager) }
@@ -186,8 +189,23 @@ constructor(private val settingsService: SettingsService) {
     fun currentAudioController(): IAudioController = if (config.useMusicStream) audioControllerMusic else audioControllerRingTone
 
     //todo move to config and make less ugly. Replace with strategy pattern maybe?
-    fun createThread(config: RingerConfig, callerNumber: String): IVolumeIncreaseThread =
-            if (config.useMusicStream)
-                RingAsMusic(config, audioControllerMusic, mRunTimeSettings, callerNumber, playerProvider)
-            else RingTone(config, audioControllerRingTone, mRunTimeSettings)
+    fun createThread(/*config: RingerConfig*/ callerNumber: String): IVolumeIncreaseThread {
+        val config = getConfig()
+        return if (config.useMusicStream)
+            RingAsMusic(config, audioControllerMusic, mRunTimeSettings, callerNumber, playerProvider)
+        else RingTone(config, audioControllerRingTone, mRunTimeSettings)
+    }
+
+    fun createFindPhoneThread(callerNumber: String): IVolumeIncreaseThread {
+        val config = findPhoneConfig
+        return if (config.useMusicStream)
+            RingAsMusic(config, audioControllerMusic, mRunTimeSettings, callerNumber, playerProvider)
+        else RingTone(config, audioControllerRingTone, mRunTimeSettings)
+    }
+
+
+    fun printDebug() {
+        LOG.debug("Current volume is $config")
+        LOG.debug("Config is ${getCurrentChosenStreamVolume()}")
+    }
 }

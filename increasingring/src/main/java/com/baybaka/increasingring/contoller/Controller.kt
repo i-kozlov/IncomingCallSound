@@ -62,13 +62,9 @@ constructor(private val mSettingsService: SettingsService,
         //todo keep this 2 only?
         val ringerMode = mAudioManagerWrapper.ringerMode
 
-        //        int preRingLevel = mAudioManagerWrapper.getCurrentChosenStreamVolume();
-        val preRingLevel = configFactory.getCurrentChosenStreamVolume()
-
-
         if (mRunTimeSettings.isLoggingEnabled) {
-            LOG.debug("Inside increaseVolume, Ringer_MODE is {} and volume is {}", ringerMode, preRingLevel)
-            LOG.debug("Config is {} ", configFactory.getConfig())
+            LOG.debug("Inside increaseVolume, Ringer_MODE is {}", ringerMode)
+            configFactory.printDebug()
         }
 
         if (ringWhenMute || ringerMode === RingMode.RINGER_MODE_NORMAL) {
@@ -76,8 +72,7 @@ constructor(private val mSettingsService: SettingsService,
 
             asapAction()
 
-            val config = configFactory.getConfig(preRingLevel)
-            currentThread = configFactory.createThread(config, callerNumber)
+            currentThread = configFactory.createThread(callerNumber)
             Thread(currentThread).start()
 
             TestPageOnCallEvenReceiver.sendBroadcastToLogReceiver(mRunTimeSettings.context)
@@ -147,13 +142,9 @@ constructor(private val mSettingsService: SettingsService,
         LOG.info("Calling find my phone function for number $callerNumber")
         mSoundRestorer.saveCurrentSoundLevels()
 
-        val config = configFactory.findPhoneConfig
-        currentThread = configFactory.createThread(config, callerNumber)
+        currentThread = configFactory.createFindPhoneThread(callerNumber)
         Thread(currentThread).start()
 
-
-        //        mAudioManagerWrapper.maxVolDisableMuteVibrate();
-        //        updateAllConfigs();
         mRunTimeSettings.getNotifyProvider().findPhoneCalled()
     }
 
