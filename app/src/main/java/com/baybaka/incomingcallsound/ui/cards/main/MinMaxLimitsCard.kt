@@ -32,7 +32,7 @@ class MinMaxLimitsCard : ListCardItem_v2() {
     private fun reconfigureRangebar() {
         initRange()
 
-        val onRangeBarChangeListener = RangeBar.OnRangeBarChangeListener { rangeBar, indexL, indexR, lefttext, rightText ->
+        val onRangeBarChangeListener = RangeBar.OnRangeBarChangeListener { _, _, _, lefttext, rightText ->
             val left = Integer.parseInt(lefttext)
             val right = Integer.parseInt(rightText)
 
