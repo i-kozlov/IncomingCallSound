@@ -110,19 +110,18 @@ abstract class VolumeIncreaseThread(val config: RingerConfig,
 
 }
 
-open class RingTone(config: RingerConfig, audioController: IAudioController, rts: RunTimeSettings)
+class RingTone(config: RingerConfig, audioController: IAudioController, rts: RunTimeSettings)
     : VolumeIncreaseThread(config, audioController, rts) {
 
 
     override fun configOutputStream() {
         audioController.normal()
-//        mAudioManagerWrapper.normalModeStream()
     }
 }
 
-open class RingAsMusic(config: RingerConfig, audioController: IAudioController, rts: RunTimeSettings,
+class RingAsMusic(config: RingerConfig, audioController: IAudioController, rts: RunTimeSettings,
                        val callerNumber: String, val playerProvider: IMediaPlayerProvider)
-    : RingTone(config, audioController, rts) {
+    : VolumeIncreaseThread(config, audioController, rts) {
 
     private var mediaPlayer: MediaPlayer? = null
     private var mReceiver: BroadcastReceiver? = null

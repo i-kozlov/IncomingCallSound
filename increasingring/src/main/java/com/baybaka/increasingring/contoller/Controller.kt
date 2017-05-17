@@ -1,11 +1,11 @@
 package com.baybaka.increasingring.contoller
 
+import com.baybaka.increasingring.audio.IAudioController
 import com.baybaka.increasingring.audio.RingMode
 import com.baybaka.increasingring.config.CachingConfigFactory
 import com.baybaka.increasingring.receivers.TestPageOnCallEvenReceiver
 import com.baybaka.increasingring.settings.RunTimeSettings
 import com.baybaka.increasingring.settings.SettingsService
-import com.baybaka.increasingring.utils.AudioManagerWrapper
 import com.baybaka.notificationlib.NotificationController
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class Controller @Inject
 constructor(private val mSettingsService: SettingsService,
             private val mRunTimeSettings: RunTimeSettings,
-            private val mAudioManagerWrapper: AudioManagerWrapper,
+            private val mAudioManagerWrapper: IAudioController,
             private val configFactory: CachingConfigFactory,
             private val mSoundRestorer: SoundRestorer,
             private val notificationController: NotificationController) {
@@ -24,16 +24,14 @@ constructor(private val mSettingsService: SettingsService,
     }
 
     private val phoneFinder: PhoneFinder
-
     private var currentThread: IVolumeIncreaseThread? = null
 
-    //    private boolean fastModeEnabled = false;
     private var ringWhenMute: Boolean = false
 
 
     init {
 
-        configFactory.initTemp(mRunTimeSettings, mAudioManagerWrapper)
+        configFactory.initTemp(mRunTimeSettings)
         this.phoneFinder = PhoneFinderImpl(mSettingsService)
         updateAllConfigs()
     }
@@ -59,18 +57,12 @@ constructor(private val mSettingsService: SettingsService,
 
     private fun standardFlow(callerNumber: String) {
 
-        //todo keep this 2 only?
         val ringerMode = mAudioManagerWrapper.ringerMode
+        someLogging()
 
-        if (mRunTimeSettings.isLoggingEnabled) {
-            LOG.debug("Inside increaseVolume, Ringer_MODE is {}", ringerMode)
-            configFactory.printDebug()
-        }
 
         if (ringWhenMute || ringerMode === RingMode.RINGER_MODE_NORMAL) {
             mSoundRestorer.saveCurrentSoundLevels()
-
-            asapAction()
 
             currentThread = configFactory.createThread(callerNumber)
             Thread(currentThread).start()
@@ -81,16 +73,13 @@ constructor(private val mSettingsService: SettingsService,
             LOG.info("Abort increasing volume. Phone mode is {} and ringWhenMute function set to {}", ringerMode, false)
         }
     }
-
-
-    /**
-     * Fix for first call with max sound on some phones
-     */
-    private fun asapAction() {
-        if (true/*fastModeEnabled*/) {
-            mAudioManagerWrapper.setAudioLevelRespectingLogging(1)
+    private fun someLogging(){
+        if (mRunTimeSettings.isLoggingEnabled) {
+            LOG.debug("Inside increaseVolume, Ringer_MODE is {}", mAudioManagerWrapper.ringerMode)
+            configFactory.printDebug()
         }
     }
+
 
     fun restoreVolumeToPreRingingLevel() {
         stopVolumeIncrease()
@@ -117,12 +106,11 @@ constructor(private val mSettingsService: SettingsService,
         mSoundRestorer.updateConfig()
         phoneFinder.update()
 
+        mAudioManagerWrapper.changeStrategy(configFactory.getConfig())
         updateLocal()
     }
 
     private fun updateLocal() {
-        //        fastModeEnabled = settings.getAsapState();
-        //        fastModeEnabled = true;
         ringWhenMute = mSettingsService.ringWhenMute()
 
     }

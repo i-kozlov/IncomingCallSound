@@ -6,14 +6,29 @@ import com.baybaka.increasingring.utils.PermissionChecker
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/**
+ * Switch ringing mode
+ */
 interface ModeSwitcher {
-    companion object{
+
+    val STREAM_TYPE: Int
+
+    fun silent()
+
+    fun vibrate()
+
+    fun normal()
+
+}
+
+abstract class AbstractSwitcher(val systemAudioManager: AudioManager) : ModeSwitcher {
+
+    companion object {
         val LOG: Logger = LoggerFactory.getLogger(ModeSwitcher::class.java.simpleName)
         val NO_FLAGS = 0
     }
-    val STREAM_TYPE : Int
 
-    fun silent() {
+    override fun silent() {
 
 
         if (PermissionChecker.Version.eqOrGreaterAndroid6()) {
@@ -26,14 +41,10 @@ interface ModeSwitcher {
         LOG.debug("mute on. ringer_mode is : {}. must be 0", systemAudioManager.ringerMode)
     }
 
-    fun vibrate() {
+    override fun vibrate() {
         setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
         LOG.debug("vibrate on. ringer_mode is : {}. must be 1", systemAudioManager.ringerMode)
     }
-
-    fun normal()
-
-    val systemAudioManager: AudioManager
 
     fun setRingVolume(level: Int) {
         systemAudioManager.setStreamVolume(AudioManager.STREAM_RING, level, NO_FLAGS)
@@ -42,15 +53,15 @@ interface ModeSwitcher {
     fun setRingerMode(mode: Int) {
         systemAudioManager.ringerMode = mode
     }
-
 }
 
-class RingtoneImpl(override val systemAudioManager: AudioManager) : ModeSwitcher {
+class RingtoneImpl(systemAudioManager: AudioManager) : AbstractSwitcher(systemAudioManager) {
     override val STREAM_TYPE: Int
         get() = AudioManager.STREAM_RING
 
     override fun toString(): String = "STREAM_RING"
 
+    @SuppressLint("InlinedApi")
     override fun vibrate() {
         if (PermissionChecker.Version.eqOrGreaterAndroid6()) {
             systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_VIBRATE)
@@ -69,8 +80,8 @@ class RingtoneImpl(override val systemAudioManager: AudioManager) : ModeSwitcher
     @SuppressLint("InlinedApi")
     override fun normal() {
 
-        when{
-            PermissionChecker.Version.eqOrGreaterAndroid6() ->{
+        when {
+            PermissionChecker.Version.eqOrGreaterAndroid6() -> {
                 //is it optional?
                 systemAudioManager.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0)
 
@@ -112,7 +123,7 @@ class RingtoneImpl(override val systemAudioManager: AudioManager) : ModeSwitcher
 
 }
 
-class MusicImpl(override val systemAudioManager: AudioManager) : ModeSwitcher {
+class MusicImpl(systemAudioManager: AudioManager) : AbstractSwitcher(systemAudioManager) {
 
     override val STREAM_TYPE: Int
         get() = AudioManager.STREAM_MUSIC

@@ -4,10 +4,11 @@ import com.baybaka.incomingcallsound.di.module.ConfigurationModule;
 import com.baybaka.incomingcallsound.di.module.ListenerModule;
 import com.baybaka.incomingcallsound.di.scopes.ApplicationScope;
 import com.baybaka.incomingcallsound.settings.AllSettings;
-import com.baybaka.increasingring.settings.RunTimeSettings;
+import com.baybaka.increasingring.audio.IAudioController;
 import com.baybaka.increasingring.contoller.Controller;
 import com.baybaka.increasingring.receivers.PowerButtonReceiver;
 import com.baybaka.increasingring.service.VolumeService;
+import com.baybaka.increasingring.settings.RunTimeSettings;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
 import com.baybaka.notificationlib.NotificationController;
 
@@ -24,8 +25,10 @@ public interface ListenerComponent {
 
 //    Activity inject(Activity activity);
 
+    @Deprecated
     AudioManagerWrapper provideAudioWrapper();
 
+    IAudioController audioController();
     /**
      * SharedPrefs direct access
      * @return

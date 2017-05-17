@@ -23,9 +23,9 @@ import com.baybaka.incomingcallsound.MyApp;
 import com.baybaka.incomingcallsound.R;
 import com.baybaka.incomingcallsound.log.LogReceiver;
 import com.baybaka.incomingcallsound.log.logsender.EmailIntentCreator;
-import com.baybaka.increasingring.settings.RunTimeSettings;
+import com.baybaka.increasingring.audio.IAudioController;
 import com.baybaka.increasingring.receivers.TestPageOnCallEvenReceiver;
-import com.baybaka.increasingring.utils.AudioManagerWrapper;
+import com.baybaka.increasingring.settings.RunTimeSettings;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +68,7 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     private BroadcastReceiver mReceiver2;
 
 
-    private AudioManagerWrapper mAudioManager;
+    private IAudioController mAudioManager;
     private RunTimeSettings mRunTimeSettings;
 
     @Override
@@ -87,7 +87,7 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
 
 
         mRunTimeSettings.setTestPageOpened(true);
-        mAudioManager = MyApp.get().getListenerComponent().provideAudioWrapper();
+        mAudioManager = MyApp.get().getListenerComponent().audioController();
 
         setupWidgets(view);
 
@@ -239,14 +239,14 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
         if (soundLevel < 0)
             soundLevel = 0;
 
-        mAudioManager.setAudioLevelRespectingLogging(soundLevel);
+        mAudioManager.new_SetAudioLevel(soundLevel);
         mTextView.append("user set STREAM_RING level to " + getCurrentLevel() + "\n");
         LOG.info("user set STREAM_RING level to  {}", getCurrentLevel());
     }
 
     private int getCurrentLevel() {
         //// TODO: according to log text it be should ring-steam-only?
-        return mAudioManager.getCurrentChosenStreamVolume();
+        return mAudioManager.new_GetMaxLevel();
     }
 
     @Override

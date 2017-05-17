@@ -22,32 +22,32 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
 //    private SettingsService mSettingsService;
 //    private int chosenStream;
 
-    private Context appСontext;
+//    private Context appСontext;
 
     public AudioManagerRealImpl(Context appСontext) {
         systemAudioManager = (AudioManager) appСontext.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
 
-        this.appСontext = appСontext;
+//        this.appСontext = appСontext;
         Getter getter = (Getter) appСontext.getApplicationContext();
         mRunTimeSettings = getter.getRunTimeSettings();
 //        mSettingsService = getter.getSetting();
 //        chosenStream = mSettingsService.getSoundStream();
     }
 
-    @Deprecated
-    @Override
-    public void setAudioLevelRespectingLogging(int soundLevel) {
-        int flags = 0;
-
-        if (mRunTimeSettings.isTestPageOpened()) {
-            flags = flags | AudioManager.FLAG_SHOW_UI;
-            LOG.info("Sound level set to {}", soundLevel);
-            setAudioLevelShowingUi(soundLevel);
-//            LOG.info("Now level equals to  {}", getCurrentChosenStreamVolume());
-        } else {
-            setAudioLevelNoUi(soundLevel);
-        }
-    }
+//    @Deprecated
+////    @Override
+//    public void setAudioLevelRespectingLogging(int soundLevel) {
+//        int flags = 0;
+//
+//        if (mRunTimeSettings.isTestPageOpened()) {
+//            flags = flags | AudioManager.FLAG_SHOW_UI;
+//            LOG.info("Sound level set to {}", soundLevel);
+//            setAudioLevelShowingUi(soundLevel);
+////            LOG.info("Now level equals to  {}", getCurrentChosenStreamVolume());
+//        } else {
+//            setAudioLevelNoUi(soundLevel);
+//        }
+//    }
 
     @Override
     public void setAudioLevelRespectingLogging(int soundLevel, int stream) {
@@ -67,21 +67,18 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
         systemAudioManager.setStreamVolume(stream, soundLevel, flags);
     }
 
-    @Deprecated
-    private void setAudioLevelShowingUi(int soundLevel) {
-        systemAudioManager.setStreamVolume(getChosenStreamType(), soundLevel, AudioManager.FLAG_SHOW_UI);
-    }
+//    private void setAudioLevelShowingUi(int soundLevel) {
+//        systemAudioManager.setStreamVolume(getChosenStreamType(), soundLevel, AudioManager.FLAG_SHOW_UI);
+//    }
 
-    @Deprecated
-    private void setAudioLevelNoUi(int soundLevel) {
-        //todo should not use getChosenStreamType()
-        systemAudioManager.setStreamVolume(getChosenStreamType(), soundLevel, NO_FLAGS);
-    }
+//    private void setAudioLevelNoUi(int soundLevel) {
+//        systemAudioManager.setStreamVolume(getChosenStreamType(), soundLevel, NO_FLAGS);
+//    }
 
-    @Override
-    public int getChosenStreamrMaxHardwareVolumeLevel() {
-        return systemAudioManager.getStreamMaxVolume(getChosenStreamType());
-    }
+//    @Override
+//    public int getChosenStreamrMaxHardwareVolumeLevel() {
+//        return systemAudioManager.getStreamMaxVolume(getChosenStreamType());
+//    }
 
     @Override
     public int getStreamMaxHardwareVolumeLevel(int stream) {
@@ -98,11 +95,11 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
         systemAudioManager.setRingerMode(mode);
     }
 
-    @Deprecated
-    @Override
-    public int getCurrentChosenStreamVolume() {
-        return systemAudioManager.getStreamVolume(getChosenStreamType());
-    }
+
+//    @Override
+//    public int getCurrentChosenStreamVolume() {
+//        return systemAudioManager.getStreamVolume(getChosenStreamType());
+//    }
 
     @Override
     public int getStreamVolume(int stream) {

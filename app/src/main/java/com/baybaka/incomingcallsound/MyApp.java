@@ -111,9 +111,10 @@ public class MyApp extends Application implements Injector, Getter {
         return mListenerComponent.provideAudioWrapper();
     }
 
-    //на карточках
+    //for cards
     public int getMaxVol() {
         //todo fix it
-        return getListenerComponent().provideAudioWrapper().getChosenStreamrMaxHardwareVolumeLevel();
+//        return getListenerComponent().provideAudioWrapper().getChosenStreamrMaxHardwareVolumeLevel();
+        return getListenerComponent().audioController().new_GetMaxLevel();
     }
 }
