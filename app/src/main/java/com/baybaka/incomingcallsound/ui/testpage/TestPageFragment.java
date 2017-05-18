@@ -68,7 +68,7 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     private BroadcastReceiver mReceiver2;
 
 
-    private IAudioController mAudioManager;
+    private IAudioController mAudioController;
     private RunTimeSettings mRunTimeSettings;
 
     @Override
@@ -87,17 +87,17 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
 
 
         mRunTimeSettings.setTestPageOpened(true);
-        mAudioManager = MyApp.get().getListenerComponent().audioController();
+        mAudioController = MyApp.get().getListenerComponent().audioController();
 
         setupWidgets(view);
 
         if (savedInstanceState != null) {
             buttonsCheckDone = savedInstanceState.getBoolean("1");
             buttonsPressed = savedInstanceState.getInt("buttonsPressed", 0);
-            buttonCheck();
+            buttonCheckCount();
             inCallesCheckDone = savedInstanceState.getBoolean("2");
             callsCount = savedInstanceState.getInt("callsCount", 0);
-            callCheck();
+            callCountCheck();
             hasDescription = savedInstanceState.getBoolean("3");
             checkDescription();
 
@@ -211,24 +211,24 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     }
 
     private void volumeUp() {
-        buttonCheck();
-        mTextView.append("STREAM_RING level is " + getCurrentLevel() + "\n" + "++");
+        buttonCheckCount();
+        mTextView.append(mAudioController.getSTREAM_TYPE() + " level is " + getCurrentLevel() + "\n" + "++");
         scrollToEnd();
         LOG.info("user pushed volumeUpButton, sound level was {}", getCurrentLevel());
         setSoundLevel(getCurrentLevel() + 1);
     }
 
     private void volumeDown() {
-        buttonCheck();
-        mTextView.append("STREAM_RING level is " + getCurrentLevel() + "\n" + "--");
+        buttonCheckCount();
+        mTextView.append(mAudioController.getSTREAM_TYPE() + " level is " + getCurrentLevel() + "\n" + "--");
         scrollToEnd();
         LOG.info("user pushed volumeDownButton, sound level was {}", getCurrentLevel());
         setSoundLevel(getCurrentLevel() - 1);
     }
 
-    private void buttonCheck() {
+    private void buttonCheckCount() {
         buttonsPressed++;
-        if (buttonsPressed == 3) {
+        if (buttonsPressed > 2) {
             buttonsCheckDone = true;
             volButCheckTextview
                     .setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_black_24dp, 0, 0, 0);
@@ -239,14 +239,14 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
         if (soundLevel < 0)
             soundLevel = 0;
 
-        mAudioManager.new_SetAudioLevel(soundLevel);
-        mTextView.append("user set STREAM_RING level to " + getCurrentLevel() + "\n");
-        LOG.info("user set STREAM_RING level to  {}", getCurrentLevel());
+        mAudioController.new_SetAudioLevel(soundLevel);
+        String txt = "user set " + mAudioController.getSTREAM_TYPE() + " level to " + getCurrentLevel() + "\n";
+        mTextView.append(txt);
+        LOG.info(txt);
     }
 
     private int getCurrentLevel() {
-        //// TODO: according to log text it be should ring-steam-only?
-        return mAudioManager.new_GetMaxLevel();
+        return mAudioController.new_GetAudioLevel();
     }
 
     @Override
@@ -266,10 +266,10 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
 
     public void callReceived() {
         callsCount++;
-        callCheck();
+        callCountCheck();
     }
 
-    private void callCheck() {
+    private void callCountCheck() {
         if (callsCount > 1) {
             inCallesCheckDone = true;
             inCallCheckTextview
