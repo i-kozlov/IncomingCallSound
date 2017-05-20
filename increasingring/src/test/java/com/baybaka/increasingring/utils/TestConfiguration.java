@@ -1,5 +1,7 @@
 package com.baybaka.increasingring.utils;
 
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.slf4j.Logger;
 
@@ -14,19 +16,28 @@ public class TestConfiguration {
     public static Logger createAndConfigureMockLogger() {
         Logger mockLogger = mock(Logger.class);
 
-        PowerMockito.doAnswer(invocation -> {
-            System.out.println(Arrays.toString(invocation.getArguments()));
-            return null;
+        PowerMockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                System.out.println(Arrays.toString(invocation.getArguments()));
+                return null;
+            }
         }).when(mockLogger).debug(anyString(), anyObject(), anyObject());
-        PowerMockito.doAnswer(invocation -> {
-            System.out.println(Arrays.toString(invocation.getArguments()));
-            return null;
+        PowerMockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                System.out.println(Arrays.toString(invocation.getArguments()));
+                return null;
+            }
         }).when(mockLogger).info(anyString());
 
 
-        PowerMockito.doAnswer(invocation -> {
-            System.out.println(Arrays.toString(invocation.getArguments()));
-            return null;
+        PowerMockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                System.out.println(Arrays.toString(invocation.getArguments()));
+                return null;
+            }
         }).when(mockLogger).info(anyString(), anyObject(), anyObject());
 
         return mockLogger;

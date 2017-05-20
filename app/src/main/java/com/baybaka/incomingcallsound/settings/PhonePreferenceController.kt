@@ -1,5 +1,6 @@
 package com.baybaka.incomingcallsound.settings
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.media.AudioManager
@@ -12,8 +13,9 @@ import javax.inject.Inject
 
 class PhonePreferenceController @Inject
 constructor(val appContext: Context) : AllSettings {
+
     override fun canUseMusicStream(): Boolean {
-        TODO("should not be called. Can be replaced with exception")
+        TODO("should not be called out of adapter Impl")
     }
 
 
@@ -27,7 +29,6 @@ constructor(val appContext: Context) : AllSettings {
 
 
     protected fun SharedPreferences.Editor.applyAndUpdateConfig() {
-//        System.out.println("config update");
 //        this.apply();
         this.commit()
         with(appContext as MyApp){
@@ -38,6 +39,7 @@ constructor(val appContext: Context) : AllSettings {
     }
 
     val editor: SharedPreferences.Editor
+        @SuppressLint("CommitPrefEdits")
         get() = mPreferences.edit()
 
     override fun isSkipRing(): Boolean = mPreferences.getBoolean(SKIP_RING, false)
