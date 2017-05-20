@@ -54,7 +54,7 @@ constructor(private val settingsService: SettingsService,
         return config
     }
 
-    public fun getConfig(): RingerConfig {
+    fun getConfig(): RingerConfig {
         return config
     }
 
@@ -96,13 +96,6 @@ constructor(private val settingsService: SettingsService,
         updateMinMaxForConfig(1)
     }
 
-//    private fun readMuteTimes(): Int {
-//        return settingsService.muteTimesCount
-//    }
-//
-//    private fun readVibrateTimes(): Int {
-//        return settingsService.vibrateTimesCount
-//    }
 
     private fun localConfigUpdate() {
         minVolLimit = settingsService.minVolumeLimit
@@ -119,18 +112,17 @@ constructor(private val settingsService: SettingsService,
 
     private fun updateMinMaxForConfig(preRingLevel: Int) {
 
-        var minLimitCalc = 1
-        if (isMinVolLimited) {
-            minLimitCalc = if (isMinLimitToPreRing) preRingLevel else minVolLimit
+        config.startSoundLevel = when {
+            isMinVolLimited && isMinLimitToPreRing -> preRingLevel
+            isMaxVolLimited -> minVolLimit
+            else -> 1
         }
 
-        var maxLimitCalc = maxHardwareVolumeLevel
-        if (isMaxVolLimited) {
-            maxLimitCalc = if (isMaxLimitToPreRing) preRingLevel else maxVolLimit
+        config.allowedMaxVolume = when{
+            isMaxVolLimited && isMaxLimitToPreRing -> preRingLevel
+            isMaxVolLimited -> maxVolLimit
+            else -> maxHardwareVolumeLevel
         }
-
-        config.startSoundLevel = minLimitCalc
-        config.allowedMaxVolume = maxLimitCalc
     }
 
 
@@ -138,32 +130,19 @@ constructor(private val settingsService: SettingsService,
         return resultLevel == maxHardwareVolumeLevel + 1
     }
 
-//    private fun readIntervalConfig(): Int {
-//        return settingsService.interval
-//    }
-//
-//    private fun readMuteConfig(): Boolean {
-//        return settingsService.isMuteFirst
-//    }
-//
-//    private fun readVibrateConfig(): Boolean {
-//        return settingsService.isVibrateFirst
-//    }
 
-//    @Deprecated("should be removed")
     private fun updateStream(soundStream: Int) {
         config.useMusicStream = soundStream == AudioManager.STREAM_MUSIC
     }
 
     private fun getCurrentChosenStreamVolume(): Int = audio.new_GetAudioLevel()
-//            if (config.useMusicStream) audioControllerMusic.new_GetAudioLevel()
-//            else audioControllerRingTone.new_GetAudioLevel()
 
     //todo move all this to AudioManager
     private lateinit var playerProvider: IMediaPlayerProvider
 
-//    private lateinit var mAudioManagerWrapper: AudioManagerWrapper
     private lateinit var mRunTimeSettings: RunTimeSettings
+
+//    private lateinit var mAudioManagerWrapper: AudioManagerWrapper
 //    private lateinit var systemAudioManager: AudioManager
 
 
@@ -173,8 +152,8 @@ constructor(private val settingsService: SettingsService,
         mRunTimeSettings = runTimeSettings
     }
 
-    fun createThread(callerNumber: String): IVolumeIncreaseThread {
-        val config = currentConfig()
+    fun createThread(callerNumber: String, config: RingerConfig = currentConfig()): IVolumeIncreaseThread {
+
         return if (config.useMusicStream)
             RingAsMusic(config, audio, mRunTimeSettings, callerNumber, playerProvider)
         else RingTone(config, audio, mRunTimeSettings)
@@ -182,10 +161,7 @@ constructor(private val settingsService: SettingsService,
     }
 
     fun createFindPhoneThread(callerNumber: String): IVolumeIncreaseThread {
-        val config = findPhoneConfig
-        return if (config.useMusicStream)
-            RingAsMusic(config, audio, mRunTimeSettings, callerNumber, playerProvider)
-        else RingTone(config, audio, mRunTimeSettings)
+        return createThread(callerNumber, findPhoneConfig)
     }
 
 
