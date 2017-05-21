@@ -11,6 +11,8 @@ import com.baybaka.increasingring.audio.IAudioController;
 import com.baybaka.increasingring.audio.ModeSwitcher;
 import com.baybaka.increasingring.audio.RingtoneImpl;
 import com.baybaka.increasingring.config.CachingConfigFactory;
+import com.baybaka.increasingring.config.ConfigProvider;
+import com.baybaka.increasingring.config.ThreadProvider;
 import com.baybaka.increasingring.contoller.Controller;
 import com.baybaka.increasingring.contoller.SoundRestorer;
 import com.baybaka.increasingring.settings.RunTimeSettings;
@@ -50,16 +52,36 @@ public class ListenerModule {
     }
 
 
+    @Provides
+    @ApplicationScope
+    ThreadProvider tp(RunTimeSettings runTimeSettings,
+                      IAudioController audioController) {
+        return new ThreadProvider(runTimeSettings,audioController);
+    }
+
+
+    @Provides
+    @ApplicationScope
+    ConfigProvider config(CachingConfigFactory configFactory,
+                          ThreadProvider tp,
+                          IAudioController audioController
+                          ) {
+        return new ConfigProvider(configFactory,tp,audioController);
+    }
+
+
 
     @Provides
     @ApplicationScope
 //    @Singleton
     Controller controller(@Named("adapter")SettingsService settingsService,
                           RunTimeSettings runTimeSettings,
-                          IAudioController audioController,
-                          CachingConfigFactory configFactory, SoundRestorer soundRestorer,
+//                          IAudioController audioController,
+//                          CachingConfigFactory configFactory,
+                          ConfigProvider config,
+                          SoundRestorer soundRestorer,
                           NotificationController notificationController) {
-        return new Controller(settingsService, runTimeSettings, audioController, configFactory, soundRestorer,
+        return new Controller(settingsService, runTimeSettings, config, soundRestorer,
                 notificationController);
     }
 

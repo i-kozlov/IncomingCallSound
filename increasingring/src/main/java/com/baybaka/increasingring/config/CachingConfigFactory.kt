@@ -2,12 +2,6 @@ package com.baybaka.increasingring.config
 
 import android.media.AudioManager
 import com.baybaka.increasingring.audio.IAudioController
-import com.baybaka.increasingring.contoller.IVolumeIncreaseThread
-import com.baybaka.increasingring.contoller.RingAsMusic
-import com.baybaka.increasingring.contoller.RingTone
-import com.baybaka.increasingring.service.IMediaPlayerProvider
-import com.baybaka.increasingring.service.MediaPlayerProvider
-import com.baybaka.increasingring.settings.RunTimeSettings
 import com.baybaka.increasingring.settings.SettingsService
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
@@ -42,7 +36,7 @@ constructor(private val settingsService: SettingsService,
 
 
 
-    private fun currentConfig(): RingerConfig {
+    internal fun currentConfig(): RingerConfig {
         val preRingLevel = getCurrentChosenStreamVolume()
 
         if (preRingLevel != oldPreRingLevel) {
@@ -58,9 +52,9 @@ constructor(private val settingsService: SettingsService,
         return config
     }
 
-    //todo caching ignores when music permissions granted
-    val findPhoneConfig: RingerConfig by lazy {
-        with(RingerConfig()) {
+
+    internal val findPhoneConfig: RingerConfig
+        get() = with(RingerConfig()) {
             startSoundLevel = 14
             allowedMaxVolume = 14
             useMusicStream = true && settingsService.canUseMusicStream()
@@ -69,7 +63,7 @@ constructor(private val settingsService: SettingsService,
             isMuteFirst = false
             return@with this
         }
-    }
+
 
 
     fun updateConfig() {
@@ -136,33 +130,6 @@ constructor(private val settingsService: SettingsService,
     }
 
     private fun getCurrentChosenStreamVolume(): Int = audio.new_GetAudioLevel()
-
-    //todo move all this to AudioManager
-    private lateinit var playerProvider: IMediaPlayerProvider
-
-    private lateinit var mRunTimeSettings: RunTimeSettings
-
-//    private lateinit var mAudioManagerWrapper: AudioManagerWrapper
-//    private lateinit var systemAudioManager: AudioManager
-
-
-    fun initTemp(runTimeSettings: RunTimeSettings
-    ) {
-        this.playerProvider = MediaPlayerProvider(runTimeSettings.context)
-        mRunTimeSettings = runTimeSettings
-    }
-
-    fun createThread(callerNumber: String, config: RingerConfig = currentConfig()): IVolumeIncreaseThread {
-
-        return if (config.useMusicStream)
-            RingAsMusic(config, audio, mRunTimeSettings, callerNumber, playerProvider)
-        else RingTone(config, audio, mRunTimeSettings)
-
-    }
-
-    fun createFindPhoneThread(callerNumber: String): IVolumeIncreaseThread {
-        return createThread(callerNumber, findPhoneConfig)
-    }
 
 
     fun printDebug() {

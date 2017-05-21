@@ -1,8 +1,7 @@
 package com.baybaka.increasingring.contoller
 
-import com.baybaka.increasingring.audio.IAudioController
 import com.baybaka.increasingring.audio.RingMode
-import com.baybaka.increasingring.config.CachingConfigFactory
+import com.baybaka.increasingring.config.ConfigProvider
 import com.baybaka.increasingring.receivers.TestPageOnCallEvenReceiver
 import com.baybaka.increasingring.settings.RunTimeSettings
 import com.baybaka.increasingring.settings.SettingsService
@@ -14,8 +13,9 @@ import javax.inject.Inject
 class Controller @Inject
 constructor(private val mSettingsService: SettingsService,
             private val mRunTimeSettings: RunTimeSettings,
-            private val mAudioManagerWrapper: IAudioController,
-            private val configFactory: CachingConfigFactory,
+//            private val mAudioManagerWrapper: IAudioController,
+//            private val configFactory: CachingConfigFactory,
+            private val config: ConfigProvider,
             private val mSoundRestorer: SoundRestorer,
             private val notificationController: NotificationController) {
 
@@ -30,8 +30,6 @@ constructor(private val mSettingsService: SettingsService,
 
 
     init {
-
-        configFactory.initTemp(mRunTimeSettings)
         this.phoneFinder = PhoneFinderImpl(mSettingsService)
         updateAllConfigs()
     }
@@ -57,14 +55,13 @@ constructor(private val mSettingsService: SettingsService,
 
     private fun standardFlow(callerNumber: String) {
 
-        val ringerMode = mAudioManagerWrapper.ringerMode
+        val ringerMode = config.ringerMode
         someLogging()
-
 
         if (ringWhenMute || ringerMode === RingMode.RINGER_MODE_NORMAL) {
             mSoundRestorer.saveCurrentSoundLevels()
 
-            currentThread = configFactory.createThread(callerNumber)
+            currentThread = config.createThread(callerNumber)
             Thread(currentThread).start()
 
             TestPageOnCallEvenReceiver.sendBroadcastToLogReceiver(mRunTimeSettings.context)
@@ -75,8 +72,8 @@ constructor(private val mSettingsService: SettingsService,
     }
     private fun someLogging(){
         if (mRunTimeSettings.isLoggingEnabled) {
-            LOG.debug("Inside increaseVolume, Ringer_MODE is {}", mAudioManagerWrapper.ringerMode)
-            configFactory.printDebug()
+            LOG.debug("Inside increaseVolume, Ringer_MODE is {}", config.ringerMode)
+            config.printDebug()
         }
     }
 
@@ -101,12 +98,12 @@ constructor(private val mSettingsService: SettingsService,
 //        configFactory.setMaxHardwareVolumeLevel(mAudioManagerWrapper.chosenStreamrMaxHardwareVolumeLevel)
 
         //todo same
-        configFactory.updateConfig()
+        config.updateConfig()
 
         mSoundRestorer.updateConfig()
         phoneFinder.update()
 
-        mAudioManagerWrapper.changeStrategy(configFactory.getConfig())
+//        mAudioManagerWrapper.changeStrategy(configFactory.getConfig())
         updateLocal()
     }
 
@@ -130,7 +127,7 @@ constructor(private val mSettingsService: SettingsService,
         LOG.info("Calling find my phone function for number $callerNumber")
         mSoundRestorer.saveCurrentSoundLevels()
 
-        currentThread = configFactory.createFindPhoneThread(callerNumber)
+        currentThread = config.createFindPhoneThread(callerNumber)
         Thread(currentThread).start()
 
         mRunTimeSettings.getNotifyProvider().findPhoneCalled()
