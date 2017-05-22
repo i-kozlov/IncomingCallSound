@@ -87,7 +87,8 @@ public class ListenerModule {
 
     @Provides
     @ApplicationScope
-    CachingConfigFactory cachingConfigFactory(@Named("adapter")SettingsService settingsService, IAudioController audioController) {
+    CachingConfigFactory cachingConfigFactory(@Named("adapter")SettingsService settingsService,
+                                              IAudioController audioController) {
         return new CachingConfigFactory(settingsService, audioController);
     }
 

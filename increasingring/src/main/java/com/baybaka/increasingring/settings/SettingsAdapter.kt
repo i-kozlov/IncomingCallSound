@@ -9,7 +9,7 @@ import com.baybaka.increasingring.utils.PermissionChecker.Version
 
 class SettingsAdapter(val prefs: SettingsService, application: Application) : SettingsService by prefs {
 
-    val doNotCheckDnD = PermissionChecker.android7plus()
+    val doNotCheckDnD = PermissionChecker.isAndroid5AndLower()
     val checker by lazy { PermissionChecker(application) }
 
     override fun isServiceEnabledInConfig(): Boolean {
@@ -19,11 +19,11 @@ class SettingsAdapter(val prefs: SettingsService, application: Application) : Se
     }
 
     override fun isSkipRing(): Boolean =
-            prefs.isSkipRing && (prefs.isMuteFirst || prefs.isVibrateFirst)
+            prefs.isSkipRing && (this.isMuteFirst || this.isVibrateFirst)
 
     @SuppressLint("NewApi")
     private fun canUseMuteVibrate(): Boolean {
-        return doNotCheckDnD || PermissionChecker.isAndroid6() || checker.doNotDisturbGranted()
+        return doNotCheckDnD|| Version.isAndroid6() || checker.doNotDisturbGranted()
     }
 
     @SuppressLint("NewApi")
