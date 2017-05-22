@@ -37,9 +37,5 @@ interface RunTimeSettings {
 
     fun setGlobalLoggingState(state: Boolean)
 
-
-    //to del
-    var lastVolActionTime: Long
-
     fun getNotifyProvider() : NotificationProvider
 }

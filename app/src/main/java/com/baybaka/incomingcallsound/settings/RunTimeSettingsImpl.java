@@ -20,7 +20,6 @@ public class RunTimeSettingsImpl implements RunTimeSettings {
     private static volatile boolean phoneStateListenerRegistered = false;
     private final Context appContext;
 
-    private long lastVolumeButtonClickTime = 0;
 
     public RunTimeSettingsImpl(Application application) {
         globalLogging = ((MyApp) application).getSetting().isLoggingEnabled();
@@ -98,17 +97,6 @@ public class RunTimeSettingsImpl implements RunTimeSettings {
         globalLogging = state;
     }
 
-
-    //todo  what is it? delete?
-    @Override
-    public long getLastVolActionTime() {
-        return lastVolumeButtonClickTime;
-    }
-
-    @Override
-    public void setLastVolActionTime(long mils) {
-        lastVolumeButtonClickTime = mils;
-    }
 
     @NotNull
     @Override
