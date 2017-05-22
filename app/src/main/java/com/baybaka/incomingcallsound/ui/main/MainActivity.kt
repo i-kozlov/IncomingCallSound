@@ -3,6 +3,7 @@ package com.baybaka.incomingcallsound.ui.main
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -14,6 +15,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import com.ahmedjazzar.rosetta.LanguageSwitcher
 import com.baybaka.incomingcallsound.BuildConfig
 import com.baybaka.incomingcallsound.MyApp
 import com.baybaka.incomingcallsound.R
@@ -23,17 +25,18 @@ import com.baybaka.incomingcallsound.utils.RateApp
 import com.baybaka.increasingring.service.ServiceStarter
 import com.baybaka.increasingring.utils.PermissionChecker
 import com.baybaka.increasingring.utils.PermissionChecker.Version.dndReqCode
+import java.util.*
+
+
 
 
 class MainActivity : AppCompatActivity() {
 
-//    @Inject
-//    private lateinit var  mSharedPreferenceController: AllSettings
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        setLang2()
+//        setLang()
         setContentView(R.layout.layout_activity_main)
 
         initNavBar()
@@ -49,6 +52,43 @@ class MainActivity : AppCompatActivity() {
 
         //start if not running?
         ServiceStarter.startServiceWithCondition(this)
+    }
+
+    private fun setLang2() {
+
+// You can use a HashSet<String> instead and call 'setSupportedStringLocales()' :)
+        val supportedLocales = hashSetOf<Locale>(
+                Locale.US,
+                Locale("ru"),
+                Locale("uk")
+        )
+
+        val current = resources.configuration.locale
+
+        val ls = if(current in supportedLocales){
+            LanguageSwitcher(this, current)
+        } else {
+            LanguageSwitcher(this)
+        }
+        ls.setSupportedLocales(supportedLocales)
+
+        if(!supportedLocales.contains(current)){
+            LanguageSwitcher(this).showChangeLanguageDialog(this)
+
+        }
+
+
+    }
+
+    private fun setLang() {
+
+        val languageToLoad = "uk" // your language
+        val locale = Locale(languageToLoad)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(config,
+                baseContext.resources.displayMetrics)
     }
 
     private fun initNavBar() {

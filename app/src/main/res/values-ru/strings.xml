@@ -178,5 +178,6 @@
     <string name="first_call_loud_problem">Если первые несколько звонков проходят на максимальной громкости,
     следуйте инструкциям указанным в пункте меню \"Онлайн справка\"
     </string>
+    <string name="menu_language">Язык</string>
 
 </resources>

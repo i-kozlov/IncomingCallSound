@@ -185,6 +185,7 @@
         in case for first few seconds, the ringer is always loud.
 
     </string>
+    <string name="menu_language">Language</string>
 
 
 </resources>

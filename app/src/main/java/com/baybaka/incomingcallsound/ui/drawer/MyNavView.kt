@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
+import com.ahmedjazzar.rosetta.LanguageSwitcher
 import com.baybaka.incomingcallsound.MyApp
 import com.baybaka.incomingcallsound.R
 import com.baybaka.incomingcallsound.log.logsender.EmailIntentCreator
@@ -92,6 +93,10 @@ class MyNavView(private val drawerLayout: DrawerLayout,
                     Toast.makeText(context, R.string.error_noapp_tosend_email, Toast.LENGTH_LONG).show()
                 }
 
+                return true
+            }
+            R.id.lang ->{
+                LanguageSwitcher(context).showChangeLanguageDialog(context)
                 return true
             }
 

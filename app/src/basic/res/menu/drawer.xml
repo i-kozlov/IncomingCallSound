@@ -38,6 +38,14 @@
 
     <group android:id="@+id/other_group"
            android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/lang"
+            android:checked="false"
+            android:orderInCategory="49"
+            android:icon="@drawable/ic_lang"
+            android:title="@string/menu_language"/>
+
         <item
             android:id="@+id/navigation_rate_app"
             android:checked="false"
@@ -58,6 +66,7 @@
             android:orderInCategory="60"
             android:icon="@drawable/mail_black"
             android:title="@string/feedback_send"/>
+
 
         <!--<item-->
             <!--android:id="@+id/navigation_about"-->
