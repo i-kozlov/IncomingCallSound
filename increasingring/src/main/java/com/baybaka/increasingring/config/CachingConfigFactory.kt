@@ -25,15 +25,10 @@ constructor(private val settingsService: SettingsService,
 
     private val LOG = LoggerFactory.getLogger(CachingConfigFactory::class.java.simpleName)
 
-//    fun setMaxHardwareVolumeLevel(maxHardwareVolumeLevel: Int) {
-//        this.maxHardwareVolumeLevel = maxHardwareVolumeLevel
-//    }
-
 
     fun updateMaxHardwareVolumeLevel() {
         this.maxHardwareVolumeLevel = audio.new_GetMaxLevel()
     }
-
 
 
     internal fun currentConfig(): RingerConfig {
@@ -54,14 +49,13 @@ constructor(private val settingsService: SettingsService,
 
 
     internal val findPhoneConfig: RingerConfig
-        get() = with(RingerConfig()) {
+        get() = RingerConfig().apply {
             startSoundLevel = 14
             allowedMaxVolume = 14
             useMusicStream = true && settingsService.canUseMusicStream()
             interval = 1
             isVibrateFirst = false
             isMuteFirst = false
-            return@with this
         }
 
 
