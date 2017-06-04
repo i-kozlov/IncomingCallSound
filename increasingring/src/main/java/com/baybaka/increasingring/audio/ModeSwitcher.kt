@@ -24,7 +24,7 @@ interface ModeSwitcher {
 abstract class AbstractSwitcher(val systemAudioManager: AudioManager) : ModeSwitcher {
 
     companion object {
-        val LOG: Logger = LoggerFactory.getLogger(ModeSwitcher::class.java.simpleName)
+        val LOG: Logger = LoggerFactory.getLogger(ModeSwitcher::class.java)
         val NO_FLAGS = 0
     }
 
@@ -38,12 +38,12 @@ abstract class AbstractSwitcher(val systemAudioManager: AudioManager) : ModeSwit
         }
 
         systemAudioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
-        LOG.debug("mute on. ringer_mode is : {}. must be 0", systemAudioManager.ringerMode)
+        LOG.debug("Calling silent(). ringer_mode is : {}. must be 0", systemAudioManager.ringerMode)
     }
 
     override fun vibrate() {
         setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
-        LOG.debug("vibrate on. ringer_mode is : {}. must be 1", systemAudioManager.ringerMode)
+        LOG.debug("Calling vibrate(). ringer_mode is : {}. must be 1", systemAudioManager.ringerMode)
     }
 
     fun setRingVolume(level: Int) {
