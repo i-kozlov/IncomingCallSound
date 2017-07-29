@@ -1,6 +1,7 @@
 package com.baybaka.incomingcallsound.ui.main
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.SwitchCompat
@@ -16,9 +17,11 @@ import com.baybaka.incomingcallsound.ui.cards.ListCardItem_v2
 import com.baybaka.incomingcallsound.ui.cards.additional.KeepInMemoryCard
 import com.baybaka.incomingcallsound.ui.cards.main.MainCard_v2
 import com.baybaka.increasingring.service.ServiceStarter
+import com.baybaka.increasingring.utils.PermissionChecker
 import org.slf4j.LoggerFactory
 
 class SimpleFragment : Fragment() {
+    val checker by lazy { PermissionChecker(activity) }
 
     @Bind(R.id.set_service_status_toggle)
     lateinit var mServiceRunningSwitch: SwitchCompat
@@ -28,6 +31,9 @@ class SimpleFragment : Fragment() {
 
     @Bind(R.id.keep_in_memory_switch)
     internal lateinit var keepInMemorySwitch: SwitchCompat
+
+    @Bind(R.id.android_7_warning)
+    internal lateinit var streamWarningText: TextView
 
     fun context() = context
 
@@ -82,6 +88,13 @@ class SimpleFragment : Fragment() {
             LoggerFactory.getLogger(KeepInMemoryCard::class.java.simpleName).info("keepInMemorySwitch  set {}. User call stopServiceRestartIfEnabled", keepInMemorySwitch.isChecked)
             ServiceStarter.stopServiceRestartIfEnabled(context())
         }
+
+        @SuppressLint("NewApi")
+        if(PermissionChecker.android7plus() && !checker.doNotDisturbGranted()){
+            streamWarningText.visibility = View.VISIBLE
+            streamWarningText.setOnClickListener { checker.askForDndPermission() }
+        }
+
         return view
     }
 

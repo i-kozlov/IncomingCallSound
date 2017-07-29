@@ -205,10 +205,22 @@ public class AudioManagerRealImpl implements AudioManagerWrapper {
             setRingVolume(state.getRingVolume());
             setRingerMode(state.getRingMode().getMode());
             setRingVolume(state.getRingVolume());
+
+            setAudioParamsByPreRingConfigNoRing(state);
+
+        }
+    }
+
+    @Override
+    public void setAudioParamsByPreRingConfigNoRing(SoundStateDTO state) {
+        if (state != null) {
+
             setMediaVolume(state.getMusicVolume());
+
             systemAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, state.getNotificationVolume(), NO_FLAGS);
 
         }
+
     }
 
     @Override

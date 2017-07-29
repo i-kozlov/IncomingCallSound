@@ -31,4 +31,7 @@ public interface AllSettings extends SettingsService, NotificationSettings {
     void setMinNotificationPriory(boolean checked);
     void setSkipRing(boolean checked);
     void setSimpleMode(boolean checked);
+
+    void setEnabledCustomNotificationLevel(boolean checked);
+    void setCustomNotificationLevel(int times);
 }

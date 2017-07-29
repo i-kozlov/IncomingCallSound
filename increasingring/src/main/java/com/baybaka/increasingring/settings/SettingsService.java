@@ -56,4 +56,8 @@ public interface SettingsService {
     boolean useSimpleMode();
 
     boolean canUseMusicStream();
+
+    boolean isCustomNotificationLevelEnabled();
+
+    int getCustomNotificationLevel();
 }

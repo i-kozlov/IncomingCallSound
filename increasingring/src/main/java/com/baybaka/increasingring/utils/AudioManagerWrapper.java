@@ -17,6 +17,12 @@ public interface AudioManagerWrapper {
 
     void setAudioParamsByPreRingConfig(SoundStateDTO state);
 
+    /**
+     * To prevent fail when to right to set ring
+     * @param state
+     */
+    void setAudioParamsByPreRingConfigNoRing(SoundStateDTO state);
+
     SoundStateDTO currentStateToDTO();
 
 //    void setAudioLevelRespectingLogging(int soundLevel);

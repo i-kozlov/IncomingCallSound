@@ -22,7 +22,7 @@ class SettingsAdapter(val prefs: SettingsService, application: Application) : Se
             prefs.isSkipRing && (this.isMuteFirst || this.isVibrateFirst)
 
     @SuppressLint("NewApi")
-    private fun canUseMuteVibrate(): Boolean {
+    fun canUseMuteVibrate(): Boolean {
         return doNotCheckDnD|| Version.isAndroid6() || checker.doNotDisturbGranted()
     }
 

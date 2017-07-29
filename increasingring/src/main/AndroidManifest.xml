@@ -3,6 +3,7 @@
 
     <uses-feature android:name="android.hardware.telephony" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <!--custom ringtones in music mode-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>

@@ -3,10 +3,11 @@ package com.baybaka.increasingring.contoller;
 
 import android.os.Handler;
 
-import com.baybaka.increasingring.settings.RunTimeSettings;
-import com.baybaka.increasingring.settings.SettingsService;
 import com.baybaka.increasingring.audio.RingMode;
 import com.baybaka.increasingring.config.SoundStateDTO;
+import com.baybaka.increasingring.settings.RunTimeSettings;
+import com.baybaka.increasingring.settings.SettingsAdapter;
+import com.baybaka.increasingring.settings.SettingsService;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
 
 import org.slf4j.Logger;
@@ -20,6 +21,9 @@ public class SoundRestorer {
     private int userSetVolumeLevelToRestore;
     private boolean mPauseWaState;
     private int mPauseWaSeconds;
+
+    private boolean customNotificationLevelEnabled;
+    private int customNotificationLevel;
 
     private SoundStateDTO originalVolumes;
 
@@ -45,11 +49,15 @@ public class SoundRestorer {
     synchronized void restoreVolumeToPreRingingLevel() {
 
         if (originalVolumes == null) {
-            LOG.info("skip restoring volume");
+            LOG.info("No data found - skip restoring volume");
             return;
         }
         usePauseWorkaround();
         calcRestoreRingLevel();
+
+        if(customNotificationLevelEnabled){
+            originalVolumes.setNotificationVolume(customNotificationLevel);
+        }
 
         if (mRunTimeSettings.isLoggingEnabled()) {
             LOG.info("Restoring sound level. Saved sound level = {}", originalVolumes);
@@ -58,7 +66,8 @@ public class SoundRestorer {
 
         if (isOkToRestore()) {
 
-            mAudioManagerWrapper.setAudioParamsByPreRingConfig(originalVolumes);
+
+            this.restore();
             SoundStateDTO wasSetTo = mAudioManagerWrapper.currentStateToDTO();
 
             //double check
@@ -71,7 +80,7 @@ public class SoundRestorer {
 
                 final Runnable r = new Runnable() {
                     public void run() {
-                        mAudioManagerWrapper.setAudioParamsByPreRingConfig(originalVolumes);
+                        SoundRestorer.this.restore();
                         SoundStateDTO wasSetTo = mAudioManagerWrapper.currentStateToDTO();
                         LOG.info("At 2nd attempt. Current value is {}.", wasSetTo);
 //                        handler.postDelayed(this, 1000);
@@ -91,12 +100,19 @@ public class SoundRestorer {
         }
     }
 
+    private void restore(){
+        if( ((SettingsAdapter)mSettingsService).canUseMuteVibrate()){
+            mAudioManagerWrapper.setAudioParamsByPreRingConfig(originalVolumes);
+        } else {
+            mAudioManagerWrapper.setAudioParamsByPreRingConfigNoRing(originalVolumes);
+        }
+    }
+
     private void calcRestoreRingLevel() {
         int restoreSoundLevel = getSoundLevelToRestore();
         originalVolumes.setRingVolume(restoreSoundLevel);
     }
 
-    // todo countDownLatch ?
     private void usePauseWorkaround() {
         int timeToWait = 1;
         if (mPauseWaState) {
@@ -145,5 +161,8 @@ public class SoundRestorer {
         userSetVolumeLevelToRestore = mSettingsService.getUserSetLvl();
         mPauseWaState = mSettingsService.isPauseWAenabled();
         mPauseWaSeconds = mSettingsService.getPauseWAtimeValue();
+
+        customNotificationLevelEnabled = mSettingsService.isCustomNotificationLevelEnabled();
+        customNotificationLevel = mSettingsService.getCustomNotificationLevel();
     }
 }
