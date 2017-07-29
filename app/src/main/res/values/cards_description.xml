@@ -144,4 +144,12 @@
         It helps you find phone when you live it somewhere in mute mode
     </string>
 
+    <string name="card_description_notifications_override">Override notifications level</string>
+    <string name="card_description_notifications_override_short">
+        If your notification are too quiet try to use this
+    </string>
+    <string name="card_description_notifications_override_full">
+        If your notification are too quiet try to use this
+    </string>
+
 </resources>

@@ -156,6 +156,11 @@
     <string name="error_music_stream_android7_dnd_reason">Нужно разшения для использования в режиме
         \"музыка\" клик для выдачи разрешений
     </string>
+
+    <string name="ring_stream_android7_dnd_reason">Рекомендуется выдать дополнительныеправа при использовании
+        с Android 7+ . Клик для выдачи
+    </string>
+
     <string name="permission_read_sd">Для проигрывания мелодий требуются права. Нажмите для их
         выдачи
     </string>
@@ -179,5 +184,6 @@
     следуйте инструкциям указанным в пункте меню \"Онлайн справка\"
     </string>
     <string name="menu_language">Язык</string>
+    <string name="restore_notifications_to_level">Установить громкость нотификаций после звонка</string>
 
 </resources>

@@ -20,6 +20,8 @@ import com.baybaka.increasingring.settings.SettingsService;
 import com.baybaka.increasingring.statelistener.MyPhoneStateListener2;
 import com.baybaka.increasingring.utils.AudioManagerRealImpl;
 import com.baybaka.increasingring.utils.AudioManagerWrapper;
+import com.baybaka.notificationlib.NotificationController;
+import com.baybaka.notificationlib.NotificationSettings;
 
 import javax.inject.Named;
 
@@ -77,8 +79,9 @@ public class ListenerModule {
 //                          IAudioController audioController,
 //                          CachingConfigFactory configFactory,
                           ConfigProvider config,
-                          SoundRestorer soundRestorer) {
-        return new Controller(settingsService, runTimeSettings, config, soundRestorer);
+                          SoundRestorer soundRestorer,
+                          NotificationController notificationController) {
+        return new Controller(settingsService, runTimeSettings, config, soundRestorer, notificationController);
     }
 
     @Provides
@@ -102,11 +105,11 @@ public class ListenerModule {
         return new AudioManagerRealImpl(application);
     }
 
-//    @Provides
-//    @ApplicationScope
-//    NotificationController notificationController(NotificationSettings notificationSettings, Application application) {
-//        return new NotificationController(notificationSettings, application);
-//    }
-//
+    @Provides
+    @ApplicationScope
+    NotificationController notificationController(NotificationSettings notificationSettings, Application application) {
+        return new NotificationController(notificationSettings, application);
+    }
+
 
 }

@@ -151,4 +151,13 @@
         Поможет, если вы оставили где-то телефон в беззвучном режиме.
     </string>
 
+
+    <string name="card_description_notifications_override">Установить уровень уведомлений</string>
+    <string name="card_description_notifications_override_short">
+        Если после звонка не слышно уведомлений попробуйте использовать эту настройку
+    </string>
+    <string name="card_description_notifications_override_full">
+        Если после звонка не слышно уведомлений попробуйте использовать эту настройку
+    </string>
+
 </resources>

@@ -1,15 +1,12 @@
 package com.baybaka.incomingcallsound.ui.cards
 
-import com.baybaka.incomingcallsound.ui.cards.additional.IgnoreSilenceVibrateCard
-import com.baybaka.incomingcallsound.ui.cards.additional.KeepInMemoryCard
-import com.baybaka.incomingcallsound.ui.cards.additional.LoggingCard
-import com.baybaka.incomingcallsound.ui.cards.additional.PauseWaCard
+import com.baybaka.incomingcallsound.ui.cards.additional.*
 import com.baybaka.incomingcallsound.ui.cards.beta.FeedbackCard
 import com.baybaka.incomingcallsound.ui.cards.beta.FindPhoneConfigCard
 import com.baybaka.incomingcallsound.ui.cards.beta.NotificationCard
+import com.baybaka.incomingcallsound.ui.cards.beta.NotificationLevelConfigCard
 import com.baybaka.incomingcallsound.ui.cards.main.MainCard_v2
 import com.baybaka.incomingcallsound.ui.cards.main.MinMaxLimitsCard
-import com.baybaka.incomingcallsound.ui.cards.additional.RestoreToLevelCard
 import com.baybaka.incomingcallsound.ui.cards.main.VibrateMuteConfigCard
 import java.util.*
 
@@ -25,6 +22,7 @@ object CardsFactory {
     fun additionalTab(): List<ListCard> = Arrays.asList(
             KeepInMemoryCard(),
             IgnoreSilenceVibrateCard(),
+            NotificationLevelConfigCard(),
             RestoreToLevelCard()
     )
 

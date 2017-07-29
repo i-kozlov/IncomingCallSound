@@ -14,6 +14,23 @@ import javax.inject.Inject
 class PhonePreferenceController @Inject
 constructor(val appContext: Context) : AllSettings {
 
+    override fun isCustomNotificationLevelEnabled(): Boolean {
+        return mPreferences.getBoolean(CUSTOM_NOTIFICATION_LEVEL_ENABLED, false)
+    }
+
+    override fun getCustomNotificationLevel(): Int {
+        return mPreferences.getInt(CUSTOM_NOTIFICATION_LEVEL, 7)
+    }
+
+    override fun setEnabledCustomNotificationLevel(checked: Boolean) {
+        editor.putBoolean(CUSTOM_NOTIFICATION_LEVEL_ENABLED, checked).applyAndUpdateConfig()
+    }
+
+    override fun setCustomNotificationLevel(times: Int) {
+        editor.putInt(CUSTOM_NOTIFICATION_LEVEL, times)
+                .applyAndUpdateConfig()
+    }
+
     override fun canUseMusicStream(): Boolean {
         TODO("should not be called out of adapter Impl")
     }
@@ -371,6 +388,9 @@ constructor(val appContext: Context) : AllSettings {
         protected val FIND_PHONE_TIMES_BEFORE_MAXIMISE = prefix + "fin_phone_times_before_maximise"
         protected val SKIP_RING = prefix + "do_not_ring"
         protected val USE_SIMPLE_MODE = prefix + "use_simple_mode"
+
+        protected val CUSTOM_NOTIFICATION_LEVEL_ENABLED = prefix + "custom_notification_level_enabled"
+        protected val CUSTOM_NOTIFICATION_LEVEL = prefix + "custom_notification_level"
 
         val DEFAULT_INTERVAL_VALUE = 5
 

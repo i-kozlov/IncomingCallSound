@@ -156,7 +156,11 @@
     <!--</string>-->
     <!---->
     <string name="error_music_stream_android7_dnd_reason">Android 7 can not use Music mode without providing do
-        not disturb permission. Click to grant
+        not disturb permission. Click to grant it
+    </string>
+
+    <string name="ring_stream_android7_dnd_reason">For Android 7+ it recommended providing do
+        not disturb permission . Click to grant it
     </string>
 
     <!--show short text like "Music mode is recommended" or "Permission is required. Click to Grant"-->
@@ -186,6 +190,8 @@
 
     </string>
     <string name="menu_language">Language</string>
+    <string name="restore_notifications_to_level">Set notifiacation to specific level after call</string>
 
 
+    <string name="custom_notification_seekbar">Set notifications level to %d</string>
 </resources>

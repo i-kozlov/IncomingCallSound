@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_notify_message">Якщо Ви використовували опцію ВІБРО ПЕРЕД ВИКЛИКОМ,перевірте налаштування
+        Або можете ігнорувати це повідомлення та переглянути новий інтерфейс і функціонал</string>
+    <string name="app_name">Плавний дзвоник</string>
+
+    <string name="service_is_active">Увімкнути службу</string>
+
+    <string name="interval_text">Збільшення гучності кожні %1$d сек</string>
+
+    <string name="send_result">Надіслати звіт</string>
+    <string name="volume_down">Звук-</string>
+    <string name="volume_up">Звук+</string>
+    <string name="test_page">Тестова сторінка</string>
+    <string name="test_hint">
+        1)Завжди додавайте невелиуий опис задля того, щоб я міг зрозуміти проблему \n
+        2)Використовуйте програмніе кнопки збільшення/зменшення гучності (ті що над кнопкою
+        "Надіслати звіт")\n
+        3)Прийміть не менш двох викликів тримаючи це вікно відкритим \n
+        4)Натисніть кнопку "Надіслати звіт" і переконайтеся, що до листа додан файл report.log \n
+
+    </string>
+
+    <string name="limit_min_volume_toggle_text">Обмежити максимальну гучність</string>
+
+    <string name="max_sound_level_text">Обмежити макс. гучність %1$s</string>
+    <string name="limit_max_volume_toggle_text">Обмежити макс. гучність</string>
+
+    <string name="start_from_min_true_description">Почне дзвонити з %1$s</string>
+
+    <string name="start_from_min_false_description">Почитнати дзвонити з ріня 1</string>
+
+    <string name="pause_before_restoring_description">Пауза у %1$d сек.</string>
+    <string name="pause_before_restore_volume">Пауза до повернення гучності</string>
+
+
+    <string name="max_sound_level_false_text">Макс. гучність не обмежена</string>
+    <string name="return_level_true_description">Поверне рівень %1$s</string>
+    <string name="return_volume_toggle_text">Повернути заданий рівень після виклика</string>
+    <string name="return_level_false_description">Поверне рівень, який був до виклика</string>
+    <string name="rate_app">Оцінити додаток</string>
+
+
+    <string name="respect_silence">Дзвонити з режимім ВІБРО і БЕЗЗВУКУ</string>
+
+
+    <string name="fibrate_first">Спочатку ВІБРО, потім ДЗВОНИК</string>
+
+    <string name="tab_1_header">Основні</string>
+    <string name="tab_2_header">Доп.</string>
+    <string name="tab_4_header">Інше</string>
+
+
+    <string name="max_sound_level_text_disabled">Не обмежувати макс.гучність</string>
+
+    <string name="keep_icon_text">Увімкнути сповіщення</string>
+    <string name="foreground_service_description">Тримати додаток у пам’яті</string>
+    <string name="keep_in_memory_active_notification_text">Служба запущено</string>
+    <string name="descriptions_level_number_plus_level">"рівнем "</string>
+    <string name="descriptions_level_prering">рівнем встановленим до виклика</string>
+    <string name="descriptions_level_vibrate">вібро</string>
+    <string name="descriptions_level_silence">беззвучного режиму (бета)</string>
+    <string name="woks_ok">Працює ок</string>
+    <string name="works_bad">Проблеми</string>
+    <string name="ticker_onUpgrade">Зміни у конфігурації нової версії. Оновить налаштування
+    </string>
+
+    <string name="use_music_stream">Нестандарний потік</string>
+    <string name="ring_stream_text">Відтворити дзвоник як рінгтон</string>
+    <string name="music_stream_text">Відтворити дзвоник як музику. Mute з допомогою кн.ЖИВЛЕННЯ
+        замість кн.ГУЧНОСТІ.
+    </string>
+
+    <string name="asap_switch">Зменшувати звук якнайшвидше</string>
+    <string name="asap_option_description">Встановити гучність =1 перед читанням налаштувань. Особливо
+        доцільно у режимі ЕНЕРГОЗАОЩАДЖЕННЯ
+    </string>
+    <string name="enable_logging_switch">Увімк. логи</string>
+    <string name="send_config">Надіслати лог и конфіг</string>
+    <string name="logging_descr">На випадок якщо у Вас проблеми з додатком, або Ви хочете допомогти у його розробці
+    </string>
+    <string name="use_led">Викоритовувати світло ліод</string>
+    <string name="review_for_develop">Залиште відгук, якщо Вам цікавий розвиток якоїсь функції
+    </string>
+    <string name="write_review">Залиште відгук</string>
+    <string name="use_flash_light">Викоритстання ліхтаря</string>
+
+    <string name="feedback_rate">Оцінити</string>
+    <string name="nav_web_help">Онлайн довідка</string>
+
+    <string name="beta_lable">Бета тест</string>
+    <string name="feedback_open_test">Тест. сторінка</string>
+    <string name="feedback_send">Відгук</string>
+    <string name="multi_itmes_ending">а</string>
+
+    <string name="vibrate_time_desc">Кіль-сть вібро інтервалів: %1$d</string>
+    <string name="vibrate_disabled_desc">Вібрація перед дзвоником вимкнута</string>
+
+    <string name="feedback_fill_free">Не переймайтеся, пишить мені, якщо маєте проблеми з додатком або маєте що запропонувати з покращення
+    </string>
+    <string name="feedback_hint">Залиште відгук</string>
+
+    <string name="mute_disabled_desc">Беззвучний режим до дзвоника вимкнуто</string>
+    <string name="mute_time_desc">Кіль-ть беззвучних інтервалів: %1$d</string>
+    <string name="mute_first">Беззвучний перед рингтоном</string>
+
+    <string name="error_ititiazing_mediaplayer">Помилка іниціалізації медіаплеєра. Можливо, ваш
+        програвач не підтримує зупинку відтворення під час вхідного виклику. Користуйтеся ПОТІК ДЗВІНКА
+    </string>
+    <string name="describe_problem_hint">Будь ласка, опишить проблему</string>
+    <string name="test_page_warning_vol">Використовуйте кнопки звук+ и звук-
+    </string>
+    <string name="test_page_warning_desc">Додайте опис проблеми</string>
+    <string name="test_page_warning_calls">Отримайте 2+ виклика</string>
+    <string name="reset_config_dialog_head">Скидання налаштувань</string>
+    <string name="reset_config_dialog_body">Ви впевнені, що хочете скинути налаштування додатку
+    </string>
+    <string name="please_meet_all_conditions">Будь ласка, виконайте усі 3 умови</string>
+    <string name="error_noapp_tosend_email">Не знайдено додатка для надсилання пошти</string>
+    <string name="find_phone_times_desc">Макс.гучність після %d дзвоників</string>
+    <string name="disabled">Вимкнуто</string>
+    <string name="enable_find_my_phone">Знайти телефон</string>
+    <string name="how_beta_works_label">Відгук щодо роботи бета функції</string>
+    <string name="keep_notify_priopity_text">Низький пріорітет</string>
+
+    <string name="yes_page_text">Ці функції увімкнуто за умовчанням. Вимикати їх не доцільно
+    </string>
+
+    <string name="drawer_ring_conf">Налаштування дзвоника</string>
+    <string name="drawer_ring_extra">Додат. налаштування</string>
+    <string name="openDrawer">Відкр. панель навігації</string>
+    <string name="closeDrawer">Закрити панель навігації</string>
+
+    <string name="drawer_app_version_text">версія %1$s (%2$s)</string>
+
+    <string name="find_phone_notification">Макс. гучність увімкнута функцієй Знайти
+        телефон
+    </string>
+
+    <!--<string name="warning_no_dnd_permissions">Android 7 не може використовувати музичн. потік при без прав управління-->
+    <!--режимом "Не турбувати"</string>-->
+
+    <string name="drawer_switch_app_mode">Перемкнути режим додатку</string>
+    <string name="do_not_ring_toggle_text">Не дзвонити</string>
+    <string name="error_mute_vibrate_android7">Потребує дозвіл. Натисніть задля дозвілу.
+    </string>
+    <string name="skip_ring_descr_text">Не буде дзвонити, якщо у налаштуваннях обрано Вібро/Беззвучний
+        до рингтона
+    </string>
+    <string name="error_music_stream_android7_dnd_reason">Треба дозвіл для використання у режимі
+        \"музика\" клік для надання дозволу
+    </string>
+
+    <string name="ring_stream_android7_dnd_reason">Рекомендуется выдать дополнительныеправа при использовании
+        с Android 7+ . Клик для выдачи
+    </string>
+
+    <string name="permission_read_sd">Для відтворення мелодій треба дозвіл. Натиснить для їх
+        надання
+    </string>
+    <string name="permission_read_contacts">Якщо для контактів призначені разні мелодії -
+        необхідно дозвіл. Натиснить для їх надання
+    </string>
+    <string name="simple_additional_modes_desc">Більше налаштувань доступні при перемиканні режимів
+        меню. Перемикання режима також скидає більшість ваших налаштувань.
+    </string>
+    <string name="simple_forcing_keep_app_in_memory_desc">Примусово утримувати додаток у пам’яті.
+        Буде показана іконка на панелі оповіщень
+    </string>
+    <string name="warning_mute_vibrate_android6">Надати права управліния режимом \"Не
+        турбувати\". Опціонально
+    </string>
+    <string name="warning_mute_vibrate_android4_and_5">Можливість використання режимів тиша/вібро
+        на Android 5 и нижче
+        залежить від виробника девайса.
+    </string>
+    <string name="first_call_loud_problem">Якщо декілька перших викликів проходят на макс. гучності,
+        виконуйте інструкції вказані в пункте меню \"Онлайн довідка\"
+    </string>
+    <string name="menu_language">Мова</string>
+    <string name="restore_notifications_to_level">Установить громкость нотификаций после звонка</string>
+
+</resources>

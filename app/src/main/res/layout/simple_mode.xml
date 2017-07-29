@@ -53,5 +53,18 @@
               android:layout_gravity="center"
               android:text="@string/first_call_loud_problem"
     />
+        <TextView
+            android:id="@+id/android_7_warning"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_warning_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|start"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:text="@string/ring_stream_android7_dnd_reason"
+        />
+
     </LinearLayout>
 </LinearLayout>
