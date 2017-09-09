@@ -252,15 +252,20 @@ public class TestPageFragment extends Fragment  implements TestPageOnCallEvenRec
     @Override
     public void onDestroy() {
 
-        mRunTimeSettings.setTestPageOpened(false);
-        if (getActivity() != null && mReceiver != null) {
-            getActivity().unregisterReceiver(mReceiver);
-            mReceiver = null;
+        try {
+            mRunTimeSettings.setTestPageOpened(false);
+            if (getActivity() != null && mReceiver != null) {
+                getActivity().unregisterReceiver(mReceiver);
+                mReceiver = null;
+            }
+            if (getActivity() != null && mReceiver2 != null) {
+                getActivity().unregisterReceiver(mReceiver2);
+                mReceiver2 = null;
+            }
+        } catch (Exception e){
+            LOG.error(e.getMessage());
         }
-        if (getActivity() != null && mReceiver2 != null) {
-            getActivity().unregisterReceiver(mReceiver2);
-            mReceiver2 = null;
-        }
+
         super.onDestroy();
     }
 

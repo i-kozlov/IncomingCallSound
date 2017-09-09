@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setLang2()
-//        setLang()
         setContentView(R.layout.layout_activity_main)
 
         initNavBar()
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setLang2() {
 
-// You can use a HashSet<String> instead and call 'setSupportedStringLocales()' :)
         val supportedLocales = hashSetOf<Locale>(
                 Locale.US,
                 Locale("ru"),
@@ -65,17 +63,12 @@ class MainActivity : AppCompatActivity() {
 
         val current = resources.configuration.locale
 
-        val ls = if(current in supportedLocales){
+        val ls = if(current.language in supportedLocales.map { it.language }){
             LanguageSwitcher(this, current)
         } else {
             LanguageSwitcher(this)
         }
         ls.setSupportedLocales(supportedLocales)
-
-        if(!supportedLocales.contains(current)){
-            LanguageSwitcher(this).showChangeLanguageDialog(this)
-
-        }
 
 
     }
